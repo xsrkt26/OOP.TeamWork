@@ -6,4 +6,5 @@ package model;
  * @date ：2023/11/28 17:41
  */
 public class CalculatorModel{
+    int c;
 }
