@@ -73,8 +73,8 @@ public class GeneralModel extends CalculatorModel{
                 }
                 else if(operationAry_N.get(op) == 2) {
                     try{
-                        double ope1 = stack.pop();
                         double ope2 = stack.pop();
+                        double ope1 = stack.pop();
                         double ans = 0;
                         ans = calculate(op,ope1,ope2);
                         stack.push(ans);
@@ -139,7 +139,7 @@ public class GeneralModel extends CalculatorModel{
                 ans = ope1 * ope2;
                 break;
             case "/":
-                ans = ope1 * ope2;
+                ans = ope1 / ope2;
                 break;
             case "mod":
                 ans = ope1 % ope2;
