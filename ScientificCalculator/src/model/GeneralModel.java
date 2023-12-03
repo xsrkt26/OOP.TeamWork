@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Stack;
 
 /**
  * @author ：kiyotaka
@@ -9,9 +10,11 @@ import java.util.HashMap;
  * @date ：2023/11/28 17:41
  */
 public class GeneralModel extends CalculatorModel{
+    final double EP = 1e-10;//用于进行浮点数相等比较
     private ArrayList<Object> postfixExpression = new ArrayList<>();
     private static HashMap<String, Integer> operationPriority = new HashMap<>();
-
+    private static HashMap<String, Integer> operationAry_N = new HashMap<>();
+    //op为？元运算符
     static {
         operationPriority.put("-", 1);
         operationPriority.put("+", 1);
@@ -29,16 +32,143 @@ public class GeneralModel extends CalculatorModel{
         operationPriority.put("%", 4);
     }
 
+    static {
+        operationAry_N.put("-",2);
+        operationAry_N.put("+",2);
+        operationAry_N.put("*",2);
+        operationAry_N.put("/",2);
+        operationAry_N.put("mod",2);
+        operationAry_N.put("^",2);
+        operationAry_N.put("log",1);
+        operationAry_N.put("ln",1);
+        operationAry_N.put("sin",1);
+        operationAry_N.put("cos",1);
+        operationAry_N.put("tan",1);
+        operationAry_N.put("!",1);
+        operationAry_N.put("abs",1);
+        operationAry_N.put("%",1);
+    }
 
     @Override
     public void count() {
         transToPostfix();
+        Stack<Double> stack = new Stack<Double>();
+        for(Object o : postfixExpression){
+            if(o instanceof Double){
+                stack.push((double)o);
+            }
+            else{
+                String op = (String)o;
+                if(operationAry_N.get(op) == 1){
+                    try{
+                        double ope = stack.pop();
+                        double ans = 0;
+                        ans = calculate(op,ope);
+                        stack.push(ans);
+                    }catch(ArithmeticException e){
+                        outputAnswer = "NaN";
+                        outputAns();
+                        return;
+                    }
+                }
+                else if(operationAry_N.get(op) == 2) {
+                    try{
+                        double ope2 = stack.pop();
+                        double ope1 = stack.pop();
+                        double ans = 0;
+                        ans = calculate(op,ope1,ope2);
+                        stack.push(ans);
+                    }catch (ArithmeticException e){//捕获异常，如:除0
+                        outputAnswer = "NaN";
+                        outputAns();
+                        return;
+                    }
+                }
+            }
+        }
+        outputAnswer = String.valueOf(stack.pop());
+        outputAns();
+        return;
+    }
 
+    private double calculate(String op, double ope){
+        //进行1元运算
+        double ans = 0;
+        switch(op){
+            case "log":
+                ans = Math.log(ope) / Math.log(10);
+                break;
+            case "ln":
+                ans = Math.log(ope);
+                break;
+            case "sin":
+                ans = Math.sin(ope);
+                break;
+            case "cos":
+                ans = Math.cos(ope);
+                break;
+            case "tan":
+                ans = Math.tan(ope);
+                break;
+            case "!":
+                ans = factorial(ope);
+                break;
+            case "abs":
+                ans = Math.abs(ope);
+                break;
+            case "%":
+                ans = ope * 0.01;
+                break;
+            default:
+                break;
+        }
+        return ans;
+    }
+
+    private double calculate(String op, double ope1, double ope2){
+        //进行二元运算
+        double ans = 0;
+        switch(op){
+            case "+":
+                ans = ope1 + ope2;
+                break;
+            case "-":
+                ans = ope1 - ope2;
+                break;
+            case "*":
+                ans = ope1 * ope2;
+                break;
+            case "/":
+                ans = ope1 / ope2;
+                break;
+            case "mod":
+                ans = ope1 % ope2;
+                break;
+            case "^":
+                ans = Math.pow(ope1,ope2);
+                break;
+            default:
+                break;
+        }
+        return ans;
+    }
+
+    private double factorial(double ope){
+        //计算ope的阶乘
+        if(Math.abs(ope - 0) < EP){
+            return 1;
+        }
+        else if(Math.abs(ope - 1) < EP){
+            return 1;
+        }
+        else{
+            return ope * factorial(ope-1);
+        }
     }
 
     @Override
     public String outputAns() {
-        return null;
+        return outputAnswer;
     }
 
     @Override
