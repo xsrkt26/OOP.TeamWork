@@ -12,4 +12,7 @@ public abstract class CalculatorModel{
     public CalculatorModel() {};
     public CalculatorModel(String inputExpression) {};
 
+    public abstract void count();
+    public abstract String outputAns();
+
 }

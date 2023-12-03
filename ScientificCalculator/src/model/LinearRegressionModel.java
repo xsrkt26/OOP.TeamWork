@@ -17,4 +17,10 @@ public class LinearRegressionModel extends CalculatorModel{
     public LinearRegressionModel(String inputExpression){
         this.inputExpression = inputExpression;
     }
+
+    public String count() {
+
+    }
+
+    public void sp
 }
