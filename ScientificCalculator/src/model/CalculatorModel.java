@@ -5,6 +5,11 @@ package model;
  * @description：TODO
  * @date ：2023/11/28 17:41
  */
-public class CalculatorModel{
-    
+public abstract class CalculatorModel{
+    String inputExpression;
+    String outputAnswer;
+
+    public CalculatorModel() {};
+    public CalculatorModel(String inputExpression) {};
+
 }
