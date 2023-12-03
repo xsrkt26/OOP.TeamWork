@@ -39,5 +39,7 @@ public class LinearRegressionModel extends CalculatorModel{
         return false;
     }
 
-    public void sp
+    public void splitInputExpression() {
+
+    }
 }
