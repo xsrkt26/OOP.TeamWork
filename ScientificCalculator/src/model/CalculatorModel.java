@@ -14,5 +14,7 @@ public abstract class CalculatorModel{
 
     public abstract void count();
     public abstract String outputAns();
+    public abstract boolean checkIllegal();
+
 
 }

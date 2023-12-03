@@ -18,8 +18,25 @@ public class LinearRegressionModel extends CalculatorModel{
         this.inputExpression = inputExpression;
     }
 
-    public String count() {
+    @Override
+    /**
+     * @author: kiyotaka
+     * @description: TODO
+     * @date: 2023/12/3 13:00
+     * @return void
+     */
+    public void count() {
 
+    }
+
+    @Override
+    public String outputAns() {
+        return outputAnswer;
+    }
+
+    @Override
+    public boolean checkIllegal() {
+        return false;
     }
 
     public void sp
