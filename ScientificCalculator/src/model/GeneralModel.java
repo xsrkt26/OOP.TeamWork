@@ -32,6 +32,7 @@ public class GeneralModel extends CalculatorModel{
 	        operationPriority.put("!", 4);
 	        operationPriority.put("abs", 4);
 	        operationPriority.put("%", 4);
+	        operationPriority.put("(", 0);
 	    }
 
 	    static {
