@@ -206,15 +206,26 @@ public class GeneralModel extends CalculatorModel{
 	    	 /**
 	         * @author: huihui-ux
 	         * @description: 输入转后缀表达式
-	         * @date: 2023/12/9 22:36
+	         * @date: 2023/12/9 23:08
 	         * @return void
 	         */
 	    	String[] s1 = new String[300];
 	    	if(inputExpression.length()>300) {
 	    		System.out.println("无效输入");
 	    	}
+	    	String replaceInput = inputExpression.replaceAll("\\s", "");
+	    	StringBuilder sb = new StringBuilder(replaceInput);
+	    	int insertIndex ; // 减号后插入空格位置的索引
+	    	char charToInsert = ' '; // 要插入的字符
+	    	for(int i=1;i<replaceInput.length();i++) {
+	    		if(replaceInput.charAt(i)=='-'&&(replaceInput.charAt(i-1)==')'||Character.isDigit(replaceInput.charAt(i-1)))) {// 减号则后面插入空格
+	    			insertIndex = i+1;
+	    			sb.insert(insertIndex, charToInsert);
+	    		}
+	    	}
+	    	String modifiedString = sb.toString();
 	    	Pattern pattern = Pattern.compile("-?\\d+\\.\\d+|-?\\d+|[-+*/%^()t()s()o()l()n()d()a()]");
-	    	 Matcher matcher = pattern.matcher(inputExpression);
+	    	Matcher matcher = pattern.matcher(modifiedString);
 	    	
 	    	ArrayList<String> infixExpression = new ArrayList<>();
 	    	while (matcher.find()) {
@@ -252,6 +263,9 @@ public class GeneralModel extends CalculatorModel{
 	    			opStack.push((String)o);
 	    		}
 	    	}
+	    	while (opStack.size() != 0){
+	        	postfixExpression.add(opStack.pop());
+	        }
 	    }
 	   
 	    public static boolean isDouble(String input) {  // 判断字符串是否是浮点数
