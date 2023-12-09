@@ -18,7 +18,19 @@ public class MatrixModel extends CalculatorModel{
         int row;
         int col;
         double[][] data;
+
         public Matrix(){}
+
+
+
+
+        public Matrix(int row, int col) {
+            this.row = row;
+            this.col = col;
+            data = new double[row][col];
+        }
+
+
         public Matrix(String[] matrixString) {
             row = matrixString.length;
             col = matrixString[0].split("\\s+").length;
@@ -57,9 +69,7 @@ public class MatrixModel extends CalculatorModel{
         int i,j;
         int row = ope1.row;
         int col = ope2.col;
-        Matrix ans = new Matrix();
-        ans.col = col;
-        ans.row = row;
+        Matrix ans = new Matrix(row, col);
         for(i = 0; i < row; i++){
             for(j = 0; j < col; j++){
                 ans.data[i][j] = ope1.data[i][j] + ope2.data[i][j];
@@ -79,9 +89,7 @@ public class MatrixModel extends CalculatorModel{
         int i,j;
         int row = ope1.row;
         int col = ope2.col;
-        Matrix ans = new Matrix();
-        ans.col = col;
-        ans.row = row;
+        Matrix ans = new Matrix(row, col);
         for(i = 0; i < row; i++){
             for(j = 0; j < col; j++){
                 ans.data[i][j] = ope1.data[i][j] - ope2.data[i][j];
@@ -100,9 +108,7 @@ public class MatrixModel extends CalculatorModel{
         int i,j;
         int row = ope1.row;
         int col = ope2.col;
-        Matrix res = new Matrix();
-        res.row = 1;
-        res.col = col;
+        Matrix res = new Matrix(1, col);
         for(j = 0; j < col; j++){
             double temp = 0;
             for(i = 0; i < row; i++){
@@ -126,9 +132,7 @@ public class MatrixModel extends CalculatorModel{
         int rowA = ope1.row;
         int total = ope1.col;//total == ope1.col == ope2.row
         int colB = ope2.col;
-        Matrix res = new Matrix();
-        res.row = rowA;
-        res.col = colB;
+        Matrix res = new Matrix(rowA, colB);
         for(i = 0; i < rowA; i++){
             for(j = 0; j < colB; j++){
                 double temp = 0;
@@ -175,9 +179,7 @@ public class MatrixModel extends CalculatorModel{
         int i,j;
         int row = ope1.row;
         int col = ope1.col;
-        Matrix res = new Matrix();
-        res.row = row;
-        res.col = col;
+        Matrix res = new Matrix(row, col);
         for(i = 0; i < row; i++){
             for(j = 0; j < col; j++){
                 res.data[i][j] = ope1.data[i][j] * ope2.data[i][j];
@@ -194,13 +196,11 @@ public class MatrixModel extends CalculatorModel{
         * @return void
         */
         int i,j;
-        int m = ope.row;
-        int n = ope.col;
-        Matrix res = new Matrix();
-        res.row = n;
-        res.col = m;
-        for(i = 0; i < m; i++){
-            for(j = 0; j < n; j++){
+        int row = ope.row;
+        int col = ope.col;
+        Matrix res = new Matrix(row, col);
+        for(i = 0; i < row; i++){
+            for(j = 0; j < col; j++){
                 res.data[j][i] = ope.data[i][j];
             }
         }
@@ -263,7 +263,7 @@ public class MatrixModel extends CalculatorModel{
                     index++;
                 }
             }
-            Matrix newMatrix = new Matrix();
+            Matrix newMatrix = new Matrix(rank-1,rank-1);
             newMatrix.row = rank-1;
             newMatrix.col = rank-1;
             newMatrix.data = newArr;
@@ -283,7 +283,7 @@ public class MatrixModel extends CalculatorModel{
         */
         int rank = ope.row - 1;
         double[][] arr = new double[rank][rank];
-        Matrix ans = new Matrix();
+        Matrix ans = new Matrix(rank,rank);
         ans.row = rank;
         ans.col = rank;
         int realI = 0, realJ = 0;
@@ -311,7 +311,7 @@ public class MatrixModel extends CalculatorModel{
         */
         int i,j;
         int rank = ope.row;
-        Matrix res = new Matrix();
+        Matrix res = new Matrix(rank,rank);
         for(i = 0; i < rank; i++){
             for(j = 0; j < rank; j++){
                 res.data[j][i] = Math.pow(-1,i+j) * matrixDeterminant(minorMatrix(i,j,ope));
@@ -329,7 +329,7 @@ public class MatrixModel extends CalculatorModel{
          */
         int i,j;
         int rank = ope.row;
-        Matrix res = new Matrix();
+        Matrix res = new Matrix(rank,rank);
         for(i = 0; i < rank; i++){
             for(j = 0; j < rank; j++){
                 res.data[j][i] = Math.pow(-1,i+j) * matrixDeterminant(minorMatrix(i,j,ope));
@@ -527,10 +527,11 @@ public class MatrixModel extends CalculatorModel{
         * @date: 2023/12/3 13:00
         * @return void
         */
-        Matrix res = new Matrix();
+
         double[][] paraMatrix = ope.data;
         int tempM = ope.row;
         int tempN = ope.col;
+        Matrix res = new Matrix(tempM,tempN);
         res.row = tempM;
         res.col = tempN;
         int[] tempIndexQ = arrayIndexAuto(tempM);

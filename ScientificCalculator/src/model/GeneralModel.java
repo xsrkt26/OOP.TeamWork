@@ -114,6 +114,9 @@ public class GeneralModel extends CalculatorModel{
         double ans = 0;
         switch(op){
             case "log":
+            	if(ope<0) {
+            		System.out.println("无效输入");
+            	}
                 ans = Math.log(ope) / Math.log(10);
                 break;
             case "ln":
@@ -206,14 +209,20 @@ public class GeneralModel extends CalculatorModel{
     private void transToPostfix() {
     	if(inputExpression.length()>300) {
     		System.out.println("无效输入");
-    		System.exit(0);
     	}
-        Pattern pattern = Pattern.compile("-?\\d+\\.\\d+|-?\\d+|[-+*/^()tan()sin()cos()log()ln()mod()]");
+        Pattern pattern = Pattern.compile("-?\\d+\\.\\d+|-?\\d+|[-+*/%^()t()s()o()l()n()d()a()]");
    	    Matcher matcher = pattern.matcher(inputExpression);
-    	String[] s1 = inputExpression.split("");
     	ArrayList<Object> infixExpression = new ArrayList<>();
     	while (matcher.find()) {
-    		infixExpression.add(matcher.group());
+    		String tmp = matcher.group();
+    		if(tmp.equals("t")) tmp="tan";
+    		else if(tmp.equals("s")) tmp="sin";
+    		else if(tmp.equals("o")) tmp="cos";
+    		else if(tmp.equals("l")) tmp="log";
+    		else if(tmp.equals("n")) tmp="ln";
+    		else if(tmp.equals("d")) tmp="mod";
+    		else if(tmp.equals("a")) tmp="abs";
+    		infixExpression.add(tmp);
     	}
     	Stack<String> opStack = new Stack<>();
     	
