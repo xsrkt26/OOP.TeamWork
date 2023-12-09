@@ -202,6 +202,10 @@ public class GeneralModel extends CalculatorModel{
         return false;
     }
     private void transToPostfix() {
+    	if(inputExpression.length()>300) {
+    		System.out.println("无效输入");
+    		System.exit(0);
+    	}
     	String[] s1 = inputExpression.split("");
     	ArrayList<Object> infixExpression = new ArrayList<>();
     	for(String s2 : s1) {
