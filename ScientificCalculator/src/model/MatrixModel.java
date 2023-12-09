@@ -7,6 +7,20 @@ package model;
  */
 public class MatrixModel extends CalculatorModel{
 
+    @Override
+    public void count() {
+
+    }
+
+    @Override
+    public String outputAns() {
+        return null;
+    }
+
+    @Override
+    public boolean checkIllegal() {
+        return false;
+    }
 }
 
 
