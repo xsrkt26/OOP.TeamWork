@@ -206,6 +206,7 @@ public class GeneralModel extends CalculatorModel{
   		GeneralModel.originalExpression = originalExpression;
   	}
     private static void transToPostfix() {
+    	
     	String[] s1 = originalExpression.split("");
     	ArrayList<Object> infixExpression = new ArrayList<>();
     	for(String s2 : s1) {
