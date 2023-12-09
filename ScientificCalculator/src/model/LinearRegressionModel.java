@@ -10,18 +10,18 @@ import java.util.ArrayList;
 public class LinearRegressionModel extends CalculatorModel {
     // inputExpression 参数包含线性回归的自变量X与因变量Y， 中间以 | 分开；
 
-    private ArrayList<Double> xList;
-    private ArrayList<Double> yList;
+    private ArrayList<Double> xList = new ArrayList<>();
+    private ArrayList<Double> yList = new ArrayList<>();
 
     // 系数长度
     private int coefficientLength;
 
     // x * y
-    private ArrayList<Double> xyList;
+    private ArrayList<Double> xyList = new ArrayList<>();
     // x ^ 2
-    private ArrayList<Double> xSquareList;
+    private ArrayList<Double> xSquareList = new ArrayList<>();
     // y ^ 2
-    private ArrayList<Double> ySquareList;
+    private ArrayList<Double> ySquareList = new ArrayList<>();
 
     // x 平均数
     private Double xAverage;
@@ -156,5 +156,12 @@ public class LinearRegressionModel extends CalculatorModel {
             yList.add(value);
         }
         coefficientLength = xList.size();
+    }
+
+    public static void main(String[] args) {
+        String A = "100 200 300 400 500 600|0.383 0.420 0.455 0.490 0.524 0.559";
+        LinearRegressionModel testModel = new LinearRegressionModel(A);
+        testModel.count();
+        System.out.println(testModel.checkIllegal());
     }
 }

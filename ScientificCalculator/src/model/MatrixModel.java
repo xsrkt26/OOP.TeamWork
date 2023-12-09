@@ -18,6 +18,7 @@ public class MatrixModel extends CalculatorModel{
 
 
 
+
     private boolean isMatrix(String expression){
         /**
         * @author: hirmy
@@ -54,6 +55,8 @@ public class MatrixModel extends CalculatorModel{
         ans.row = row;
 
     }
+
+
 }
 
 

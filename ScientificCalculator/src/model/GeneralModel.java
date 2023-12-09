@@ -208,5 +208,6 @@ public class GeneralModel extends CalculatorModel{
 
     private static double readNumber() {
 
+        return 0;
     }
 }
