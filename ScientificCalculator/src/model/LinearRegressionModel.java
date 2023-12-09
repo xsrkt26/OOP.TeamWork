@@ -75,7 +75,6 @@ public class LinearRegressionModel extends CalculatorModel {
      * @return void
      */
     public void count() {
-        splitInputExpression();
         countData();
         transDataIntoString();
     }
@@ -134,6 +133,7 @@ public class LinearRegressionModel extends CalculatorModel {
      */
     @Override
     public boolean checkIllegal() {
+        splitInputExpression();
         return xList.size() == yList.size();
     }
 
