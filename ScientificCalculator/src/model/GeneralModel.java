@@ -114,6 +114,9 @@ public class GeneralModel extends CalculatorModel{
         double ans = 0;
         switch(op){
             case "log":
+            	if(ope<0) {
+            		System.out.println("无效输入");
+            	}
                 ans = Math.log(ope) / Math.log(10);
                 break;
             case "ln":
@@ -206,7 +209,6 @@ public class GeneralModel extends CalculatorModel{
     private void transToPostfix() {
     	if(inputExpression.length()>300) {
     		System.out.println("无效输入");
-    		System.exit(0);
     	}
         Pattern pattern = Pattern.compile("-?\\d+\\.\\d+|-?\\d+|[-+*/%^()t()s()o()l()n()d()a()]");
    	    Matcher matcher = pattern.matcher(inputExpression);
