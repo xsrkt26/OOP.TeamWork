@@ -239,7 +239,7 @@ public class GeneralModel extends CalculatorModel{
 	    		else if(tmp.equals("a")) tmp="abs";
 	    		infixExpression.add(tmp);
 	    	}
-	    	for(int i=0;i<infixExpression.size();i++) System.out.println(infixExpression.get(i));
+	    	
 	    	Stack<String> opStack = new Stack<>();
 	    	
 	    	for(String o : infixExpression) {
