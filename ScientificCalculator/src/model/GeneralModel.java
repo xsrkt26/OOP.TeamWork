@@ -11,7 +11,8 @@ import java.util.Stack;
  */
 public class GeneralModel extends CalculatorModel{
     final double EP = 1e-10;//用于进行浮点数相等比较
-    private ArrayList<Object> postfixExpression = new ArrayList<>();
+    private static String originalExpression;//输入表达式
+	private static ArrayList<Object> postfixExpression = new ArrayList<>();
     private static HashMap<String, Integer> operationPriority = new HashMap<>();
     private static HashMap<String, Integer> operationAry_N = new HashMap<>();
     //op为 1或2 元运算符
@@ -201,9 +202,37 @@ public class GeneralModel extends CalculatorModel{
     public boolean checkIllegal() {
         return false;
     }
-
+    public static void setOriginalExpression(String originalExpression) {
+  		GeneralModel.originalExpression = originalExpression;
+  	}
     private static void transToPostfix() {
-
+    	String[] s1 = originalExpression.split("");
+    	ArrayList<Object> infixExpression = new ArrayList<>();
+    	for(String s2 : s1) {
+    		infixExpression.add(s2);
+    	}
+    	Stack<String> opStack = new Stack<>();
+    	
+    	for(Object o : infixExpression) {
+    		if(o instanceof Double){
+                 postfixExpression.add(o);
+            }
+    		else if(o.equals("(")){
+    			opStack.push((String)o);
+    		}
+    		else if(o.equals(")")) {
+    			while(!opStack.peek().equals("(")) {// 到上一个左括号
+    				postfixExpression.add(opStack.pop());
+    			}
+    			opStack.pop();
+    		}
+    		else {// 运算符
+    			while(opStack.size()>0 && operationPriority.get(o)<=operationPriority.get(opStack.peek())) {           //符号栈为空，并且运算符小于等于栈顶的运算符优先级
+    				postfixExpression.add(opStack.pop());
+    			}
+    			opStack.push((String)o);
+    		}
+    	}
     }
 
     private static double readNumber() {
