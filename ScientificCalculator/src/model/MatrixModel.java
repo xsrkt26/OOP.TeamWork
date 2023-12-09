@@ -1,5 +1,6 @@
 package model;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 /**
@@ -198,7 +199,7 @@ public class MatrixModel extends CalculatorModel{
         int i,j;
         int row = ope.row;
         int col = ope.col;
-        Matrix res = new Matrix(row, col);
+        Matrix res = new Matrix(col, row);
         for(i = 0; i < row; i++){
             for(j = 0; j < col; j++){
                 res.data[j][i] = ope.data[i][j];
@@ -287,9 +288,10 @@ public class MatrixModel extends CalculatorModel{
         ans.row = rank;
         ans.col = rank;
         int realI = 0, realJ = 0;
-        for(int i = 0; i < row; i++){
+        for(int i = 0; i < ope.row; i++){
             if(i != row){
-                for(int j = 0; j < col; j++){
+                realJ = 0;
+                for(int j = 0; j < ope.col; j++){
                     if(j != col){
                         arr[realI][realJ] = ope.data[i][j];
                         realJ++;
@@ -368,7 +370,13 @@ public class MatrixModel extends CalculatorModel{
             outputAnswer = "NaN";
             outputAns();
         }
-        matrixC = matrixDiv(adj,det);
+        Matrix temp = matrixDiv(adj,det);
+        for(int i = 0; i < temp.row; i++){//保留三位小数
+            for(int j = 0; j < temp.col; j++){
+                temp.data[i][j] = getDoubleApproximation(temp.data[i][j],3);
+            }
+        }
+        matrixC = temp;
     }
 
     private double matrixTrace(Matrix ope){
@@ -523,8 +531,8 @@ public class MatrixModel extends CalculatorModel{
     private void matrixEigValue(Matrix ope) {
         /**
         * @author: hirmy
-        * @description: 求矩阵特征值；要求：矩阵行列式非0
-        * @date: 2023/12/3 13:00
+        * @description: 求矩阵特征值,返回矩阵的对角线元素即为答案；要求：矩阵行列式非0
+        * @date: 2023/12/9 23:47
         * @return void
         */
 
@@ -541,10 +549,25 @@ public class MatrixModel extends CalculatorModel{
             double[][] tempMatrixQ = arrayRowValue(tempSummary, tempIndexQ);
             double[][] tempMatrixR = arrayRowValue(tempSummary, tempIndexR);
             paraMatrix = matrixCrossProduct_tool(tempMatrixR, tempMatrixQ);
-        } // Of for i
+        }
+        for(int i = 0; i < tempM; i++){//进行四舍五入
+            for(int j = 0; j < tempN; j++){
+                paraMatrix[i][j] = getDoubleApproximation(paraMatrix[i][j],3);
+                if(Math.abs(paraMatrix[i][j] - 0) < EP){
+                    paraMatrix[i][j] = 0;
+                }
+            }
+        }
+        for(int i = 0; i < tempM; i++){
+            for(int j = 0; j < tempN; j++){
+                if(i != j){
+                    paraMatrix[i][j] = 0;
+                }
+            }
+        }
         res.data = paraMatrix;
         matrixC = res;
-    }// Of matrixEigValue
+    }
 
     private double[][] matrixQrDecomposition(double[][] paraMatrix) {
         /**
@@ -556,7 +579,6 @@ public class MatrixModel extends CalculatorModel{
         double[][] tempOrthogonalMatrix = matrixTranspose(matrixGramSchimidt(paraMatrix));
         int tempM = tempOrthogonalMatrix.length;
         int tempN = tempOrthogonalMatrix[0].length;
-
         double[][] tempMatrixQ = new double[tempM][tempN];
         for (int i = 0; i < tempM; i++) {
             double tempMag = magnitude(tempOrthogonalMatrix[i]);
@@ -578,11 +600,32 @@ public class MatrixModel extends CalculatorModel{
                 resultSummary[i][j] = tempMatrixR[i - tempN][j];
             } // Of for j
         } // Of for i
-
         return resultSummary;
     }
 
+    private double getDoubleApproximation(double input, int digits) {
+        /**
+        * @author: hirmy
+        * @description: 工具用方法，求double的近似值
+        * @date: 2023/12/9 22:36
+        * @return double
+        */
+        double result = 0;
+        NumberFormat format = NumberFormat.getInstance();
+        format.setMaximumFractionDigits(digits);//指定四舍五入的位数
+
+        String temp = format.format(input);
+        result = Double.parseDouble(temp);
+
+        return result;
+    }
     private double[][] matrixGramSchimidt(double[][] paraMatrix) {
+        /**
+        * @author: hirmy
+        * @description: 工具用方法,用于QR分解
+        * @date: 2023/12/9 22:53
+        * @return double
+        */
 
         double[][] tempTransposedMatrix = matrixTranspose(paraMatrix);
         int tempM = tempTransposedMatrix.length;
@@ -598,17 +641,17 @@ public class MatrixModel extends CalculatorModel{
                     tempFactor = (1. * arrayMultiplyAndAdd(tempTransposedMatrix[i], resultMatrix[k]))
                             / arrayMultiplyAndAdd(resultMatrix[k], resultMatrix[k]);
                     tempValue -= tempFactor * resultMatrix[k][j];
-                } // Of for k
+                }
                 resultMatrix[i][j] = tempValue;
-            } // Of for j
-        } // Of for i
+            }
+        }
 
         return matrixTranspose(resultMatrix);
     }
     private double arrayMultiplyAndAdd(double[] paraFirstArray, double[] paraSecondArray) {
         /**
         * @author: hirmy
-        * @description: 工具用方法向量的点乘
+        * @description: 工具用方法,向量的点乘
         * @date: 2023/12/3 13:00
         * @return double
         */
@@ -617,7 +660,7 @@ public class MatrixModel extends CalculatorModel{
 
         for (int i = 0; i < tempM; i++) {
             resultMultipliedArray += paraFirstArray[i] * paraSecondArray[i];
-        } // Of for i
+        }
 
         return resultMultipliedArray;
     }
@@ -643,7 +686,7 @@ public class MatrixModel extends CalculatorModel{
 
         for (int i = 0; i < returnRowValue.length; i++) {
             returnRowValue[i] = paraArray[paraIndex[i]];
-        } // Of for i
+        }
 
         return returnRowValue;
     }
