@@ -14,7 +14,7 @@ public class GeneralModel extends CalculatorModel{
     private ArrayList<Object> postfixExpression = new ArrayList<>();
     private static HashMap<String, Integer> operationPriority = new HashMap<>();
     private static HashMap<String, Integer> operationAry_N = new HashMap<>();
-    //op为？元运算符
+    //op为 1或2 元运算符
     static {
         operationPriority.put("-", 1);
         operationPriority.put("+", 1);
@@ -33,6 +33,11 @@ public class GeneralModel extends CalculatorModel{
     }
 
     static {
+        /**
+        * @author: hirmy
+        * @description: 某计算符为 1或2 元计算符
+        * @date: 2023/12/9 14:49
+        */
         operationAry_N.put("-",2);
         operationAry_N.put("+",2);
         operationAry_N.put("*",2);
@@ -51,6 +56,12 @@ public class GeneralModel extends CalculatorModel{
 
     @Override
     public void count() {
+        /**
+        * @author: hirmy
+        * @description: 根据transToPostfix()修改后的list，进行后缀表达式的计算
+        * @date: 2023/12/9 14:50
+        * @return void
+        */
         transToPostfix();
         Stack<Double> stack = new Stack<Double>();
         for(Object o : postfixExpression){
@@ -92,7 +103,12 @@ public class GeneralModel extends CalculatorModel{
     }
 
     private double calculate(String op, double ope){
-        //进行1元运算
+        /**
+        * @author: hirmy
+        * @description: 进行一元运算
+        * @date: 2023/12/9 14:50
+        * @return double
+        */
         double ans = 0;
         switch(op){
             case "log":
@@ -126,7 +142,12 @@ public class GeneralModel extends CalculatorModel{
     }
 
     private double calculate(String op, double ope1, double ope2){
-        //进行二元运算
+        /**
+         * @author: hirmy
+         * @description: 进行二元运算
+         * @date: 2023/12/9 14:50
+         * @return double
+         */
         double ans = 0;
         switch(op){
             case "+":
@@ -154,7 +175,12 @@ public class GeneralModel extends CalculatorModel{
     }
 
     private double factorial(double ope){
-        //计算ope的阶乘
+        /**
+         * @author: hirmy
+         * @description: 进行ope的阶乘运算
+         * @date: 2023/12/9 14:50
+         * @return double
+         */
         if(Math.abs(ope - 0) < EP){
             return 1;
         }
