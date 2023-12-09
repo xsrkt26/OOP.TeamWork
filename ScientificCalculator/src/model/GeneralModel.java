@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Stack;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author ：kiyotaka
@@ -11,7 +13,7 @@ import java.util.Stack;
  */
 public class GeneralModel extends CalculatorModel{
     final double EP = 1e-10;//用于进行浮点数相等比较
-    private ArrayList<Object> postfixExpression = new ArrayList<>();
+	private ArrayList<Object> postfixExpression = new ArrayList<>();
     private static HashMap<String, Integer> operationPriority = new HashMap<>();
     private static HashMap<String, Integer> operationAry_N = new HashMap<>();
     //op为 1或2 元运算符
@@ -201,9 +203,47 @@ public class GeneralModel extends CalculatorModel{
     public boolean checkIllegal() {
         return false;
     }
-
-    private static void transToPostfix() {
-
+    private void transToPostfix() {
+    	if(inputExpression.length()>300) {
+    		System.out.println("无效输入");
+    		System.exit(0);
+    	}
+        Pattern pattern = Pattern.compile("-?\\d+\\.\\d+|-?\\d+|[-+*/%^()t()s()o()l()n()d()a()]");
+   	    Matcher matcher = pattern.matcher(inputExpression);
+    	ArrayList<Object> infixExpression = new ArrayList<>();
+    	while (matcher.find()) {
+    		String tmp = matcher.group();
+    		if(tmp.equals("t")) tmp="tan";
+    		else if(tmp.equals("s")) tmp="sin";
+    		else if(tmp.equals("o")) tmp="cos";
+    		else if(tmp.equals("l")) tmp="log";
+    		else if(tmp.equals("n")) tmp="ln";
+    		else if(tmp.equals("d")) tmp="mod";
+    		else if(tmp.equals("a")) tmp="abs";
+    		infixExpression.add(tmp);
+    	}
+    	Stack<String> opStack = new Stack<>();
+    	
+    	for(Object o : infixExpression) {
+    		if(o instanceof Double){
+                 postfixExpression.add(o);
+            }
+    		else if(o.equals("(")){
+    			opStack.push((String)o);
+    		}
+    		else if(o.equals(")")) {
+    			while(!opStack.peek().equals("(")) {// 到上一个左括号
+    				postfixExpression.add(opStack.pop());
+    			}
+    			opStack.pop();
+    		}
+    		else {// 运算符
+    			while(opStack.size()>0 && operationPriority.get(o)<=operationPriority.get(opStack.peek())) {           //符号栈为空，并且运算符小于等于栈顶的运算符优先级
+    				postfixExpression.add(opStack.pop());
+    			}
+    			opStack.push((String)o);
+    		}
+    	}
     }
 
     private static double readNumber() {
