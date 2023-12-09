@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Stack;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author ：kiyotaka
@@ -206,10 +208,12 @@ public class GeneralModel extends CalculatorModel{
     		System.out.println("无效输入");
     		System.exit(0);
     	}
+        Pattern pattern = Pattern.compile("-?\\d+\\.\\d+|-?\\d+|[-+*/^()tan()sin()cos()log()ln()mod()]");
+   	    Matcher matcher = pattern.matcher(inputExpression);
     	String[] s1 = inputExpression.split("");
     	ArrayList<Object> infixExpression = new ArrayList<>();
-    	for(String s2 : s1) {
-    		infixExpression.add(s2);
+    	while (matcher.find()) {
+    		infixExpression.add(matcher.group());
     	}
     	Stack<String> opStack = new Stack<>();
     	
