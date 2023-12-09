@@ -62,11 +62,11 @@ public class MatrixModel extends CalculatorModel{
 
     private void matrixAdd(Matrix ope1, Matrix ope2){
         /**
-        * @author: hirmy
-        * @description: 矩阵加法；要求：两矩阵i，j相等
-        * @date: 2023/12/9 13:00
-        * @return void
-        */
+         * @author: hirmy
+         * @description: 矩阵加法；要求：两矩阵i，j相等
+         * @date: 2023/12/9 13:00
+         * @return void
+         */
         int i,j;
         int row = ope1.row;
         int col = ope2.col;
@@ -81,11 +81,11 @@ public class MatrixModel extends CalculatorModel{
 
     private void matrixSub(Matrix ope1, Matrix ope2){
         /**
-        * @author: hirmy
-        * @description: 矩阵减法；要求：两矩阵i，j相等
-        * @date: 2023/12/9 15:53
-        * @return void
-        */
+         * @author: hirmy
+         * @description: 矩阵减法；要求：两矩阵i，j相等
+         * @date: 2023/12/9 15:53
+         * @return void
+         */
         // ！注意运算顺序：ope1 - ope2
         int i,j;
         int row = ope1.row;
@@ -101,11 +101,11 @@ public class MatrixModel extends CalculatorModel{
 
     private void matrixInnerProduct(Matrix ope1, Matrix ope2){
         /**
-        * @author: hirmy
-        * @description: 矩阵内积；要求：两矩阵i，j相等
-        * @date: 2023/12/9 16:13
-        * @return void
-        */
+         * @author: hirmy
+         * @description: 矩阵内积；要求：两矩阵i，j相等
+         * @date: 2023/12/9 16:13
+         * @return void
+         */
         int i,j;
         int row = ope1.row;
         int col = ope2.col;
@@ -148,11 +148,11 @@ public class MatrixModel extends CalculatorModel{
 
     private double[][] matrixCrossProduct_tool(double[][] ope1, double[][] ope2){
         /**
-        * @author: hirmy
-        * @description: 工具用方法，返回矩阵叉乘
-        * @date: 2023/12/9 21:37
-        * @return Matrix
-        */
+         * @author: hirmy
+         * @description: 工具用方法，返回矩阵叉乘
+         * @date: 2023/12/9 21:37
+         * @return Matrix
+         */
         int i,j,k;
         int rowA = ope1.length;
         int total = ope1[0].length;//total == ope1.N == ope2.M
@@ -172,11 +172,11 @@ public class MatrixModel extends CalculatorModel{
 
     private void matrixDotProduct(Matrix ope1, Matrix ope2){
         /**
-        * @author: hirmy
-        * @description: 矩阵点乘；要求：两矩阵i，j相等
-        * @date: 2023/12/9 16:31
-        * @return Matrix
-        */
+         * @author: hirmy
+         * @description: 矩阵点乘；要求：两矩阵i，j相等
+         * @date: 2023/12/9 16:31
+         * @return Matrix
+         */
         int i,j;
         int row = ope1.row;
         int col = ope1.col;
@@ -191,11 +191,11 @@ public class MatrixModel extends CalculatorModel{
 
     private void matrixTranspose(Matrix ope){
         /**
-        * @author: hirmy
-        * @description: 矩阵转置；要求：暂无
-        * @date: 2023/12/9 16:35
-        * @return void
-        */
+         * @author: hirmy
+         * @description: 矩阵转置；要求：暂无
+         * @date: 2023/12/9 16:35
+         * @return void
+         */
         int i,j;
         int row = ope.row;
         int col = ope.col;
@@ -210,11 +210,11 @@ public class MatrixModel extends CalculatorModel{
 
     private double[][] matrixTranspose(double[][] ope){
         /**
-        * @author: hirmy
-        * @description: 工具用方法，求矩阵转置
-        * @date: 2023/12/9 22:21
-        * @return double[][]
-        */
+         * @author: hirmy
+         * @description: 工具用方法，求矩阵转置
+         * @date: 2023/12/9 22:21
+         * @return double[][]
+         */
         int i,j;
         int m = ope.length;
         int n = ope[0].length;
@@ -228,11 +228,11 @@ public class MatrixModel extends CalculatorModel{
     }
     private double matrixDeterminant(Matrix ope){
         /**
-        * @author: hirmy
-        * @description: 求行列式det(A)；要求：i == j,方阵
-        * @date: 2023/12/9 16:42
-        * @return double
-        */
+         * @author: hirmy
+         * @description: 求行列式det(A)；要求：i == j,方阵
+         * @date: 2023/12/9 16:42
+         * @return double
+         */
 
         int rank = ope.row;
         if(rank == 1){
@@ -277,11 +277,11 @@ public class MatrixModel extends CalculatorModel{
 
     private Matrix minorMatrix(int row, int col, Matrix ope){
         /**
-        * @author: hirmy
-        * @description: 工具用方法，返回去掉i行j列的矩阵，用于求伴随矩阵;要求：方阵
-        * @date: 2023/12/9 17:46
-        * @return Matrix
-        */
+         * @author: hirmy
+         * @description: 工具用方法，返回去掉i行j列的矩阵，用于求伴随矩阵;要求：方阵
+         * @date: 2023/12/9 17:46
+         * @return Matrix
+         */
         int rank = ope.row - 1;
         double[][] arr = new double[rank][rank];
         Matrix ans = new Matrix(rank,rank);
@@ -306,11 +306,11 @@ public class MatrixModel extends CalculatorModel{
 
     private void matrixAdjoint(Matrix ope){
         /**
-        * @author: hirmy
-        * @description: 求伴随矩阵；要求：i == j,方阵
-        * @date: 2023/12/9 16:49
-        * @return void
-        */
+         * @author: hirmy
+         * @description: 求伴随矩阵；要求：i == j,方阵
+         * @date: 2023/12/9 16:49
+         * @return void
+         */
         int i,j;
         int rank = ope.row;
         Matrix res = new Matrix(rank,rank);
@@ -342,11 +342,11 @@ public class MatrixModel extends CalculatorModel{
 
     private Matrix matrixDiv(Matrix ope, double num){
         /**
-        * @author: hirmy
-        * @description: 工具用方法，矩阵数除，用于计算逆矩阵
-        * @date: 2023/12/9 18:00
-        * @return Matrix
-        */
+         * @author: hirmy
+         * @description: 工具用方法，矩阵数除，用于计算逆矩阵
+         * @date: 2023/12/9 18:00
+         * @return Matrix
+         */
         int row = ope.row;
         int col = ope.col;
         int i,j;
@@ -359,11 +359,11 @@ public class MatrixModel extends CalculatorModel{
     }
     private void matrixInverse(Matrix ope){
         /**
-        * @author: hirmy
-        * @description: 求逆矩阵；要求：i == j
-        * @date: 2023/12/9 17:08
-        * @return void
-        */
+         * @author: hirmy
+         * @description: 求逆矩阵；要求：i == j
+         * @date: 2023/12/9 17:08
+         * @return void
+         */
         double det = matrixDeterminant(ope);
         Matrix adj = matrixAdjoint_tool(ope);
         if(Math.abs(det-0) < EP){
@@ -381,11 +381,11 @@ public class MatrixModel extends CalculatorModel{
 
     private double matrixTrace(Matrix ope){
         /**
-        * @author: hirmy
-        * @description: 矩阵求迹；要求：方阵
-        * @date: 2023/12/9 18:19
-        * @return double
-        */
+         * @author: hirmy
+         * @description: 矩阵求迹；要求：方阵
+         * @date: 2023/12/9 18:19
+         * @return double
+         */
         int rank = ope.row;
         double res = 0;
         for(int i = 0; i < rank; i++){
@@ -395,12 +395,12 @@ public class MatrixModel extends CalculatorModel{
     }
 
     private int Rank(Matrix ope){
-    /**
-    * @author: hirmy
-    * @description: 矩阵求秩；要求：暂无
-    * @date: 2023/12/9 19:50
-    * @return int
-    */
+        /**
+         * @author: hirmy
+         * @description: 矩阵求秩；要求：暂无
+         * @date: 2023/12/9 19:50
+         * @return int
+         */
         int n = ope.col;
         int m = ope.row ;
         int i = 0;
@@ -530,11 +530,11 @@ public class MatrixModel extends CalculatorModel{
 
     private void matrixEigValue(Matrix ope) {
         /**
-        * @author: hirmy
-        * @description: 求矩阵特征值,返回矩阵的对角线元素即为答案；要求：矩阵行列式非0
-        * @date: 2023/12/9 23:47
-        * @return void
-        */
+         * @author: hirmy
+         * @description: 求矩阵特征值,返回矩阵的对角线元素即为答案；要求：矩阵行列式非0
+         * @date: 2023/12/9 23:47
+         * @return void
+         */
 
         double[][] paraMatrix = ope.data;
         int tempM = ope.row;
@@ -571,11 +571,11 @@ public class MatrixModel extends CalculatorModel{
 
     private double[][] matrixQrDecomposition(double[][] paraMatrix) {
         /**
-        * @author: hirmy
-        * @description: 工具用方法，矩阵QR分解
-        * @date: 2023/12/9 21:47
-        * @return double[][]
-        */
+         * @author: hirmy
+         * @description: 工具用方法，矩阵QR分解
+         * @date: 2023/12/9 21:47
+         * @return double[][]
+         */
         double[][] tempOrthogonalMatrix = matrixTranspose(matrixGramSchimidt(paraMatrix));
         int tempM = tempOrthogonalMatrix.length;
         int tempN = tempOrthogonalMatrix[0].length;
@@ -605,11 +605,11 @@ public class MatrixModel extends CalculatorModel{
 
     private double getDoubleApproximation(double input, int digits) {
         /**
-        * @author: hirmy
-        * @description: 工具用方法，求double的近似值
-        * @date: 2023/12/9 22:36
-        * @return double
-        */
+         * @author: hirmy
+         * @description: 工具用方法，求double的近似值
+         * @date: 2023/12/9 22:36
+         * @return double
+         */
         double result = 0;
         NumberFormat format = NumberFormat.getInstance();
         format.setMaximumFractionDigits(digits);//指定四舍五入的位数
@@ -621,11 +621,11 @@ public class MatrixModel extends CalculatorModel{
     }
     private double[][] matrixGramSchimidt(double[][] paraMatrix) {
         /**
-        * @author: hirmy
-        * @description: 工具用方法,用于QR分解
-        * @date: 2023/12/9 22:53
-        * @return double
-        */
+         * @author: hirmy
+         * @description: 工具用方法,用于QR分解
+         * @date: 2023/12/9 22:53
+         * @return double
+         */
 
         double[][] tempTransposedMatrix = matrixTranspose(paraMatrix);
         int tempM = tempTransposedMatrix.length;
@@ -650,11 +650,11 @@ public class MatrixModel extends CalculatorModel{
     }
     private double arrayMultiplyAndAdd(double[] paraFirstArray, double[] paraSecondArray) {
         /**
-        * @author: hirmy
-        * @description: 工具用方法,向量的点乘
-        * @date: 2023/12/3 13:00
-        * @return double
-        */
+         * @author: hirmy
+         * @description: 工具用方法,向量的点乘
+         * @date: 2023/12/3 13:00
+         * @return double
+         */
         int tempM = paraFirstArray.length;
         double resultMultipliedArray = 0;
 
@@ -666,11 +666,11 @@ public class MatrixModel extends CalculatorModel{
     }
     private double magnitude(double[] paraMatrix) {
         /**
-        * @author: hirmy
-        * @description: 工具用方法，求向量的模
-        * @date: 2023/12/9 22:11
-        * @return double
-        */
+         * @author: hirmy
+         * @description: 工具用方法，求向量的模
+         * @date: 2023/12/9 22:11
+         * @return double
+         */
         return Math.sqrt(arrayMultiplyAndAdd(paraMatrix, paraMatrix));
     }
 
@@ -692,11 +692,11 @@ public class MatrixModel extends CalculatorModel{
     }
     private  int[] arrayIndexAuto(int paraLen) {
         /**
-        * @author: hirmy
-        * @description: 工具用方法，用于求特征值
-        * @date: 2023/12/9 21:30
-        * @return int[]
-        */
+         * @author: hirmy
+         * @description: 工具用方法，用于求特征值
+         * @date: 2023/12/9 21:30
+         * @return int[]
+         */
         int[] returnArray = new int[paraLen];
         for (int i = 0; i < paraLen; i++) {
             returnArray[i] = i;
@@ -782,7 +782,5 @@ public class MatrixModel extends CalculatorModel{
     }
 
 
-
 }
-
 
