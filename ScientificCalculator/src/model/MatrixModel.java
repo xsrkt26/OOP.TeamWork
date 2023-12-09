@@ -19,10 +19,13 @@ public class MatrixModel extends CalculatorModel{
         int col;
         double[][] data;
 
-
-
         public Matrix(){}
 
+        public Matrix(int row, int col) {
+            this.row = row;
+            this.col = col;
+            data = new double[row][col];
+        }
 
         public Matrix(String[] matrixString) {
             row = matrixString.length;
@@ -62,9 +65,7 @@ public class MatrixModel extends CalculatorModel{
         int i,j;
         int row = ope1.row;
         int col = ope2.col;
-        Matrix ans = new Matrix();
-        ans.col = col;
-        ans.row = row;
+        Matrix ans = new Matrix(row, col);
         for(i = 0; i < row; i++){
             for(j = 0; j < col; j++){
                 ans.data[i][j] = ope1.data[i][j] + ope2.data[i][j];
@@ -84,9 +85,7 @@ public class MatrixModel extends CalculatorModel{
         int i,j;
         int row = ope1.row;
         int col = ope2.col;
-        Matrix ans = new Matrix();
-        ans.col = col;
-        ans.row = row;
+        Matrix ans = new Matrix(row, col);
         for(i = 0; i < row; i++){
             for(j = 0; j < col; j++){
                 ans.data[i][j] = ope1.data[i][j] - ope2.data[i][j];
@@ -105,9 +104,7 @@ public class MatrixModel extends CalculatorModel{
         int i,j;
         int row = ope1.row;
         int col = ope2.col;
-        Matrix res = new Matrix();
-        res.row = 1;
-        res.col = col;
+        Matrix res = new Matrix(1, col);
         for(j = 0; j < col; j++){
             double temp = 0;
             for(i = 0; i < row; i++){
@@ -129,9 +126,7 @@ public class MatrixModel extends CalculatorModel{
         int rowA = ope1.row;
         int total = ope1.col;//total == ope1.col == ope2.row
         int colB = ope2.col;
-        Matrix res = new Matrix();
-        res.row = rowA;
-        res.col = colB;
+        Matrix res = new Matrix(rowA, colB);
         for(i = 0; i < rowA; i++){
             for(j = 0; j < colB; j++){
                 double temp = 0;
@@ -154,9 +149,7 @@ public class MatrixModel extends CalculatorModel{
         int i,j;
         int row = ope1.row;
         int col = ope1.col;
-        Matrix res = new Matrix();
-        res.row = row;
-        res.col = col;
+        Matrix res = new Matrix(row, col);
         for(i = 0; i < row; i++){
             for(j = 0; j < col; j++){
                 res.data[i][j] = ope1.data[i][j] * ope2.data[i][j];
@@ -173,13 +166,11 @@ public class MatrixModel extends CalculatorModel{
         * @return Matrix
         */
         int i,j;
-        int m = ope.row;
-        int n = ope.col;
-        Matrix res = new Matrix();
-        res.row = n;
-        res.col = m;
-        for(i = 0; i < m; i++){
-            for(j = 0; j < n; j++){
+        int row = ope.row;
+        int col = ope.col;
+        Matrix res = new Matrix(row, col);
+        for(i = 0; i < row; i++){
+            for(j = 0; j < col; j++){
                 res.data[j][i] = ope.data[i][j];
             }
         }
