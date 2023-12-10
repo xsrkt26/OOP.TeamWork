@@ -239,6 +239,7 @@ public class MatrixModel extends CalculatorModel{
             //若一阶矩阵，直接返回
             return ope.data[0][0];
         }
+
         else if(rank == 2){
             //二阶矩阵，直接计算
             return ope.data[0][0] * ope.data[1][1] - ope.data[0][1] * ope.data[1][0];
@@ -272,11 +273,11 @@ public class MatrixModel extends CalculatorModel{
             result += Math.pow(-1,(k+1+1)) * ope.data[k][0] * matrixDeterminant(newMatrix);
         }
         return result;
-
     }
 
-    private Matrix minorMatrix(int row, int col, Matrix ope){
+    private Matrix minorMatrix(int row, int col, Matrix ope) {
         /**
+         <<<<<<< Updated upstream
          * @author: hirmy
          * @description: 工具用方法，返回去掉i行j列的矩阵，用于求伴随矩阵;要求：方阵
          * @date: 2023/12/9 17:46
@@ -284,15 +285,15 @@ public class MatrixModel extends CalculatorModel{
          */
         int rank = ope.row - 1;
         double[][] arr = new double[rank][rank];
-        Matrix ans = new Matrix(rank,rank);
+        Matrix ans = new Matrix(rank, rank);
         ans.row = rank;
         ans.col = rank;
         int realI = 0, realJ = 0;
-        for(int i = 0; i < ope.row; i++){
-            if(i != row){
+        for (int i = 0; i < ope.row; i++) {
+            if (i != row) {
                 realJ = 0;
-                for(int j = 0; j < ope.col; j++){
-                    if(j != col){
+                for (int j = 0; j < ope.col; j++) {
+                    if (j != col) {
                         arr[realI][realJ] = ope.data[i][j];
                         realJ++;
                     }

@@ -105,6 +105,17 @@ public class GeneralModel extends CalculatorModel{
 	        return;
 	    }
 
+    /**
+     * @author: kiyotaka
+     * @description: 构造函数
+     * @date: 2023/12/9 22:13
+     * @return
+     */
+    public GeneralModel(String inputExpression) {
+        this.inputExpression = inputExpression;
+    }
+
+
 	    private double calculate(String op, double ope){
 	        /**
 	        * @author: hirmy
@@ -304,5 +315,13 @@ public class GeneralModel extends CalculatorModel{
 	    private static double readNumber() {
 	        return 0;
 	    }
-	}
 
+
+
+    public static void main(String[] args) {
+        String A = "1 / 2";
+        GeneralModel testModel = new GeneralModel(A);
+        testModel.count();
+        System.out.println(testModel.outputAnswer);
+    }
+}
