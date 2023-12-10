@@ -5,14 +5,13 @@ import java.util.HashMap;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 /**
  * @author ：kiyotaka
  * @description：TODO
  * @date ：2023/11/28 17:41
  */
 public class GeneralModel extends CalculatorModel{
-	    final double EP = 1e-10;//用于进行浮点数相等比较
+    final double EP = 1e-17;//用于进行浮点数相等比较
 		private ArrayList<String> postfixExpression = new ArrayList<>();
 	    private static HashMap<String, Integer> operationPriority = new HashMap<>();
 	    private static HashMap<String, Integer> operationAry_N = new HashMap<>();
@@ -105,6 +104,17 @@ public class GeneralModel extends CalculatorModel{
 	        return;
 	    }
 
+    /**
+     * @author: kiyotaka
+     * @description: 构造函数
+     * @date: 2023/12/9 22:13
+     * @return
+     */
+    public GeneralModel(String inputExpression) {
+        this.inputExpression = inputExpression;
+    }
+
+
 	    private double calculate(String op, double ope){
 	        /**
 	        * @author: hirmy
@@ -112,22 +122,37 @@ public class GeneralModel extends CalculatorModel{
 	        * @date: 2023/12/9 14:50
 	        * @return double
 	        */
-	        double ans = 0;
+	    	double ans = 0;
 	        switch(op){
 	            case "log":
+	            	 if(ope < EP){
+	            		 System.out.println("真数必须大于0");
+	            		 ans = Double.POSITIVE_INFINITY;
+		            	 return ans;
+	     	        }
 	                ans = Math.log(ope) / Math.log(10);
 	                break;
 	            case "ln":
+	            	if(ope < EP){
+	            		 System.out.println("真数必须大于0");
+	            		 ans = Double.POSITIVE_INFINITY;
+		            	 return ans;
+	     	        }
 	                ans = Math.log(ope);
 	                break;
 	            case "sin":
-	                ans = Math.sin(ope);
+	                ans = Math.sin(Math.toRadians(ope));
 	                break;
 	            case "cos":
-	                ans = Math.cos(ope);
+	                ans = Math.cos(Math.toRadians(ope));
 	                break;
 	            case "tan":
-	                ans = Math.tan(ope);
+	            	if((ope+90)%180<EP) {
+	            		System.out.println("tan无效输入");
+	            		ans = Double.POSITIVE_INFINITY;
+	            		return ans;
+	            	}
+	                ans = Math.tan(Math.toRadians(ope));
 	                break;
 	            case "!":
 	                ans = factorial(ope);
@@ -163,9 +188,14 @@ public class GeneralModel extends CalculatorModel{
 	                ans = ope1 * ope2;
 	                break;
 	            case "/":
+	            	 if(Math.abs(ope2 - 0) < EP){
+	            		 System.out.println("除数不能为0");
+	            		 ans = Double.POSITIVE_INFINITY;
+		            	 return ans;
+	     	        }
 	                ans = ope1 / ope2;
 	                break;
-	            case "%":
+	            case "mod":          
 	                ans = ope1 % ope2;
 	                break;
 	            case "^":
@@ -184,6 +214,10 @@ public class GeneralModel extends CalculatorModel{
 	         * @date: 2023/12/9 14:50
 	         * @return double
 	         */
+	    	if(ope<-EP||ope-(int)ope>=EP) {
+	    		System.out.println("无法计算该阶乘");
+	    		return Double.POSITIVE_INFINITY;
+	    	}
 	        if(Math.abs(ope - 0) < EP){
 	            return 1;
 	        }
@@ -215,17 +249,20 @@ public class GeneralModel extends CalculatorModel{
 	    		System.out.println("无效输入");
 	    	}
 	    	String replaceInput = inputExpression.replaceAll("\\s", "");
+	    	
 	    	StringBuilder sb = new StringBuilder(replaceInput);
 	    	int insertIndex ; // 减号后插入空格位置的索引
 	    	char charToInsert = ' '; // 要插入的字符
+	    	int k = 0;
 	    	for(int i=1;i<replaceInput.length();i++) {
 	    		if(replaceInput.charAt(i)=='-'&&(replaceInput.charAt(i-1)==')'||Character.isDigit(replaceInput.charAt(i-1)))) {// 减号则后面插入空格
-	    			insertIndex = i+1;
+	    			insertIndex = i+1+k;
+	    			k++;
 	    			sb.insert(insertIndex, charToInsert);
 	    		}
 	    	}
 	    	String modifiedString = sb.toString();
-	    	Pattern pattern = Pattern.compile("-?\\d+\\.\\d+|-?\\d+|[-+*/%^()t()s()o()l()n()d()a()]");
+	    	Pattern pattern = Pattern.compile("-?\\d+\\.\\d+|-?\\d+|[-+*/%!^()t()s()o()l()n()d()a()]");
 	    	Matcher matcher = pattern.matcher(modifiedString);
 	    	
 	    	ArrayList<String> infixExpression = new ArrayList<>();
@@ -280,5 +317,13 @@ public class GeneralModel extends CalculatorModel{
 	    private static double readNumber() {
 	        return 0;
 	    }
-	}
 
+
+
+    public static void main(String[] args) {
+        String A = "1 / 2 + t 45 - l 100.00 - 3! * s (-90) * o(180)/ n 2.732 d 6.54 + a(-2)*a(3.04) %%";
+        GeneralModel testModel = new GeneralModel(A);
+        testModel.count();
+        System.out.println(testModel.outputAnswer);
+    }
+}
