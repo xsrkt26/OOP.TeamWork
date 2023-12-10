@@ -1,7 +1,6 @@
 package model;
 
 import java.text.NumberFormat;
-import java.util.ArrayList;
 
 /**
  * @author ：kiyotaka
@@ -11,6 +10,7 @@ import java.util.ArrayList;
  */
 public class MatrixModel extends CalculatorModel{
     final double EP = 1e-10;
+    final String NaN = "invalid syntax";
 
     // 判断该矩阵Model 是一元运算还是二元运算，0是一元；
     int matrixOperation;
@@ -20,10 +20,32 @@ public class MatrixModel extends CalculatorModel{
         int col;
         double[][] data;
 
-        public Matrix(){}
+        @Override
+        public String toString(){
+            if (this.row == 0 && this.col == 0) {
+                return "0|" + NaN;
+            }
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("1|");
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < col; j++ ){
+                    stringBuilder.append(String.valueOf(data[i][j])).append(' ');
+                }
+                stringBuilder.append('/');
+            }
+            return stringBuilder.toString();
+        }
 
+        public void setRowCol(int row, int col) {
+            this.row = row;
+            this.col = col;
+            data = new double[row][col];
+        }
 
-
+        public Matrix() {
+            this.row = 0;
+            this.col = 0;
+        }
 
         public Matrix(int row, int col) {
             this.row = row;
@@ -43,12 +65,48 @@ public class MatrixModel extends CalculatorModel{
                 }
             }
         }
+
+        public boolean equalSize(Matrix A) {
+            return this.row == A.row && this.col == A.col;
+        }
+        
+        public boolean crossEqualSize(Matrix A) {
+            return this.col == A.row;
+        }
+
+        public boolean isPhalanx() {
+            return this.col == this.row;
+        }
     }
 
+    // 进行运算的矩阵A
     private Matrix matrixA;
+    // 进行运算的矩阵B
     private Matrix matrixB;
 
-    private Matrix matrixC;
+    // A + B
+    private String matrixAddAnswer;
+
+    // A - B
+    private String matrixSubAnswer;
+    // A CrossProduct B
+    private String matrixCrossProductAnswer;
+    // A dotProduct B
+    private String matrixDotProductAnswer;
+    // A transposeMatrix
+    private String matrixTransposeAnswer;
+    // A 行列式
+    private String matrixDeterminantAnswer;
+    // A 伴随矩阵
+    private String matrixAdjointAnswer;
+    // A 逆矩阵
+    private String matrixInverseAnswer;
+    // A 迹
+    private String matrixTraceAnswer;
+    // A rank
+    private String matrixRankAnswer;
+    // A 特征值
+    private String matrixEigValueAnswer;
 
     public MatrixModel(String inputExpression) {
         this.inputExpression = inputExpression;
@@ -56,7 +114,27 @@ public class MatrixModel extends CalculatorModel{
 
     @Override
     public void count() {
+        if (checkIllegal()) {
+            if (matrixOperation == 0) {
+                countDataForOne();
+            }
+            else {
+                countDataForTwo();
+            }
+        }
+    }
 
+    private void countDataForTwo() {
+    }
+
+    private void countDataForOne() {
+        matrixTranspose(matrixA);
+        matrixDeterminant(matrixA);
+        matrixAdjoint(matrixA);
+        matrixInverse(matrixA);
+        matrixTrace(matrixA);
+        Rank(matrixA);
+        matrixEigValue(matrixA);
     }
 
 
@@ -67,16 +145,16 @@ public class MatrixModel extends CalculatorModel{
         * @date: 2023/12/9 13:00
         * @return void
         */
-        int i,j;
-        int row = ope1.row;
-        int col = ope2.col;
-        Matrix ans = new Matrix(row, col);
-        for(i = 0; i < row; i++){
-            for(j = 0; j < col; j++){
-                ans.data[i][j] = ope1.data[i][j] + ope2.data[i][j];
+        Matrix result = new Matrix();
+        if (ope1.equalSize(ope2)) {
+            result.setRowCol(ope1.row, ope1.col);
+            for(int i = 0; i < result.row; i++){
+                for(int j = 0; j < result.col; j++){
+                    result.data[i][j] = ope1.data[i][j] + ope2.data[i][j];
+                }
             }
         }
-        matrixC = ans;
+        matrixAddAnswer = result.toString();
     }
 
     private void matrixSub(Matrix ope1, Matrix ope2){
@@ -87,40 +165,17 @@ public class MatrixModel extends CalculatorModel{
         * @return void
         */
         // ！注意运算顺序：ope1 - ope2
-        int i,j;
-        int row = ope1.row;
-        int col = ope2.col;
-        Matrix ans = new Matrix(row, col);
-        for(i = 0; i < row; i++){
-            for(j = 0; j < col; j++){
-                ans.data[i][j] = ope1.data[i][j] - ope2.data[i][j];
+        Matrix result = new Matrix();
+        if (ope1.equalSize(ope2)) {
+            result.setRowCol(ope1.row, ope1.col);
+            for(int i = 0; i < result.row; i++){
+                for(int j = 0; j < result.col; j++){
+                    result.data[i][j] = ope1.data[i][j] + ope2.data[i][j];
+                }
             }
         }
-        matrixC = ans;
+        matrixSubAnswer = result.toString();
     }
-
-    private void matrixInnerProduct(Matrix ope1, Matrix ope2){
-        /**
-        * @author: hirmy
-        * @description: 矩阵内积；要求：两矩阵i，j相等
-        * @date: 2023/12/9 16:13
-        * @return void
-        */
-        int i,j;
-        int row = ope1.row;
-        int col = ope2.col;
-        Matrix res = new Matrix(1, col);
-        for(j = 0; j < col; j++){
-            double temp = 0;
-            for(i = 0; i < row; i++){
-                temp += ope1.data[i][j] * ope2.data[i][j];
-            }
-            res.data[0][j] = temp;
-        }
-        matrixC = res;
-    }
-
-
 
     private void matrixCrossProduct(Matrix ope1, Matrix ope2){
         /**
@@ -129,24 +184,27 @@ public class MatrixModel extends CalculatorModel{
          * @date: 2023/12/9 16:20
          * @return void
          */
-        int i,j,k;
-        int rowA = ope1.row;
-        int total = ope1.col;//total == ope1.col == ope2.row
-        int colB = ope2.col;
-        Matrix res = new Matrix(rowA, colB);
-        for(i = 0; i < rowA; i++){
-            for(j = 0; j < colB; j++){
-                double temp = 0;
-                for(k = 0; k < total; k++){
-                    temp += ope1.data[i][k] * ope2.data[k][j];
+        Matrix result = new Matrix();
+        if (ope1.crossEqualSize(ope2)) {
+            int i, j, k;
+            int rowA = ope1.row;
+            int total = ope1.col;//total == ope1.col == ope2.row
+            int colB = ope2.col;
+            result.setRowCol(rowA, colB);
+            for (i = 0; i < rowA; i++) {
+                for (j = 0; j < colB; j++) {
+                    double temp = 0;
+                    for (k = 0; k < total; k++) {
+                        temp += ope1.data[i][k] * ope2.data[k][j];
+                    }
+                    result.data[i][j] = temp;
                 }
-                res.data[i][j] = temp;
             }
         }
-        matrixC = res;
+        matrixCrossProductAnswer = result.toString();
     }
 
-    private double[][] matrixCrossProduct_tool(double[][] ope1, double[][] ope2){
+    private double[][] matrixCrossProductTool(double[][] ope1, double[][] ope2){
         /**
         * @author: hirmy
         * @description: 工具用方法，返回矩阵叉乘
@@ -177,16 +235,16 @@ public class MatrixModel extends CalculatorModel{
         * @date: 2023/12/9 16:31
         * @return Matrix
         */
-        int i,j;
-        int row = ope1.row;
-        int col = ope1.col;
-        Matrix res = new Matrix(row, col);
-        for(i = 0; i < row; i++){
-            for(j = 0; j < col; j++){
-                res.data[i][j] = ope1.data[i][j] * ope2.data[i][j];
+        Matrix result = new Matrix();
+        if (ope1.equalSize(ope2)) {
+            result.setRowCol(ope1.row, ope1.col);
+            for(int i = 0; i < result.row; i++){
+                for(int j = 0; j < result.col; j++){
+                    result.data[i][j] = ope1.data[i][j] * ope2.data[i][j];
+                }
             }
         }
-        matrixC = res;
+        matrixDotProductAnswer = result.toString();
     }
 
     private void matrixTranspose(Matrix ope){
@@ -196,16 +254,15 @@ public class MatrixModel extends CalculatorModel{
         * @date: 2023/12/9 16:35
         * @return void
         */
-        int i,j;
         int row = ope.row;
         int col = ope.col;
-        Matrix res = new Matrix(col, row);
-        for(i = 0; i < row; i++){
-            for(j = 0; j < col; j++){
-                res.data[j][i] = ope.data[i][j];
+        Matrix result = new Matrix(col, row);
+        for(int i = 0; i < row; i++){
+            for(int j = 0; j < col; j++){
+                result.data[j][i] = ope.data[i][j];
             }
         }
-        matrixC = res;
+        matrixTransposeAnswer = result.toString();
     }
 
     private double[][] matrixTranspose(double[][] ope){
@@ -233,46 +290,51 @@ public class MatrixModel extends CalculatorModel{
         * @date: 2023/12/9 16:42
         * @return double
         */
-
+        double result = 0;
+        if (!ope.isPhalanx()) {
+            matrixDeterminantAnswer = "0|" + NaN;
+            return result;
+        }
         int rank = ope.row;
+
         if(rank == 1){
             //若一阶矩阵，直接返回
-            return ope.data[0][0];
+            result = ope.data[0][0];
         }
         else if(rank == 2){
             //二阶矩阵，直接计算
-            return ope.data[0][0] * ope.data[1][1] - ope.data[0][1] * ope.data[1][0];
+            result =  ope.data[0][0] * ope.data[1][1] - ope.data[0][1] * ope.data[1][0];
         }
-        double result = 0;
-
-        for (int k = 0; k < rank; k++)
-        {
-            // 取出余子式
-            double[][] newArr=new double[rank-1][rank-1];
-            int index = 0;
-            // 对数组进行赋值
-            for (int i = 0; i < rank; i++)
+        else {
+            for (int k = 0; k < rank; k++)
             {
-                if (k != i)
+                // 取出余子式
+                double[][] newArr=new double[rank-1][rank-1];
+                int index = 0;
+                // 对数组进行赋值
+                for (int i = 0; i < rank; i++)
                 {
-                    for (int j = 1; j < rank; j++)
+                    if (k != i)
                     {
-                        // 如果该行不等于所在行
-                        newArr[index][j-1]=ope.data[i][j];
+                        for (int j = 1; j < rank; j++)
+                        {
+                            // 如果该行不等于所在行
+                            newArr[index][j-1]=ope.data[i][j];
+                        }
+                        // 到第下一行赋值
+                        index++;
                     }
-                    // 到第下一行赋值
-                    index++;
                 }
+                Matrix newMatrix = new Matrix(rank-1,rank-1);
+                newMatrix.row = rank-1;
+                newMatrix.col = rank-1;
+                newMatrix.data = newArr;
+                // 重点注意  由于此处取的是  a11 所以 (-1)^(1+1) = 1  可以进行处理
+                result += Math.pow(-1,(k+1+1)) * ope.data[k][0] * matrixDeterminant(newMatrix);
             }
-            Matrix newMatrix = new Matrix(rank-1,rank-1);
-            newMatrix.row = rank-1;
-            newMatrix.col = rank-1;
-            newMatrix.data = newArr;
-            // 重点注意  由于此处取的是  a11 所以 (-1)^(1+1) = 1  可以进行处理
-            result += Math.pow(-1,(k+1+1)) * ope.data[k][0] * matrixDeterminant(newMatrix);
         }
+        matrixDeterminantAnswer = "1|" + String.valueOf(result);
         return result;
-
     }
 
     private Matrix minorMatrix(int row, int col, Matrix ope){
@@ -311,18 +373,20 @@ public class MatrixModel extends CalculatorModel{
         * @date: 2023/12/9 16:49
         * @return void
         */
-        int i,j;
-        int rank = ope.row;
-        Matrix res = new Matrix(rank,rank);
-        for(i = 0; i < rank; i++){
-            for(j = 0; j < rank; j++){
-                res.data[j][i] = Math.pow(-1,i+j) * matrixDeterminant(minorMatrix(i,j,ope));
+        Matrix result = new Matrix();
+        if (ope.isPhalanx()) {
+            int rank = ope.row;
+            result.setRowCol(rank,rank);
+            for(int i = 0; i < rank; i++){
+                for(int j = 0; j < rank; j++){
+                    result.data[j][i] = Math.pow(-1,i+j) * matrixDeterminant(minorMatrix(i,j,ope));
+                }
             }
         }
-        matrixC = res;
+        matrixAdjointAnswer = result.toString();
     }
 
-    private Matrix matrixAdjoint_tool(Matrix ope){
+    private Matrix matrixAdjointTool(Matrix ope){
         /**
          * @author: hirmy
          * @description: 工具用方法，求伴随矩阵（需要返回时用到）
@@ -364,37 +428,45 @@ public class MatrixModel extends CalculatorModel{
         * @date: 2023/12/9 17:08
         * @return void
         */
-        double det = matrixDeterminant(ope);
-        Matrix adj = matrixAdjoint_tool(ope);
-        if(Math.abs(det-0) < EP){
-            outputAnswer = "NaN";
-            outputAns();
-        }
-        Matrix temp = matrixDiv(adj,det);
-        for(int i = 0; i < temp.row; i++){//保留三位小数
-            for(int j = 0; j < temp.col; j++){
-                temp.data[i][j] = getDoubleApproximation(temp.data[i][j],3);
+        Matrix result = new Matrix();
+        if (ope.isPhalanx() && Math.abs(matrixDeterminant(ope) - 0) > EP) {
+            double det = matrixDeterminant(ope);
+            Matrix adj = matrixAdjointTool(ope);
+            if(Math.abs(det-0) < EP){
+                outputAnswer = "NaN";
+                outputAns();
+            }
+            Matrix temp = matrixDiv(adj,det);
+            for(int i = 0; i < temp.row; i++){//保留三位小数
+                for(int j = 0; j < temp.col; j++){
+                    temp.data[i][j] = getDoubleApproximation(temp.data[i][j],3);
+                }
             }
         }
-        matrixC = temp;
+        matrixInverseAnswer = result.toString();
     }
 
-    private double matrixTrace(Matrix ope){
+    private void matrixTrace(Matrix ope){
         /**
         * @author: hirmy
         * @description: 矩阵求迹；要求：方阵
         * @date: 2023/12/9 18:19
         * @return double
         */
-        int rank = ope.row;
-        double res = 0;
-        for(int i = 0; i < rank; i++){
-            res += ope.data[i][i];
+        if(!ope.isPhalanx()){
+            matrixTraceAnswer = "0|" + NaN;
         }
-        return res;
+        else {
+            int rank = ope.row;
+            double res = 0;
+            for(int i = 0; i < rank; i++){
+                res += ope.data[i][i];
+            }
+            matrixTraceAnswer = "1|" + String.valueOf(res);
+        }
     }
 
-    private int Rank(Matrix ope){
+    private void Rank(Matrix ope){
     /**
     * @author: hirmy
     * @description: 矩阵求秩；要求：暂无
@@ -407,7 +479,7 @@ public class MatrixModel extends CalculatorModel{
         int j = 0;
         int i1, j1;
         double temp1;
-
+        StringBuilder stringBuilder = new StringBuilder("1|");
         if(m > n)
         {
             i = m;
@@ -448,11 +520,17 @@ public class MatrixModel extends CalculatorModel{
             {
                 if(ope.data[0][i] != 0)
                 {
-                    return 1;
+                    stringBuilder.append("1");
+                    matrixRankAnswer = stringBuilder.toString();
+                    return;
+                    //return 1;
                 }
                 i += 1;
             }
-            return 0;
+            stringBuilder.append("0");
+            matrixRankAnswer = stringBuilder.toString();
+            return;
+            //return 0;
         }
 
         double error0;
@@ -525,8 +603,277 @@ public class MatrixModel extends CalculatorModel{
                 }
             }
         }
-        return i1;
+        stringBuilder.append(String.valueOf(i1));
+        matrixRankAnswer = stringBuilder.toString();
     }
+
+    private int Hessenberg(double[][] Matrix,int n,double[][]ret)
+    {
+
+        int i;
+        int j;
+        int k;
+        double temp;
+        int MaxNu;
+        n-=1;
+        for(k=1;k<=n-1;k++)
+        {
+            i=k-1;
+            MaxNu=k;
+            temp=Math.abs(Matrix[k][i]);
+            for(j=k+1;j<=n;j++)
+            {
+                if(Math.abs(Matrix[j][i])>temp)
+                {
+                    MaxNu=j;
+                }
+            }
+            ret[0][0]=Matrix[MaxNu][i];
+            i=MaxNu;
+            if(ret[0][0]!=0)
+            {
+                if(i!=k)
+                {
+                    for(j=k-1;j<=n;j++)
+                    {
+                        temp=Matrix[i][j];
+                        Matrix[i][j]=Matrix[k][j];
+                        Matrix[k][j]=temp;
+                    }
+                    for(j=0;j<=n;j++)
+                    {
+                        temp=Matrix[j][i];
+                        Matrix[j][i]=Matrix[j][k];
+                        Matrix[j][k]=temp;
+                    }
+                }
+                for(i=k+1;i<=n;i++)
+                {
+                    temp=Matrix[i][k-1]/ret[0][0];
+                    Matrix[i][k-1]=0;
+                    for(j=k;j<=n;j++)
+                    {
+                        Matrix[i][j]-=temp*Matrix[k][j];
+                    }
+                    for(j=0;j<=n;j++)
+                    {
+                        Matrix[j][k]+=temp*Matrix[j][i];
+                    }
+                }
+            }
+        }
+        for(i=0;i<=n;i++)
+        {
+            for(j=0;j<=n;j++)
+            {
+                ret[i][j]=Matrix[i][j];
+            }
+        }
+        return n+1;
+    }
+
+    private boolean EigenValue(Matrix ope,double[][] Ret)
+    {
+        double[][] Matrix = ope.data;
+        int n = ope.row;
+        int Erro = 4;
+        int LoopNu = 400;
+        int i=Matrix.length;
+        if(i!=n)
+        {
+            return false;
+        }
+        int j;
+        int k;
+        int t;
+        int m;
+        double[][]A=new double[n][n];
+        double erro=Math.pow(0.1, Erro);
+        double b;
+        double c;
+        double d;
+        double g;
+        double xy;
+        double p;
+        double q;
+        double r;
+        double x;
+        double s;
+        double e;
+        double f;
+        double z;
+        double y;
+        int loop1=LoopNu;
+        Hessenberg(Matrix,n,A);//灏嗘柟闃礙1杞寲鎴愪笂Hessenberg鐭╅樀A
+        m=n;
+        while(m!=0)
+        {
+            t=m-1;
+            while(t>0)
+            {
+                if(Math.abs(A[t][t-1])>erro*(Math.abs(A[t-1][t-1])+Math.abs(A[t][t])))
+                {
+                    t-=1;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            if(t==m-1)
+            {
+                Ret[m-1][0]=A[m-1][m-1];
+                Ret[m-1][1]=0;
+                m-=1;
+                loop1=LoopNu;
+
+            }
+            else if(t==m-2)
+            {
+                b=-(A[m-1][m-1]+A[m-2][m-2]);
+                c=A[m-1][m-1]*A[m-2][m-2]-A[m-1][m-2]*A[m-2][m-1];
+                d=b*b-4*c;
+                y=Math.pow(Math.abs(d), 0.5);
+                if(d>0)
+                {
+                    xy=1;
+                    if(b<0)
+                    {
+                        xy=-1;
+                    }
+                    Ret[m-1][0]=-(b+xy*y)/2;
+                    Ret[m-1][1]=0;
+                    Ret[m-2][0]=c/Ret[m-1][0];
+                    Ret[m-2][1]=0;
+                }
+                else
+                {
+                    Ret[m-1][0]=-b/2;
+                    Ret[m-2][0]=Ret[m-1][0];
+                    Ret[m-1][1]=y/2;
+                    Ret[m-2][1]=-Ret[m-1][1];
+                }
+                m-=2;
+                loop1=LoopNu;
+            }
+            else
+            {
+                if(loop1<1)
+                {
+                    return false;
+                }
+                loop1-=1;
+                j=t+2;
+                while(j<m)
+                {
+                    A[j][j-2]=0;
+                    j+=1;
+                }
+                j=t+3;
+                while(j<m)
+                {
+                    A[j][j-3]=0;
+                    j+=1;
+                }
+                k=t;
+                while(k<m-1)
+                {
+                    if(k!=t)
+                    {
+                        p=A[k][k-1];
+                        q=A[k+1][k-1];
+                        if(k!=m-2)
+                        {
+                            r=A[k+2][k-1];
+                        }
+                        else
+                        {
+                            r=0;
+                        }
+                    }
+                    else
+                    {
+                        b=A[m-1][m-1];
+                        c=A[m-2][m-2];
+                        x=b+c;
+                        y=c*b-A[m-2][m-1]*A[m-1][m-2];
+                        p=A[t][t]*(A[t][t]-x)+A[t][t+1]*A[t+1][t]+y;
+                        q=A[t+1][t]*(A[t][t]+A[t+1][t+1]-x);
+                        r=A[t+1][t]*A[t+2][t+1];
+                    }
+                    if(p!=0||q!=0||r!=0)
+                    {
+                        if(p<0)
+                        {
+                            xy=-1;
+                        }
+                        else
+                        {
+                            xy=1;
+                        }
+                        s=xy*Math.pow(p*p+q*q+r*r, 0.5);
+                        if(k!=t)
+                        {
+                            A[k][k-1]=-s;
+                        }
+                        e=-q/s;
+                        f=-r/s;
+                        x=-p/s;
+                        y=-x-f*r/(p+s);
+                        g=e*r/(p+s);
+                        z=-x-e*q/(p+s);
+                        for(j=k;j<=m-1;j++)
+                        {
+                            b=A[k][j];
+                            c=A[k+1][j];
+                            p=x*b+e*c;
+                            q=e*b+y*c;
+                            r=f*b+g*c;
+                            if(k!=m-2)
+                            {
+                                b=A[k+2][j];
+                                p+=f*b;
+                                q+=g*b;
+                                r+=z*b;
+                                A[k+2][j]=r;
+                            }
+                            A[k+1][j]=q;
+                            A[k][j]=p;
+
+                        }
+                        j=k+3;
+                        if(j>=m-1)
+                        {
+                            j=m-1;
+                        }
+                        for(i=t;i<=j;i++)
+                        {
+                            b=A[i][k];
+                            c=A[i][k+1];
+                            p=x*b+e*c;
+                            q=e*b+y*c;
+                            r=f*b+g*c;
+                            if(k!=m-2)
+                            {
+                                b=A[i][k+2];
+                                p+=f*b;
+                                q+=g*b;
+                                r+=z*b;
+                                A[i][k+2]=r;
+                            }
+                            A[i][k+1]=q;
+                            A[i][k]=p;
+                        }
+                    }
+                    k+=1;
+                }
+
+            }
+
+        }
+        return true;
+    }
+
 
     private void matrixEigValue(Matrix ope) {
         /**
@@ -535,38 +882,62 @@ public class MatrixModel extends CalculatorModel{
         * @date: 2023/12/9 23:47
         * @return void
         */
+        if(!ope.isPhalanx()){
+            matrixEigValueAnswer = "0|" + NaN;
+        }
+        else if (Math.abs(matrixDeterminant(ope) - 0) < EP) {
+            int rank = ope.row;
+            double[][] temp = new double[rank][rank];
+            EigenValue(ope,temp);
+            for(int i = 0; i < rank; i++){
+                for(int j = 0; j < rank; j++){
+                    temp[i][j] = getDoubleApproximation(temp[i][j],3);
+                }
+            }
+            Matrix tempMatrix = new Matrix(rank,rank);
+            tempMatrix.data = temp;
+            matrixEigValueAnswer = "1|";
+            for (int i = 0; i < rank; i++) {
+                matrixEigValueAnswer += String.valueOf(tempMatrix.data[i][0]) + " ";
+            }
+        }
+        else{
+            double[][] paraMatrix = ope.data;
+            int tempM = ope.row;
+            int tempN = ope.col;
+            Matrix res = new Matrix(tempM,tempN);
+            res.row = tempM;
+            res.col = tempN;
+            int[] tempIndexQ = arrayIndexAuto(tempM);
+            int[] tempIndexR = arrayIndexAuto(tempM, tempM + tempN);
+            for (int i = 0; i < 1000; i++) {
+                double[][] tempSummary = matrixQrDecomposition(paraMatrix);
+                double[][] tempMatrixQ = arrayRowValue(tempSummary, tempIndexQ);
+                double[][] tempMatrixR = arrayRowValue(tempSummary, tempIndexR);
+                paraMatrix = matrixCrossProductTool(tempMatrixR, tempMatrixQ);
+            }
+            for(int i = 0; i < tempM; i++){//进行四舍五入
+                for(int j = 0; j < tempN; j++){
+                    paraMatrix[i][j] = getDoubleApproximation(paraMatrix[i][j],3);
+                    if(Math.abs(paraMatrix[i][j] - 0) < EP){
+                        paraMatrix[i][j] = 0;
+                    }
+                }
+            }
+            for(int i = 0; i < tempM; i++){
+                for(int j = 0; j < tempN; j++){
+                    if(i != j){
+                        paraMatrix[i][j] = 0;
+                    }
+                }
+            }
+            res.data = paraMatrix;
+            matrixEigValueAnswer = "1|";
+            for (int i = 0; i < tempM; i++) {
+                matrixEigValueAnswer += String.valueOf(res.data[i][i]) + " ";
+            };
+        }
 
-        double[][] paraMatrix = ope.data;
-        int tempM = ope.row;
-        int tempN = ope.col;
-        Matrix res = new Matrix(tempM,tempN);
-        res.row = tempM;
-        res.col = tempN;
-        int[] tempIndexQ = arrayIndexAuto(tempM);
-        int[] tempIndexR = arrayIndexAuto(tempM, tempM + tempN);
-        for (int i = 0; i < 1000; i++) {
-            double[][] tempSummary = matrixQrDecomposition(paraMatrix);
-            double[][] tempMatrixQ = arrayRowValue(tempSummary, tempIndexQ);
-            double[][] tempMatrixR = arrayRowValue(tempSummary, tempIndexR);
-            paraMatrix = matrixCrossProduct_tool(tempMatrixR, tempMatrixQ);
-        }
-        for(int i = 0; i < tempM; i++){//进行四舍五入
-            for(int j = 0; j < tempN; j++){
-                paraMatrix[i][j] = getDoubleApproximation(paraMatrix[i][j],3);
-                if(Math.abs(paraMatrix[i][j] - 0) < EP){
-                    paraMatrix[i][j] = 0;
-                }
-            }
-        }
-        for(int i = 0; i < tempM; i++){
-            for(int j = 0; j < tempN; j++){
-                if(i != j){
-                    paraMatrix[i][j] = 0;
-                }
-            }
-        }
-        res.data = paraMatrix;
-        matrixC = res;
     }
 
     private double[][] matrixQrDecomposition(double[][] paraMatrix) {
@@ -587,7 +958,7 @@ public class MatrixModel extends CalculatorModel{
             } // Of for j
         } // Of for i
 
-        double[][] tempMatrixR = matrixCrossProduct_tool(tempMatrixQ, paraMatrix);
+        double[][] tempMatrixR = matrixCrossProductTool(tempMatrixQ, paraMatrix);
         double[][] resultSummary = new double[tempM + tempN][tempM];
         for (int i = 0; i < tempN; i++) {
             for (int j = 0; j < tempM; j++) {
@@ -741,6 +1112,8 @@ public class MatrixModel extends CalculatorModel{
         else {
             matrixOperation = 1;
         }
+
+
         if (matrixOperation == 0) {
             String[] matrixString = temp[1].split("/");
             if (!checkMatrixString(matrixString)) {
@@ -757,9 +1130,6 @@ public class MatrixModel extends CalculatorModel{
             }
             matrixA = new Matrix(matrixStringA);
             matrixB = new Matrix(matrixStringB);
-            if (matrixA.row != matrixB.col && matrixB.row != matrixA.col) {
-                return false;
-            }
         }
         return true;
     }
@@ -781,8 +1151,12 @@ public class MatrixModel extends CalculatorModel{
         return true;
     }
 
-
-
+    public static void main(String[] args) {
+        String A = "0|1 2 3/4 5 6/7 8 9";
+        MatrixModel testModel = new MatrixModel(A);
+        testModel.count();
+        System.out.println(testModel.checkIllegal());
+    }
 }
 
 
