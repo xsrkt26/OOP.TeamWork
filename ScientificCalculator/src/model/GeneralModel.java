@@ -195,8 +195,13 @@ public class GeneralModel extends CalculatorModel{
 	     	        }
 	                ans = ope1 / ope2;
 	                break;
-	            case "mod":          
-	                ans = ope1 % ope2;
+	            case "mod": 
+	            	if(Math.abs(ope2)<EP) {
+	            		ans = ope1;
+	            	}
+	            	else {
+	            		ans = (ope1%ope2+ope2)%ope2;
+	            	}
 	                break;
 	            case "^":
 	                ans = Math.pow(ope1,ope2);
@@ -252,13 +257,29 @@ public class GeneralModel extends CalculatorModel{
 	    	
 	    	StringBuilder sb = new StringBuilder(replaceInput);
 	    	int insertIndex ; // 减号后插入空格位置的索引
-	    	char charToInsert = ' '; // 要插入的字符
+	    	char charToInsert = ' '; // 要插入的空格
 	    	int k = 0;
+	    	if(replaceInput.charAt(0)=='-') {//首位为负号补0
+	    		insertIndex = 0;
+	    		k++;
+	    		sb.insert(insertIndex, '0');
+	    		insertIndex = 2;
+	    		k++;
+	    		sb.insert(insertIndex, ' ');
+	    	}
 	    	for(int i=1;i<replaceInput.length();i++) {
 	    		if(replaceInput.charAt(i)=='-'&&(replaceInput.charAt(i-1)==')'||Character.isDigit(replaceInput.charAt(i-1)))) {// 减号则后面插入空格
 	    			insertIndex = i+1+k;
 	    			k++;
 	    			sb.insert(insertIndex, charToInsert);
+	    		}
+	    		else if(replaceInput.charAt(i)=='-'&&(replaceInput.charAt(i-1)=='(')){//前补0后补空格
+	    			insertIndex = i+k;
+		    		k++;
+		    		sb.insert(insertIndex, '0');
+		    		insertIndex = i+k+1;
+		    		k++;
+		    		sb.insert(insertIndex, ' ');
 	    		}
 	    	}
 	    	String modifiedString = sb.toString();
@@ -321,7 +342,7 @@ public class GeneralModel extends CalculatorModel{
 
 
     public static void main(String[] args) {
-        String A = "1 / 2 + t 45 - l 100.00 - 3! * s (-90) * o(180)/ n 2.732 d 6.54 + a(-2)*a(3.04) %%";
+        String A = "-(-(-1! / 2 + t 45 - l 100.00 - 3! * s (-90) * o(180)/ n 2.732 d 6.54 + a(-2)*a(3.04) %)%)*10000.0000";
         GeneralModel testModel = new GeneralModel(A);
         testModel.count();
         System.out.println(testModel.outputAnswer);
