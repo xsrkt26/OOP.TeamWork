@@ -223,8 +223,8 @@ public class GeneralModel extends CalculatorModel{
 	            		System.out.println("acsc无效输入");
 	            		ans = Double.POSITIVE_INFINITY;
 	            		return ans;
-	            	}
-	                ans = Math.sin(Math.toRadians(1/ope));
+	            	}	          
+	            	 ans = Math.toDegrees(Math.asin(1/ope));
 	                break;
 	            case "asec":
 	            	if(ope>=-1+EP&&ope<=1-EP) {
@@ -232,13 +232,13 @@ public class GeneralModel extends CalculatorModel{
 	            		ans = Double.POSITIVE_INFINITY;
 	            		return ans;
 	            	}
-	                ans = Math.cos(Math.toRadians(1/ope));
+	                ans = Math.toDegrees(Math.acos(1/ope));
 	                break;
 	            case "acot":
-	            	 if(Math.abs(ope)<EP) {
-	            		ans = 0;
+	            	if(Math.abs(ope)<EP) {
+	            		ans = 90;
 	            	}
-	            	else ans = Math.tan(Math.toRadians(1/ope));
+	            	else ans = Math.toDegrees(Math.atan(1/ope));
 	                break;
 	            case "!":
 	                ans = factorial(ope);
@@ -448,7 +448,7 @@ public class GeneralModel extends CalculatorModel{
 	    	return false;
 	    }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) {//测试
         String A = "-(-(-1! / 2 + t 45 - l 100.00 - 3! * s (-90) * o(180)/ n 2.732 d 6.54^1.2086 + a(-2)*a(3.04) %)%)*10000.0000^(1.768596)";
         GeneralModel testModel = new GeneralModel(A); 
         testModel.count();
