@@ -17,6 +17,7 @@ public class GeneralModel extends CalculatorModel{
     private static HashMap<String, Integer> operationPriority = new HashMap<>();
     private static HashMap<String, Integer> operationAry_N = new HashMap<>();
     //op为 1或2 元运算符
+    
     static {
         operationPriority.put("-", 1);
         operationPriority.put("+", 1);
