@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  * @date ：2023/11/28 17:41
  */
 public class GeneralModel extends CalculatorModel{
-    final double EP = 1e-17;//用于进行浮点数相等比较
+    final double EP = 1e-16;//用于进行浮点数相等比较
 		private ArrayList<String> postfixExpression = new ArrayList<>();
 	    private static HashMap<String, Integer> operationPriority = new HashMap<>();
 	    private static HashMap<String, Integer> operationAry_N = new HashMap<>();
@@ -28,6 +28,15 @@ public class GeneralModel extends CalculatorModel{
 	        operationPriority.put("sin", 4);
 	        operationPriority.put("cos", 4);
 	        operationPriority.put("tan", 4);
+	        operationPriority.put("sec", 4);
+	        operationPriority.put("cot", 4);
+	        operationPriority.put("csc", 4);
+	        operationPriority.put("asin", 4);
+	        operationPriority.put("acos", 4);
+	        operationPriority.put("atan", 4);
+	        operationPriority.put("asec", 4);
+	        operationPriority.put("acot", 4);
+	        operationPriority.put("acsc", 4);
 	        operationPriority.put("!", 4);
 	        operationPriority.put("abs", 4);
 	        operationPriority.put("%", 4);
@@ -51,6 +60,15 @@ public class GeneralModel extends CalculatorModel{
 	        operationAry_N.put("sin",1);
 	        operationAry_N.put("cos",1);
 	        operationAry_N.put("tan",1);
+	        operationAry_N.put("sec",1);
+	        operationAry_N.put("csc",1);
+	        operationAry_N.put("cot",1);
+	        operationAry_N.put("asin",1);
+	        operationAry_N.put("acos",1);
+	        operationAry_N.put("atan",1);
+	        operationAry_N.put("asec",1);
+	        operationAry_N.put("acsc",1);
+	        operationAry_N.put("acot",1);
 	        operationAry_N.put("!",1);
 	        operationAry_N.put("abs",1);
 	        operationAry_N.put("%",1);
@@ -147,12 +165,80 @@ public class GeneralModel extends CalculatorModel{
 	                ans = Math.cos(Math.toRadians(ope));
 	                break;
 	            case "tan":
-	            	if((ope+90)%180<EP) {
+	            	if(isPiDiv2(ope)) {
 	            		System.out.println("tan无效输入");
 	            		ans = Double.POSITIVE_INFINITY;
 	            		return ans;
 	            	}
 	                ans = Math.tan(Math.toRadians(ope));
+	                break;
+	            case "csc":
+	            	if(isKMultPi(ope)) {
+	            		System.out.println("csc无效输入");
+	            		ans = Double.POSITIVE_INFINITY;
+	            		return ans;
+	            	}
+	                ans =1/ Math.sin(Math.toRadians(ope));
+	                break;
+	            case "sec":
+	            	if(isPiDiv2(ope)) {
+	            		System.out.println("sec无效输入");
+	            		ans = Double.POSITIVE_INFINITY;
+	            		return ans;
+	            	}
+	                ans =1/ Math.cos(Math.toRadians(ope));
+	                break;
+	            case "cot":
+	            	if(isKMultPi(ope)) {
+	            		System.out.println("cot无效输入");
+	            		ans = Double.POSITIVE_INFINITY;
+	            		return ans;
+	            	}
+	            	else if(isPiDiv2(ope)) {
+	            		ans = 0;
+	            	}
+	            	else ans =1/ Math.tan(Math.toRadians(ope));
+	                break;
+	            case "asin":
+	            	if(ope>1+EP||ope<-1-EP) {
+	            		System.out.println("asin无效输入");
+	            		ans = Double.POSITIVE_INFINITY;
+	            		return ans;
+	            	}
+	            	ans = Math.toDegrees(Math.asin(ope));
+	                break;
+	            case "acos":
+	            	if(ope>1+EP||ope<-1-EP) {
+	            		System.out.println("acos无效输入");
+	            		ans = Double.POSITIVE_INFINITY;
+	            		return ans;
+	            	}
+	                ans = Math.toDegrees(Math.acos(ope));
+	                break;
+	            case "atan":
+	                ans = Math.toDegrees(Math.atan(ope));
+	                break;
+	            case "acsc":
+	            	if(ope>=-1+EP&&ope<=1-EP) {
+	            		System.out.println("acsc无效输入");
+	            		ans = Double.POSITIVE_INFINITY;
+	            		return ans;
+	            	}
+	                ans = Math.sin(Math.toRadians(1/ope));
+	                break;
+	            case "asec":
+	            	if(ope>=-1+EP&&ope<=1-EP) {
+	            		System.out.println("asec无效输入");
+	            		ans = Double.POSITIVE_INFINITY;
+	            		return ans;
+	            	}
+	                ans = Math.cos(Math.toRadians(1/ope));
+	                break;
+	            case "acot":
+	            	 if(Math.abs(ope)<EP) {
+	            		ans = 0;
+	            	}
+	            	else ans = Math.tan(Math.toRadians(1/ope));
 	                break;
 	            case "!":
 	                ans = factorial(ope);
@@ -283,7 +369,7 @@ public class GeneralModel extends CalculatorModel{
 	    		}
 	    	}
 	    	String modifiedString = sb.toString();
-	    	Pattern pattern = Pattern.compile("-?\\d+\\.\\d+|-?\\d+|[-+*/%!^()t()s()o()l()n()d()a()]");
+	    	Pattern pattern = Pattern.compile("-?\\d+\\.\\d+|-?\\d+|[-+*/%!^()t()s()o()l()n()d()a()e()p()u()i()j()T()S()O()U()I()J()]");
 	    	Matcher matcher = pattern.matcher(modifiedString);
 	    	
 	    	ArrayList<String> infixExpression = new ArrayList<>();
@@ -292,10 +378,21 @@ public class GeneralModel extends CalculatorModel{
 	    		if(tmp.equals("t")) tmp="tan";
 	    		else if(tmp.equals("s")) tmp="sin";
 	    		else if(tmp.equals("o")) tmp="cos";
+	    		else if(tmp.equals("u")) tmp="sec";
+	    		else if(tmp.equals("i")) tmp="csc";
+	    		else if(tmp.equals("j")) tmp="cot";
+	    		else if(tmp.equals("T")) tmp="atan";
+	    		else if(tmp.equals("S")) tmp="asin";
+	    		else if(tmp.equals("O")) tmp="acos";
+	    		else if(tmp.equals("U")) tmp="asec";
+	    		else if(tmp.equals("I")) tmp="acsc";
+	    		else if(tmp.equals("J")) tmp="acot";
 	    		else if(tmp.equals("l")) tmp="log";
 	    		else if(tmp.equals("n")) tmp="ln";
 	    		else if(tmp.equals("d")) tmp="mod";
 	    		else if(tmp.equals("a")) tmp="abs";
+	    		else if(tmp.equals("p")) tmp= Double.toString(Math.PI);
+	    		else if(tmp.equals("e")) tmp= Double.toString(Math.E);
 	    		infixExpression.add(tmp);
 	    	}
 	    	
@@ -338,12 +435,22 @@ public class GeneralModel extends CalculatorModel{
 	    private static double readNumber() {
 	        return 0;
 	    }
-
-
+	    public boolean isPiDiv2 (double num) {//判断是否为k*180+90
+	    	if(Math.abs((num+90)%180)<EP||Math.abs((num+90)%180)>180-EP) {
+	    		return true;
+	    	}
+	    	return false;
+	    }
+	    public boolean isKMultPi (double num) {//判断是否为k*180
+	    	if(Math.abs(num%180)<EP||Math.abs(num%180)>180-EP) {
+	    		return true;
+	    	}
+	    	return false;
+	    }
 
     public static void main(String[] args) {
-        String A = "-(-(-1! / 2 + t 45 - l 100.00 - 3! * s (-90) * o(180)/ n 2.732 d 6.54 + a(-2)*a(3.04) %)%)*10000.0000";
-        GeneralModel testModel = new GeneralModel(A);
+        String A = "-(-(-1! / 2 + t 45 - l 100.00 - 3! * s (-90) * o(180)/ n 2.732 d 6.54^1.2086 + a(-2)*a(3.04) %)%)*10000.0000^(1.768596)";
+        GeneralModel testModel = new GeneralModel(A); 
         testModel.count();
         System.out.println(testModel.outputAnswer);
     }
