@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
  * @description：TODO
  * @date ：2023/11/28 17:41
  */
+
 public class GeneralModel extends CalculatorModel{
     final double EP = 1e-16;//用于进行浮点数相等比较
 		private ArrayList<String> postfixExpression = new ArrayList<>();
