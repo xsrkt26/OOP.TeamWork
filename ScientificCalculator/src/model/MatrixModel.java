@@ -1,6 +1,7 @@
 package model;
 
 import java.text.NumberFormat;
+import java.util.Map;
 
 /**
  * @author ：kiyotaka
@@ -31,7 +32,7 @@ public class MatrixModel extends CalculatorModel{
                 for (int j = 0; j < col; j++ ){
                     stringBuilder.append(String.valueOf(data[i][j])).append(' ');
                 }
-                stringBuilder.append('/');
+                stringBuilder.append("\n");
             }
             return stringBuilder.toString();
         }
@@ -112,6 +113,12 @@ public class MatrixModel extends CalculatorModel{
         this.inputExpression = inputExpression;
     }
 
+    public MatrixModel(){}
+
+    public void setInputExpression(String s){
+        outputMap.clear();
+        this.inputExpression = s;
+    }
     @Override
     public void count() {
         if (checkIllegal()) {
@@ -121,7 +128,31 @@ public class MatrixModel extends CalculatorModel{
             else {
                 countDataForTwo();
             }
+            saveDataToMap();
         }
+    }
+
+    private void saveDataToMap(){
+        if (matrixOperation == 0) {
+            outputMap.put("matrixAddAnswer", matrixAddAnswer);
+            outputMap.put("matrixSubAnswer", matrixSubAnswer);
+            outputMap.put("matrixCrossProductAnswer", matrixCrossProductAnswer);
+            outputMap.put("matrixDotProductAnswer", matrixDotProductAnswer);
+        }
+        else {
+            outputMap.put("matrixTransposeAnswer", matrixTransposeAnswer);
+            outputMap.put("matrixDeterminantAnswer", matrixDeterminantAnswer);
+            outputMap.put("matrixAdjointAnswer", matrixAdjointAnswer);
+            outputMap.put("matrixInverseAnswer", matrixInverseAnswer);
+            outputMap.put("matrixTraceAnswer", matrixTraceAnswer);
+            outputMap.put("matrixRankAnswer", matrixRankAnswer);
+            outputMap.put("matrixEigValueAnswer", matrixEigValueAnswer);
+        }
+    }
+
+    @Override
+    public Map<String, String> getOutPutMap() {
+        return null;
     }
 
     private void countDataForTwo() {
@@ -433,8 +464,9 @@ public class MatrixModel extends CalculatorModel{
             double det = matrixDeterminant(ope);
             Matrix adj = matrixAdjointTool(ope);
             if(Math.abs(det-0) < EP){
-                outputAnswer = "NaN";
-                outputAns();
+                // TODO outputMap = "NaN";
+                matrixInverseAnswer = "0|" + NaN;
+                return;
             }
             Matrix temp = matrixDiv(adj,det);
             for(int i = 0; i < temp.row; i++){//保留三位小数
@@ -1087,10 +1119,6 @@ public class MatrixModel extends CalculatorModel{
             returnArray[i] = i + paraStrat;
         }
         return returnArray;
-    }
-    @Override
-    public String outputAns() {
-        return null;
     }
 
     @Override

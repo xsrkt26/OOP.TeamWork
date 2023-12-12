@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,115 +13,124 @@ import java.util.regex.Pattern;
  */
 public class GeneralModel extends CalculatorModel{
     final double EP = 1e-16;//用于进行浮点数相等比较
-		private ArrayList<String> postfixExpression = new ArrayList<>();
-	    private static HashMap<String, Integer> operationPriority = new HashMap<>();
-	    private static HashMap<String, Integer> operationAry_N = new HashMap<>();
-	    //op为 1或2 元运算符
-	    static {
-	        operationPriority.put("-", 1);
-	        operationPriority.put("+", 1);
-	        operationPriority.put("*", 2);
-	        operationPriority.put("/", 2);
-	        operationPriority.put("mod", 2);
-	        operationPriority.put("^", 3);
-	        operationPriority.put("log", 4);
-	        operationPriority.put("ln", 4);
-	        operationPriority.put("sin", 4);
-	        operationPriority.put("cos", 4);
-	        operationPriority.put("tan", 4);
-	        operationPriority.put("sec", 4);
-	        operationPriority.put("cot", 4);
-	        operationPriority.put("csc", 4);
-	        operationPriority.put("asin", 4);
-	        operationPriority.put("acos", 4);
-	        operationPriority.put("atan", 4);
-	        operationPriority.put("asec", 4);
-	        operationPriority.put("acot", 4);
-	        operationPriority.put("acsc", 4);
-	        operationPriority.put("!", 4);
-	        operationPriority.put("abs", 4);
-	        operationPriority.put("%", 4);
-	        operationPriority.put("(", 0);
-	    }
+	private ArrayList<String> postfixExpression = new ArrayList<>();
+	private static HashMap<String, Integer> operationPriority = new HashMap<>();
+	private static HashMap<String, Integer> operationAry_N = new HashMap<>();
+	//op为 1或2 元运算符
+	static {
+		operationPriority.put("-", 1);
+		operationPriority.put("+", 1);
+		operationPriority.put("*", 2);
+		operationPriority.put("/", 2);
+		operationPriority.put("mod", 2);
+		operationPriority.put("^", 3);
+		operationPriority.put("log", 4);
+		operationPriority.put("ln", 4);
+		operationPriority.put("sin", 4);
+		operationPriority.put("cos", 4);
+		operationPriority.put("tan", 4);
+		operationPriority.put("sec", 4);
+		operationPriority.put("cot", 4);
+		operationPriority.put("csc", 4);
+		operationPriority.put("asin", 4);
+		operationPriority.put("acos", 4);
+		operationPriority.put("atan", 4);
+		operationPriority.put("asec", 4);
+		operationPriority.put("acot", 4);
+		operationPriority.put("acsc", 4);
+		operationPriority.put("!", 4);
+		operationPriority.put("abs", 4);
+		operationPriority.put("%", 4);
+		operationPriority.put("(", 0);
+	}
 
-	    static {
-	        /**
-	        * @author: hirmy
-	        * @description: 某计算符为 1或2 元计算符
-	        * @date: 2023/12/9 14:49
-	        */
-	        operationAry_N.put("-",2);
-	        operationAry_N.put("+",2);
-	        operationAry_N.put("*",2);
-	        operationAry_N.put("/",2);
-	        operationAry_N.put("mod",2);
-	        operationAry_N.put("^",2);
-	        operationAry_N.put("log",1);
-	        operationAry_N.put("ln",1);
-	        operationAry_N.put("sin",1);
-	        operationAry_N.put("cos",1);
-	        operationAry_N.put("tan",1);
-	        operationAry_N.put("sec",1);
-	        operationAry_N.put("csc",1);
-	        operationAry_N.put("cot",1);
-	        operationAry_N.put("asin",1);
-	        operationAry_N.put("acos",1);
-	        operationAry_N.put("atan",1);
-	        operationAry_N.put("asec",1);
-	        operationAry_N.put("acsc",1);
-	        operationAry_N.put("acot",1);
-	        operationAry_N.put("!",1);
-	        operationAry_N.put("abs",1);
-	        operationAry_N.put("%",1);
-	    }
+	static {
+		/**
+		* @author: hirmy
+		* @description: 某计算符为 1或2 元计算符
+		* @date: 2023/12/9 14:49
+		*/
+		operationAry_N.put("-",2);
+		operationAry_N.put("+",2);
+		operationAry_N.put("*",2);
+		operationAry_N.put("/",2);
+		operationAry_N.put("mod",2);
+		operationAry_N.put("^",2);
+		operationAry_N.put("log",1);
+		operationAry_N.put("ln",1);
+		operationAry_N.put("sin",1);
+		operationAry_N.put("cos",1);
+		operationAry_N.put("tan",1);
+		operationAry_N.put("sec",1);
+		operationAry_N.put("csc",1);
+		operationAry_N.put("cot",1);
+		operationAry_N.put("asin",1);
+		operationAry_N.put("acos",1);
+		operationAry_N.put("atan",1);
+		operationAry_N.put("asec",1);
+		operationAry_N.put("acsc",1);
+		operationAry_N.put("acot",1);
+		operationAry_N.put("!",1);
+		operationAry_N.put("abs",1);
+		operationAry_N.put("%",1);
+	}
 
-	    public void count() {
-	        /**
-	        * @author: hirmy
-	        * @description: 根据transToPostfix()修改后的list，进行后缀表达式的计算
-	        * @date: 2023/12/9 14:50
-	        * @return void
-	        */
-	        transToPostfix();
-	        Stack<Double> stack = new Stack<Double>();
-	        for(String o : postfixExpression){
-	 
-	            if(isDouble(o)|| isInteger(o)){
-	                stack.push(Double.parseDouble(o));
-	            }
-	            else{
-	                String op = o;
-	                if(operationAry_N.get(op) == 1){
-	                    try{
-	                        double ope = stack.pop();
-	                        double ans = 0;
-	                        ans = calculate(op,ope);
-	                        stack.push(ans);
-	                    }catch(ArithmeticException e){
-	                        outputAnswer = "NaN";
-	                        outputAns();
-	                        return;
-	                    }
-	                }
-	                else if(operationAry_N.get(op) == 2) {
-	                    try{
-	                        double ope2 = stack.pop();
-	                        double ope1 = stack.pop();
-	                        double ans = 0;
-	                        ans = calculate(op,ope1,ope2);
-	                        stack.push(ans);
-	                    }catch (ArithmeticException e){//捕获异常，如:除0
-	                        outputAnswer = "NaN";
-	                        outputAns();
-	                        return;
-	                    }
-	                }
-	            }
-	        }
-	        outputAnswer = String.valueOf(stack.pop());
-	        outputAns();
-	        return;
-	    }
+	public void count() {
+		/**
+		* @author: hirmy
+		* @description: 根据transToPostfix()修改后的list，进行后缀表达式的计算
+		* @date: 2023/12/9 14:50
+		* @return void
+		*/
+		transToPostfix();
+		countPostFix();
+	}
+
+	private void countPostFix(){
+		/**
+		 * @author: hirmy
+		 * @description: 根据transToPostfix()修改后的list，进行后缀表达式的计算
+		 * @date: 2023/12/12 19:06
+		 * @return void
+		 */
+		outputMap = new HashMap<>();
+		Stack<Double> stack = new Stack<Double>();
+		for(String o : postfixExpression){
+			if(isDouble(o)|| isInteger(o)){
+				stack.push(Double.parseDouble(o));
+			}
+			else{
+				String op = o;
+				if(operationAry_N.get(op) == 1){
+					try{
+						double ope = stack.pop();
+						double ans = 0;
+						ans = calculate(op,ope);
+						stack.push(ans);
+					}catch(ArithmeticException e){
+						outputMap.put("answer", "NaN");
+						return;
+					}
+				}
+				else if(operationAry_N.get(op) == 2) {
+					try{
+						double ope2 = stack.pop();
+						double ope1 = stack.pop();
+						double ans = 0;
+						ans = calculate(op,ope1,ope2);
+						stack.push(ans);
+					}catch (ArithmeticException e){//捕获异常，如:除0
+						outputMap.put("answer", "NaN");
+						return;
+					}
+				}
+			}
+		}
+		outputMap.put("answer", String.valueOf(stack.pop()));
+	}
+
+	public GeneralModel() {};
+
 
     /**
      * @author: kiyotaka
@@ -320,8 +330,8 @@ public class GeneralModel extends CalculatorModel{
 	        }
 	    }
 
-	    public String outputAns() {
-	        return outputAnswer;
+	    public Map<String, String> getOutPutMap() {
+	        return outputMap;
 	    }
 
 	    public boolean checkIllegal() {
@@ -452,6 +462,11 @@ public class GeneralModel extends CalculatorModel{
         String A = "-(-(-1! / 2 + t 45 - l 100.00 - 3! * s (-90) * o(180)/ n 2.732 d 6.54^1.2086 + a(-2)*a(3.04) %)%)*10000.0000^(1.768596)";
         GeneralModel testModel = new GeneralModel(A); 
         testModel.count();
-        System.out.println(testModel.outputAnswer);
+        System.out.println(testModel.outputMap);
     }
+
+	public void setInputExpression(String inputInformation) {
+		outputMap.clear();
+		this.inputExpression = inputInformation;
+	}
 }

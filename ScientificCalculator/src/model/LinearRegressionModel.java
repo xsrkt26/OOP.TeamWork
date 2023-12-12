@@ -1,6 +1,8 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author ：kiyotaka
@@ -9,6 +11,8 @@ import java.util.ArrayList;
  */
 public class LinearRegressionModel extends CalculatorModel {
     // inputExpression 参数包含线性回归的自变量X与因变量Y， 中间以 | 分开；
+
+    // answerMap
 
     private ArrayList<Double> xList = new ArrayList<>();
     private ArrayList<Double> yList = new ArrayList<>();
@@ -57,6 +61,10 @@ public class LinearRegressionModel extends CalculatorModel {
         this.inputExpression = inputExpression;
     }
 
+
+
+    public LinearRegressionModel() {};
+
     /**
      * @return
      * @author: kiyotake
@@ -67,6 +75,10 @@ public class LinearRegressionModel extends CalculatorModel {
         this.inputExpression = inputExpression;
     }
 
+    public void setInputExpression(String inputExpression) {
+        outputMap.clear();
+        this.inputExpression = inputExpression;
+    }
     @Override
     /**
      * @author: kiyotaka
@@ -75,12 +87,34 @@ public class LinearRegressionModel extends CalculatorModel {
      * @return void
      */
     public void count() {
+        checkIllegal();
         countData();
-        transDataIntoString();
+        saveDataIntoMap();
     }
 
-    private void transDataIntoString() {
+    private String listToString(ArrayList<Double> list) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (double temp : list) {
+            stringBuilder.append(String.format("%.5f ", temp));
+        }
+        return stringBuilder.toString();
+    }
 
+    private void saveDataIntoMap() {
+        outputMap = new HashMap<>();
+        outputMap.put("xyList", listToString(xyList));
+        outputMap.put("xSquareList", listToString(xSquareList));
+        outputMap.put("ySquareList", listToString(ySquareList));
+        outputMap.put("xAverage", String.format("%.5f", xAverage));
+        outputMap.put("yAverage", String.format("%.5f", yAverage));
+        outputMap.put("xyAverage", String.format("%.5f", xyAverage));
+        outputMap.put("xAverageSquare", String.format("%.5f", xAverageSquare));
+        outputMap.put("yAverageSquare", String.format("%.5f", yAverageSquare));
+        outputMap.put("xSquareAverage", String.format("%.5f", xSquareAverage));
+        outputMap.put("ySquareAverage", String.format("%.5f", ySquareAverage));
+        outputMap.put("regressionCoefficientB", String.format("%.5f", regressionCoefficientB));
+        outputMap.put("regressionCoefficientA", String.format("%.5f", regressionCoefficientA));
+        outputMap.put("correlationCoefficientR", String.format("%.5f", correlationCoefficientR));
     }
 
     /**
@@ -120,8 +154,8 @@ public class LinearRegressionModel extends CalculatorModel {
     }
 
     @Override
-    public String outputAns() {
-        return outputAnswer;
+    public Map<String, String> getOutPutMap() {
+        return outputMap;
     }
 
 

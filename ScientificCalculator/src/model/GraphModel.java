@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Map;
+
 /**
  * @author ：kiyotaka
  * @description：TODO
@@ -12,10 +14,9 @@ public class GraphModel extends CalculatorModel{
     }
 
     @Override
-    public String outputAns() {
+    public Map<String, String> getOutPutMap() {
         return null;
     }
-
     @Override
     public boolean checkIllegal() {
         return false;
