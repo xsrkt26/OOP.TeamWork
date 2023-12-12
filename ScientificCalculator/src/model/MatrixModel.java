@@ -472,6 +472,9 @@ public class MatrixModel extends CalculatorModel{
             for(int i = 0; i < temp.row; i++){//保留三位小数
                 for(int j = 0; j < temp.col; j++){
                     temp.data[i][j] = getDoubleApproximation(temp.data[i][j],3);
+                    if(Math.abs(temp.data[i][j] - 0) < EP){
+                        temp.data[i][j] = 0;
+                    }
                 }
             }
         }
@@ -924,6 +927,9 @@ public class MatrixModel extends CalculatorModel{
             for(int i = 0; i < rank; i++){
                 for(int j = 0; j < rank; j++){
                     temp[i][j] = getDoubleApproximation(temp[i][j],3);
+                    if(Math.abs(temp[i][j] - 0) < EP){
+                        temp[i][j] = 0;
+                    }
                 }
             }
             Matrix tempMatrix = new Matrix(rank,rank);
