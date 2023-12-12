@@ -7,11 +7,12 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import main.controller.MainWindowController;
 
 public class MainWindow extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindowInterface.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/MainWindowInterface.fxml"));
         Scene scene = new Scene(loader.load());
         stage.setScene(scene);
         stage.setResizable(false);

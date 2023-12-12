@@ -16,6 +16,8 @@ public class GeneralModel extends CalculatorModel{
 		private ArrayList<String> postfixExpression = new ArrayList<>();
 	    private static HashMap<String, Integer> operationPriority = new HashMap<>();
 	    private static HashMap<String, Integer> operationAry_N = new HashMap<>();
+		private String inputExpression;
+		private String outputAnswer;
 	    //op为 1或2 元运算符
 	    static {
 	        operationPriority.put("-", 1);
@@ -111,9 +113,8 @@ public class GeneralModel extends CalculatorModel{
      * @date: 2023/12/9 22:13
      * @return
      */
-    public GeneralModel(String inputExpression) {
-        this.inputExpression = inputExpression;
-    }
+
+	public void setInputExpression(String inputExpression) { this.inputExpression = inputExpression;}
 
 
 	    private double calculate(String op, double ope){
@@ -319,9 +320,10 @@ public class GeneralModel extends CalculatorModel{
 
 
     public static void main(String[] args) {
-        String A = "1 / 2";
-        GeneralModel testModel = new GeneralModel(A);
+        String A = "1/2";
+        GeneralModel testModel = new GeneralModel();
+		testModel.setInputExpression(A);
         testModel.count();
-        System.out.println(testModel.outputAnswer);
+        System.out.println(testModel.outputAns());
     }
 }
