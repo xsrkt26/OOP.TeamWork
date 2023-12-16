@@ -21,6 +21,7 @@ public class GeneralController implements Controller {
 
     @Override
     public String getOutputInformation(String key) {
+        //此模块key值统一为“answer”
         return currentModel.getOutPutMap().get(key);
 
     }
@@ -29,7 +30,12 @@ public class GeneralController implements Controller {
     public void count() {
         currentModel.count();
     }
-    
+    public static void main(String[] args) {
+        FunctionGraphModel f = new FunctionGraphModel();
+        f.setInputExpression("x^2+5");
+        f.run();
+    }
+
 }
 
 

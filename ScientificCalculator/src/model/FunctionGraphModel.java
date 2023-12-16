@@ -1,4 +1,5 @@
 package model;
+import controller.GeneralController;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
@@ -13,6 +14,7 @@ import javafx.scene.text.Text;
 
 public class FunctionGraphModel extends Application {
 
+
     int width = 1000;
     int height = 600;
     int centerX = width / 2;
@@ -23,6 +25,10 @@ public class FunctionGraphModel extends Application {
     Scene scene;
     public void run(){
         launch();
+    }
+
+    public void setInputExpression(String input){
+        this.inputExpression = input;
     }
 
     @Override
@@ -59,15 +65,6 @@ public class FunctionGraphModel extends Application {
 
     private Pane getPane() throws Exception{
         BorderPane thisPane = new BorderPane();
-//        try{
-//            Image mumu = new Image("./mumu.jpg");
-//            ImageView mumuView = new ImageView(mumu);
-//            mumuView.setFitWidth(width);
-//            mumuView.setFitHeight(height);
-//            thisPane.getChildren().add(mumuView);
-//        }catch (Exception e){
-//            System.out.println(e.getMessage());
-//        }
 
         //折线绘制
         Polyline polyline = new Polyline();
@@ -118,7 +115,13 @@ public class FunctionGraphModel extends Application {
 
 
     private double f(double x){
-        return Math.log(x);
+        String realExpression = inputExpression.replace("x", String.valueOf(x));
+        GeneralModel temp = new GeneralModel(realExpression);
+        temp.count();
+        String result = temp.getOutPutMap().get("answer");
+
+        return Double.valueOf(result);
+       // return x*x;
     }
 
 
