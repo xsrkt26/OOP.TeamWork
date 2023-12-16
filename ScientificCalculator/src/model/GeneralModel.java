@@ -460,8 +460,9 @@ public class GeneralModel extends CalculatorModel{
 	    }
 
     public static void main(String[] args) {//测试
-        String A = "-(-(-1! / 2 + t 45 - l 100.00 - 3! * s (-90) * o(180)/ n 2.732 d 6.54^1.2086 + a(-2)*a(3.04) %)%)*10000.0000^(1.768596)";
-        GeneralModel testModel = new GeneralModel(A); 
+     //   String A = "-(-(-1! / 2 + t 45 - l 100.00 - 3! * s (-90) * o(180)/ n 2.732 d 6.54^1.2086 + a(-2)*a(3.04) %)%)*10000.0000^(1.768596)";
+        String A = "-4.99+1";
+        GeneralModel testModel = new GeneralModel(A);
         testModel.count();
         System.out.println(testModel.outputMap);
     }
@@ -470,4 +471,6 @@ public class GeneralModel extends CalculatorModel{
 		outputMap.clear();
 		this.inputExpression = inputInformation;
 	}
+
+
 }

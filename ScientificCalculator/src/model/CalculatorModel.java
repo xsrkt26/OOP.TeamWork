@@ -1,5 +1,6 @@
 package model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Map;
  */
 public abstract class CalculatorModel {
     String inputExpression;
-    Map<String, String> outputMap;
+    Map<String, String> outputMap = new HashMap<>();
 
     public CalculatorModel() {};
     public CalculatorModel(String inputExpression) {};
