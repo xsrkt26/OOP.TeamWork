@@ -1,25 +1,18 @@
 package model;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polyline;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
-public class FunctionGraph extends Application {
+public class FunctionGraphModel extends Application {
+
     int width = 1000;
     int height = 600;
     int centerX = width / 2;
@@ -28,6 +21,10 @@ public class FunctionGraph extends Application {
     int measureGap = 100; //坐标轴度量
     String inputExpression;
     Scene scene;
+    public void run(){
+        launch();
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         primaryStage.setTitle("Function");

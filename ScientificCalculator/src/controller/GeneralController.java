@@ -1,5 +1,6 @@
 package controller;
 
+import model.FunctionGraphModel;
 import model.GeneralModel;
 
 /**
@@ -28,6 +29,7 @@ public class GeneralController implements Controller {
     public void count() {
         currentModel.count();
     }
+    
 }
 
 
