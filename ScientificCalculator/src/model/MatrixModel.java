@@ -1,6 +1,7 @@
 package model;
 
 import java.text.NumberFormat;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -110,10 +111,13 @@ public class MatrixModel extends CalculatorModel{
     private String matrixEigValueAnswer;
 
     public MatrixModel(String inputExpression) {
+        outputMap = new HashMap<>();
         this.inputExpression = inputExpression;
     }
 
-    public MatrixModel(){}
+    public MatrixModel(){
+        outputMap = new HashMap<>();
+    }
 
     public void setInputExpression(String s){
         outputMap.clear();
@@ -133,7 +137,7 @@ public class MatrixModel extends CalculatorModel{
     }
 
     private void saveDataToMap(){
-        if (matrixOperation == 0) {
+        if (matrixOperation == 1) {
             outputMap.put("matrixAddAnswer", matrixAddAnswer);
             outputMap.put("matrixSubAnswer", matrixSubAnswer);
             outputMap.put("matrixCrossProductAnswer", matrixCrossProductAnswer);
@@ -152,10 +156,14 @@ public class MatrixModel extends CalculatorModel{
 
     @Override
     public Map<String, String> getOutPutMap() {
-        return null;
+        return this.outputMap;
     }
 
     private void countDataForTwo() {
+        matrixAdd(matrixA, matrixB);
+        matrixSub(matrixA, matrixB);
+        matrixCrossProduct(matrixA, matrixB);
+        matrixDotProduct(matrixA, matrixB);
     }
 
     private void countDataForOne() {
@@ -1149,6 +1157,7 @@ public class MatrixModel extends CalculatorModel{
 
 
         if (matrixOperation == 0) {
+            //0:一元矩阵运算
             String[] matrixString = temp[1].split("/");
             if (!checkMatrixString(matrixString)) {
                 return false;
@@ -1157,6 +1166,7 @@ public class MatrixModel extends CalculatorModel{
             matrixB = null;
         }
         else {
+            //1：二元矩阵运算
             String[] matrixStringA = temp[1].split("/");
             String[] matrixStringB = temp[2].split("/");
             if (!checkMatrixString(matrixStringA) || !checkMatrixString(matrixStringB)){
