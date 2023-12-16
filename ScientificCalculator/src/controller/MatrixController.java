@@ -45,6 +45,8 @@ public class MatrixController implements Controller{
         System.out.println("矩阵加： " +addAns);
         System.out.println("矩阵叉乘：" + crossAns);
 
+
+
     }
 
     @Override
