@@ -11,7 +11,6 @@ public class GraphModel extends CalculatorModel{
 
     }
 
-    @Override
     public String outputAns() {
         return null;
     }

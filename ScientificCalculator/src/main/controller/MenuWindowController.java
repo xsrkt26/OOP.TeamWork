@@ -1,5 +1,10 @@
 package main.controller;
-
+/**
+ * @Description: The Controller of menu window
+ * @author: QingYu
+ * @date: 2023/12/9
+ */
+import controller.LinearRegressionController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -32,5 +37,22 @@ public class MenuWindowController extends Controller {
         ((LinearWindowController)loader.getController()).init(stage);
         stage.show();
     }
-
+    public void switchToMatrixOneWindow() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/MatrixOneWindowInterface.fxml"));
+        Stage stage = (Stage)binMenu.getScene().getWindow();
+        Scene scene = new Scene(loader.load());
+        scene.setFill(Color.TRANSPARENT);
+        stage.setScene(scene);
+        ((MatrixOneWindowController)loader.getController()).init(stage);
+        stage.show();
+    }
+    public void switchToMatrixTwoWindow() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/MatrixTwoWindowInterface.fxml"));
+        Stage stage = (Stage)binMenu.getScene().getWindow();
+        Scene scene = new Scene(loader.load());
+        scene.setFill(Color.TRANSPARENT);
+        stage.setScene(scene);
+        ((MatrixTwoWindowController)loader.getController()).init(stage);
+        stage.show();
+    }
 }

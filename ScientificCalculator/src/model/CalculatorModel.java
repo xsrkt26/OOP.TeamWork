@@ -1,5 +1,5 @@
 package model;
-
+import java.util.Map;
 /**
  * @author ：kiyotaka
  * @description：TODO
@@ -7,13 +7,11 @@ package model;
  */
 public abstract class CalculatorModel{
     String inputExpression;
-    String outputAnswer;
-
+    Map<String, String> outputMap;
     public CalculatorModel() {};
     public CalculatorModel(String inputExpression) {};
 
     public abstract void count();
-    public abstract String outputAns();
     public abstract boolean checkIllegal();
 
 }

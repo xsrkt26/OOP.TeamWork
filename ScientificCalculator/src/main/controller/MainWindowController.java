@@ -1,5 +1,9 @@
 package main.controller;
-
+/**
+ * @Description: The Controller of main window
+ * @author: QingYu
+ * @date: 2023/12/9
+ */
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -42,8 +46,7 @@ public class MainWindowController extends Controller{
             showExpression.setLength(0);
             operator = ".";
             stack.clear();
-        }
-        else if(symbol.equals("BackSpace")) {
+        }        else if(symbol.equals("BackSpace")) {
             if (!stack.isEmpty()) {
                 calculateExpression = new StringBuffer(calculateExpression.substring(0, calculateExpression.length() - 1));
                 lastShowExpressionIndex = stack.get(stack.size() - 1).length();

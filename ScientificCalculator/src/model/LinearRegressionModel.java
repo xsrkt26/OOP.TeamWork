@@ -1,6 +1,6 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * @author ：kiyotaka
@@ -10,6 +10,68 @@ import java.util.ArrayList;
 public class LinearRegressionModel extends CalculatorModel {
     // inputExpression 参数包含线性回归的自变量X与因变量Y， 中间以 | 分开；
 
+    // answerMap
+    Map<String, String> outputMap = new Map<String, String>() {
+        @Override
+        public int size() {
+            return 0;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return false;
+        }
+
+        @Override
+        public boolean containsKey(Object key) {
+            return false;
+        }
+
+        @Override
+        public boolean containsValue(Object value) {
+            return false;
+        }
+
+        @Override
+        public String get(Object key) {
+            return null;
+        }
+
+        @Override
+        public String put(String key, String value) {
+            return null;
+        }
+
+        @Override
+        public String remove(Object key) {
+            return null;
+        }
+
+        @Override
+        public void putAll(Map<? extends String, ? extends String> m) {
+
+        }
+
+        @Override
+        public void clear() {
+
+        }
+
+        @Override
+        public Set<String> keySet() {
+            return null;
+        }
+
+        @Override
+        public Collection<String> values() {
+            return null;
+        }
+
+        @Override
+        public Set<Entry<String, String>> entrySet() {
+            return null;
+        }
+    };
     private ArrayList<Double> xList = new ArrayList<>();
     private ArrayList<Double> yList = new ArrayList<>();
 
@@ -57,6 +119,10 @@ public class LinearRegressionModel extends CalculatorModel {
         this.inputExpression = inputExpression;
     }
 
+
+
+    public LinearRegressionModel() {};
+
     /**
      * @return
      * @author: kiyotake
@@ -67,6 +133,10 @@ public class LinearRegressionModel extends CalculatorModel {
         this.inputExpression = inputExpression;
     }
 
+    public void setInputExpression(String inputExpression) {
+        outputMap.clear();
+        this.inputExpression = inputExpression;
+    }
     @Override
     /**
      * @author: kiyotaka
@@ -75,12 +145,34 @@ public class LinearRegressionModel extends CalculatorModel {
      * @return void
      */
     public void count() {
+        checkIllegal();
         countData();
-        transDataIntoString();
+        saveDataIntoMap();
     }
 
-    private void transDataIntoString() {
+    private String listToString(ArrayList<Double> list) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (double temp : list) {
+            stringBuilder.append(String.format("%.5f ", temp));
+        }
+        return stringBuilder.toString();
+    }
 
+    private void saveDataIntoMap() {
+        outputMap = new HashMap<>();
+        outputMap.put("xyList", listToString(xyList));
+        outputMap.put("xSquareList", listToString(xSquareList));
+        outputMap.put("ySquareList", listToString(ySquareList));
+        outputMap.put("xAverage", String.format("%.5f", xAverage));
+        outputMap.put("yAverage", String.format("%.5f", yAverage));
+        outputMap.put("xyAverage", String.format("%.5f", xyAverage));
+        outputMap.put("xAverageSquare", String.format("%.5f", xAverageSquare));
+        outputMap.put("yAverageSquare", String.format("%.5f", yAverageSquare));
+        outputMap.put("xSquareAverage", String.format("%.5f", xSquareAverage));
+        outputMap.put("ySquareAverage", String.format("%.5f", ySquareAverage));
+        outputMap.put("regressionCoefficientB", String.format("%.5f", regressionCoefficientB));
+        outputMap.put("regressionCoefficientA", String.format("%.5f", regressionCoefficientA));
+        outputMap.put("correlationCoefficientR", String.format("%.5f", correlationCoefficientR));
     }
 
     /**
@@ -119,9 +211,8 @@ public class LinearRegressionModel extends CalculatorModel {
                 Math.sqrt((xSquareAverage - xAverageSquare) * (ySquareAverage - yAverageSquare));
     }
 
-    @Override
-    public String outputAns() {
-        return outputAnswer;
+    public Map<String, String> getOutPutMap() {
+        return outputMap;
     }
 
 

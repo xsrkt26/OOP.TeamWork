@@ -1,5 +1,9 @@
 package main.controller;
-
+/**
+ * @Description: The superclass of all controllers
+ * @author: QingYu
+ * @date: 2023/12/9
+ */
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

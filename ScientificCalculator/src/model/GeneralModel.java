@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 
 public class GeneralModel extends CalculatorModel {
 	private String inputExpression;
+	private String outputAnswer;
 	final double EP = 1e-16;//用于进行浮点数相等比较
 	private ArrayList<String> postfixExpression = new ArrayList<>();
 	private static HashMap<String, Integer> operationPriority = new HashMap<>();

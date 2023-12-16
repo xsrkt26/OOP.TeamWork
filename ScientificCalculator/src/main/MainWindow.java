@@ -1,5 +1,9 @@
 package main;
-
+/**
+ * @Description: The main window of the program
+ * @author: QingYu
+ * @date: 2023/12/9
+ */
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -18,7 +22,7 @@ public class MainWindow extends Application {
         stage.setResizable(false);
         stage.initStyle(StageStyle.TRANSPARENT);
         scene.setFill(Color.TRANSPARENT);
-        stage.setTitle("Calculator");
+        stage.setTitle("Scientific Calculator");
         stage.show();
         Image image = new Image("/images/icon.png");
         stage.getIcons().add(image);
