@@ -3,6 +3,7 @@ package controller;
 import model.FunctionGraphModel;
 import model.GeneralModel;
 
+import javafx.application.Application;
 /**
  * @author ：kiyotaka
  * @description：TODO
@@ -31,9 +32,13 @@ public class GeneralController implements Controller {
         currentModel.count();
     }
     public static void main(String[] args) throws Exception {
-        FunctionGraphModel f = new FunctionGraphModel();
-        f.setInputExpression("x^2+5");
-        f.run();
+        try{
+            FunctionGraphModel.setInputExpression("tx") ;
+            FunctionGraphModel.launch(FunctionGraphModel.class,args);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
     }
 
 }

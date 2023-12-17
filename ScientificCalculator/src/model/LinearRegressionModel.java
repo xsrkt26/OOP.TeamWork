@@ -131,7 +131,6 @@ public class LinearRegressionModel extends CalculatorModel {
             double y = yList.get(i);
             xyList.add(x * y);
             xSquareList.add(x * x);
-            ySquareList.add(y * y);
 
             xSum += x;
             ySum += y;

@@ -21,7 +21,6 @@ public class MatrixController implements Controller{
     @Override
     public String getOutputInformation(String key) {
         return currentModel.getOutPutMap().get(key);
-
     }
 
     public static void main(String[] args) {
@@ -53,9 +52,6 @@ public class MatrixController implements Controller{
     public void count() {
         currentModel.count();
     }
-
-
-
 
 }
 
