@@ -51,6 +51,9 @@ public class MatrixOneWindowController extends Controller{
         processInput(inputMatrix);
         matrixController.transmitData(inputMatrix.toString());
         matrixController.count();
+        transpose.setText(matrixController.getOutputInformation("matrixTransposeAnswer").substring(2));
+        adjoint.setText(matrixController.getOutputInformation("matrixAdjointAnswer").substring(2));
+        inverse.setText(matrixController.getOutputInformation("matrixInverseAnswer").substring(2));
         determinant.setText(matrixController.getOutputInformation("matrixDeterminantAnswer").substring(2));
         trace.setText(matrixController.getOutputInformation("matrixTraceAnswer").substring(2));
         rank.setText(matrixController.getOutputInformation("matrixRankAnswer").substring(2));
