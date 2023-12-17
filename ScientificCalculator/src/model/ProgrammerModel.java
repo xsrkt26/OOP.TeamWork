@@ -279,8 +279,6 @@ public class ProgrammerModel extends CalculatorModel{
 	 public static boolean isLong(String input) { // 判断字符串是否是整数
 	        return input.matches("-?\\d+");
 	 }
-
-	
 	@Override
 	public Map<String, String> getOutPutMap() {
 		// TODO 自动生成的方法存根
