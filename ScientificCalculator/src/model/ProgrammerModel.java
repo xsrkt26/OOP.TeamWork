@@ -130,7 +130,8 @@ public class ProgrammerModel extends CalculatorModel{
 	}
 
 	public void setNumberSystem(int numberSystem) {//设置进制 numberSystem=2,8,10,16
-		this.numberSystem = numberSystem;
+		inputExpression=transAtoB(inputExpression,this.numberSystem,numberSystem);
+		this.numberSystem=numberSystem;
 	}
 	 private void transToPostfix() {
     	if(inputExpression.length()>300) {
@@ -210,7 +211,71 @@ public class ProgrammerModel extends CalculatorModel{
     		System.out.print(o+" ");
     	
     }
-	 
+	 public String transAtoB(String inputExpression,int a,int b) { //a->b进制转换
+		 String res="";
+		 String replaceInput = inputExpression.replaceAll("\\s", "");
+	    	StringBuilder sb = new StringBuilder(replaceInput);
+	    	int insertIndex ; 
+	    	char charToInsert = ' '; 
+	    	int k = 0;
+	    	if(replaceInput.charAt(0)=='-') {
+	    		insertIndex = 0;
+	    		k++;
+	    		sb.insert(insertIndex, '0');
+	    		insertIndex = 2;
+	    		k++;
+	    		sb.insert(insertIndex, ' ');
+	    	}
+	    	for(int i=1;i<replaceInput.length();i++) {
+	    		if(replaceInput.charAt(i)=='-'&&(replaceInput.charAt(i-1)==')'||Character.isDigit(replaceInput.charAt(i-1)))) {// 减号则后面插入空格
+	    			insertIndex = i+1+k;
+	    			k++;
+	    			sb.insert(insertIndex, charToInsert);
+	    		}
+	    		else if(replaceInput.charAt(i)=='-'&&(replaceInput.charAt(i-1)=='(')){//前补0后补空格
+	    			insertIndex = i+k;
+		    		k++;
+		    		sb.insert(insertIndex, '0');
+		    		insertIndex = i+k+1;
+		    		k++;
+		    		sb.insert(insertIndex, ' ');
+	    		}
+	    	}
+	    	String modifiedString = sb.toString();
+	    	Pattern pattern = Pattern.compile("-?\\d+|[-+*/%><&|~\\\\.^()N()]");
+	    	Matcher matcher = pattern.matcher(modifiedString);
+	    	
+	    	ArrayList<String> infixExpression = new ArrayList<>();
+
+	    	while (matcher.find()) {
+	    		String tmp = matcher.group();
+	    		infixExpression.add(tmp);
+	    	}
+	    	for(String o : infixExpression) {
+	    		if( isLong(o)) {
+	    			transNum(o,a,b);
+	    		}
+	    			res+=o;  
+	    	}
+		 return res;
+	 }
+	 public String transNum(String num,int a,int b) {
+		long number = Long.parseLong(num, a);//解析a进制到十进制
+		String res="";
+		if(b==2) {
+			res=Long.toBinaryString(number);
+		}
+		else if(b==8) {
+			res=Long.toOctalString(number);
+		}
+		else if(b==10) {
+			res=Long.toString(number);
+		}
+		else if(b==16) {
+			res=Long.toHexString(number);
+		}
+		return res;
+	 }
 	 public static boolean isLong(String input) { // 判断字符串是否是整数
 	        return input.matches("-?\\d+");
 	 }
@@ -221,6 +286,6 @@ public class ProgrammerModel extends CalculatorModel{
 		// TODO 自动生成的方法存根
 		return null;
 	}
-
+	
 
 }
