@@ -18,6 +18,56 @@ public class GeneralModel extends CalculatorModel{
 	private static HashMap<String, Integer> operationPriority = new HashMap<>();
 	private static HashMap<String, Integer> operationAry_N = new HashMap<>();
 	//op为 1或2 元运算符
+	/*	键盘快捷键输入
+	 * 
+	 *  t->tan
+	 *  s->sin
+	 *  o->cos
+	 *  u->sec
+	 *  i->csc
+	 *  j->cot
+	 *  shift+t->atan
+	 *  shift+s->asin
+	 *  shift+o->acos
+	 *  shift+u->asec
+	 *  shift+i->acsc
+	 *  shift+j->acot
+	 *  p->3.141592653589793
+	 *  e->2.718281828459045
+	 *  
+	    		else if(tmp.equals("s")) tmp="sin";
+	    		else if(tmp.equals("o")) tmp="cos";
+	    		else if(tmp.equals("u")) tmp="sec";
+	    		else if(tmp.equals("i")) tmp="csc";
+	    		else if(tmp.equals("j")) tmp="cot";
+	    		else if(tmp.equals("T")) tmp="atan";
+	    		else if(tmp.equals("S")) tmp="asin";
+	    		else if(tmp.equals("O")) tmp="acos";
+	    		else if(tmp.equals("U")) tmp="asec";
+	    		else if(tmp.equals("I")) tmp="acsc";
+	    		else if(tmp.equals("J")) tmp="acot";
+	    		else if(tmp.equals("l")) tmp="log";
+	    		else if(tmp.equals("n")) tmp="ln";
+	    		else if(tmp.equals("d")) tmp="mod";
+	    		else if(tmp.equals("a")) tmp="abs";
+	    		else if(tmp.equals("p")) tmp= Double.toString(Math.PI);
+	    		else if(tmp.equals("e")) tmp= Double.toString(Math.E);
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
+
 	static {
 		operationPriority.put("-", 1);
 		operationPriority.put("+", 1);
@@ -460,7 +510,7 @@ public class GeneralModel extends CalculatorModel{
 	    }
 
     public static void main(String[] args) {//测试
-     //   String A = "-(-(-1! / 2 + t 45 - l 100.00 - 3! * s (-90) * o(180)/ n 2.732 d 6.54^1.2086 + a(-2)*a(3.04) %)%)*10000.0000^(1.768596)";
+       //String A = "-(-(-1! / 2 + t 45 - l 100.00 - 3! * s (-90) * o(180)/ n 2.732 d 6.54^1.2086 + a(-2)*a(3.04) %)%)*10000.0000^(1.768596)*T6.42/S 0.6024+O(-0.4523)-U7.002*I56.54-J0.23";
         String A = "-4.99+1";
         GeneralModel testModel = new GeneralModel(A);
         testModel.count();
