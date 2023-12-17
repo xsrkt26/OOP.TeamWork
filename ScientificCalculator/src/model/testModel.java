@@ -1,12 +1,14 @@
 package model;
 import controller.GeneralController;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polyline;
 import javafx.stage.Stage;
@@ -18,28 +20,38 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javafx.scene.layout.VBox;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 
-public class FunctionGraphModel extends Application {
+public class testModel extends Application {
 
 
-    int width = 1000;
-    int height = 600;
-    int centerX = width / 2;
-    int centerY = height / 2;
-    double scaleFactor = 0.0001;
-    int measureGap = 100; //坐标轴度量
-    static String inputExpression = "tx";
-    Scene scene;
-    final double EP = 1e-16;
+    static int width = 1000;
+    static int height = 600;
+    static int centerX = width / 2;
+    static int centerY = height / 2;
+    static double scaleFactor = 0.0001;
+    static int measureGap = 100; //坐标轴度量
+    static String inputExpression ;
+    static Scene scene;
+    static final double EP = 1e-16;
+
 
     public static void setInputExpression(String input){
         inputExpression = input;
     }
 
     @Override
+    public void stop(){
+        return;
+    }
+    @Override
     public void start(Stage primaryStage) throws Exception{
+
         primaryStage.setTitle("Function");
         scene = new Scene(getPane(),width,height);
+
         scene.setOnScroll(event -> {
             double deltaY = event.getDeltaY();
             if (deltaY < 0) {
@@ -69,10 +81,26 @@ public class FunctionGraphModel extends Application {
     }
 
 
-
-
-    private Pane getPane() throws Exception{
+    private static Pane getPane() throws Exception{
         BorderPane thisPane = new BorderPane();
+        VBox vbox = new VBox();
+
+        //创建文本框
+        TextField textField = new TextField();
+        textField.setPrefColumnCount(3);
+        textField.setPromptText("请输入函数表达式");
+        Button submitButton = new Button("绘制");
+        submitButton.setOnAction(e -> {
+            String inputText = textField.getText();
+            inputExpression = inputText;
+            try {
+                scene.setRoot(getPane());
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        vbox.getChildren().addAll(textField, submitButton);
+        thisPane.setCenter(vbox);
 
         //折线绘制
         Polyline polyline = new Polyline();
@@ -122,7 +150,7 @@ public class FunctionGraphModel extends Application {
     }
 
 
-    private double f(double x){
+    private static double f(double x){
         String in;
         if(x < 0){
             in = inputExpression.replaceAll("x",'(' + String.valueOf(x) + ')');
@@ -143,10 +171,10 @@ public class FunctionGraphModel extends Application {
 //
 //        return Double.valueOf(result);
 
-    //   return Math.tan(x);
+        //   return Math.tan(x);
     }
 
-    public void count() {
+    public static void count() {
         /**
          * @author: hirmy
          * @description: 根据transToPostfix()修改后的list，进行后缀表达式的计算
@@ -157,7 +185,7 @@ public class FunctionGraphModel extends Application {
         countPostFix();
     }
 
-    private void countPostFix(){
+    private static void countPostFix(){
         /**
          * @author: hirmy
          * @description: 根据transToPostfix()修改后的list，进行后缀表达式的计算
@@ -200,7 +228,7 @@ public class FunctionGraphModel extends Application {
         outputMap.put("answer", String.valueOf(stack.pop()));
     }
 
-    private void transToPostfix() {
+    private static void transToPostfix() {
         /**
          * @author: huihui-ux
          * @description: 输入转后缀表达式
@@ -296,10 +324,10 @@ public class FunctionGraphModel extends Application {
         }
     }
 
-    private ArrayList<String> postfixExpression = new ArrayList<>();
+    private static ArrayList<String> postfixExpression = new ArrayList<>();
     private static HashMap<String, Integer> operationPriority = new HashMap<>();
     private static HashMap<String, Integer> operationAry_N = new HashMap<>();
-    Map<String, String> outputMap = new HashMap<>();
+    static Map<String, String> outputMap = new HashMap<>();
     //op为 1或2 元运算符
     static {
         operationPriority.put("-", 1);
@@ -367,7 +395,7 @@ public class FunctionGraphModel extends Application {
         return input.matches("-?\\d+");
     }
 
-    private double calculate(String op, double ope){
+    private static double calculate(String op, double ope){
         /**
          * @author: hirmy
          * @description: 进行一元运算
@@ -489,7 +517,7 @@ public class FunctionGraphModel extends Application {
         return ans;
     }
 
-    private double factorial(double ope){
+    private static double factorial(double ope){
         /**
          * @author: hirmy
          * @description: 进行ope的阶乘运算
@@ -511,7 +539,7 @@ public class FunctionGraphModel extends Application {
         }
     }
 
-    private double calculate(String op, double ope1, double ope2){
+    private static double calculate(String op, double ope1, double ope2){
         /**
          * @author: hirmy
          * @description: 进行二元运算
@@ -553,13 +581,13 @@ public class FunctionGraphModel extends Application {
         }
         return ans;
     }
-    public boolean isPiDiv2 (double num) {//判断是否为k*180+90
+    public static boolean isPiDiv2 (double num) {//判断是否为k*180+90
         if(Math.abs((num+90)%180)<EP||Math.abs((num+90)%180)>180-EP) {
             return true;
         }
         return false;
     }
-    public boolean isKMultPi (double num) {//判断是否为k*180
+    public static boolean isKMultPi (double num) {//判断是否为k*180
         if(Math.abs(num%180)<EP||Math.abs(num%180)>180-EP) {
             return true;
         }
