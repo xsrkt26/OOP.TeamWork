@@ -8,7 +8,7 @@ import model.LinearRegressionModel;
  * @date ：2023/12/12 18:30
  */
 public class LinearRegressionController implements Controller{
-    LinearRegressionModel currentModel;
+    LinearRegressionModel currentModel = null;
     public LinearRegressionController() {
         currentModel = new LinearRegressionModel();
     }
