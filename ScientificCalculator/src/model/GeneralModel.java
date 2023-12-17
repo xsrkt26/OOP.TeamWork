@@ -34,38 +34,6 @@ public class GeneralModel extends CalculatorModel{
 	 *  shift+j->acot
 	 *  p->3.141592653589793
 	 *  e->2.718281828459045
-	 *  
-	    		else if(tmp.equals("s")) tmp="sin";
-	    		else if(tmp.equals("o")) tmp="cos";
-	    		else if(tmp.equals("u")) tmp="sec";
-	    		else if(tmp.equals("i")) tmp="csc";
-	    		else if(tmp.equals("j")) tmp="cot";
-	    		else if(tmp.equals("T")) tmp="atan";
-	    		else if(tmp.equals("S")) tmp="asin";
-	    		else if(tmp.equals("O")) tmp="acos";
-	    		else if(tmp.equals("U")) tmp="asec";
-	    		else if(tmp.equals("I")) tmp="acsc";
-	    		else if(tmp.equals("J")) tmp="acot";
-	    		else if(tmp.equals("l")) tmp="log";
-	    		else if(tmp.equals("n")) tmp="ln";
-	    		else if(tmp.equals("d")) tmp="mod";
-	    		else if(tmp.equals("a")) tmp="abs";
-	    		else if(tmp.equals("p")) tmp= Double.toString(Math.PI);
-	    		else if(tmp.equals("e")) tmp= Double.toString(Math.E);
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
 	 */
 
 	static {
