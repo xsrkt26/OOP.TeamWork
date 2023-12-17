@@ -12,7 +12,7 @@ public class FunctionGraphController {
     public void transmitData(String s){
         testModel.setInputExpression(s) ;
     };
-    public void getOutputInformation() throws InterruptedException {
+    public void draw() {
         testModel.launch(testModel.class);
     }
 
@@ -20,8 +20,7 @@ public class FunctionGraphController {
         FunctionGraphController fs = new FunctionGraphController();
         fs.transmitData("x^3");
         System.out.println(Thread.currentThread().getName());
-        fs.getOutputInformation();
-
+        fs.draw();
     }
 
 }
