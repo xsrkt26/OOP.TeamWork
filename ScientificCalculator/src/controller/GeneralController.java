@@ -30,7 +30,7 @@ public class GeneralController implements Controller {
     public void count() {
         currentModel.count();
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         FunctionGraphModel f = new FunctionGraphModel();
         f.setInputExpression("x^2+5");
         f.run();
