@@ -135,7 +135,6 @@ public class ProgrammerModel extends CalculatorModel{
 		inputExpression=transAtoB(inputExpression,this.numberSystem,numberSystem);
 		transAnswer(this.numberSystem,numberSystem);
 		this.numberSystem=numberSystem;
-		System.out.println(inputExpression);
 	}
 	 private void transToPostfix() {
     	if(inputExpression.length()>300) {
@@ -267,7 +266,6 @@ public class ProgrammerModel extends CalculatorModel{
 	 public String transNum(String num,int a,int b) {
 		  BigInteger bigInteger = new BigInteger(num, a);
 	      long number = bigInteger.longValue();//解析a进制到十进制
-		System.out.println(number);
 		String res="";
 		if(b==2) {
 			res=Long.toBinaryString(number);
