@@ -40,9 +40,6 @@ public class MatrixOneWindowController extends Controller{
         }
         input.insert(0, "0|");
     }
-    private void processOutput(String output) {
-
-    }
     public MatrixOneWindowController() {
     }
     @FXML

@@ -42,8 +42,10 @@ public class MatrixController implements Controller{
         testControl.count();
         String addAns = testControl.getOutputInformation( "matrixAddAnswer");
         String crossAns = testControl.getOutputInformation("matrixCrossProductAnswer");
+        String subAns = testControl.getOutputInformation("matrixSubAnswer");
         System.out.println("矩阵加： " +addAns);
         System.out.println("矩阵叉乘：" + crossAns);
+        System.out.println("矩阵减： " + subAns);
 
     }
 
