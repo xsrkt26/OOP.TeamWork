@@ -169,7 +169,7 @@ public class FunctionGraphModel extends Application {
 
 
         //函数，确定定义域
-        for (int xi = -(width / 2); xi < (width / 2); xi++) {
+        for (int xi = -(width / 2)*5; xi < (width / 2)*5; xi++) {
             pointList.add(centerX + (double) (xi));
             pointList.add(centerY - (f(xi * 1.0 / measureGap) * measureGap));
         }
