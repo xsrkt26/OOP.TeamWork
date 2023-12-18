@@ -1,9 +1,7 @@
 package controller;
 
-import model.FunctionGraphModel;
 import model.GeneralModel;
 
-import javafx.application.Application;
 /**
  * @author ：kiyotaka
  * @description：TODO
@@ -31,15 +29,7 @@ public class GeneralController implements Controller {
     public void count() {
         currentModel.count();
     }
-    public static void main(String[] args) throws Exception {
-        try{
-            FunctionGraphModel.setInputExpression("tx") ;
-            FunctionGraphModel.launch(FunctionGraphModel.class,args);
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
 
-    }
 
 }
 

@@ -1,26 +1,31 @@
 package controller;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
 import model.FunctionGraphModel;
-import model.testModel;
-
-import java.util.TreeMap;
 
 public class FunctionGraphController {
 
     public void transmitData(String s){
-        testModel.setInputExpression(s) ;
+        FunctionGraphModel.setInputExpression(s) ;
     };
-    public void draw() {
-        testModel.launch(testModel.class);
+    public void testDraw() {
+        FunctionGraphModel.launch(FunctionGraphModel.class);
+    }
+
+    public void draw() throws Exception {
+        try {
+            FunctionGraphModel.draw();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
     }
 
     public static void main(String[] args) throws InterruptedException {
         FunctionGraphController fs = new FunctionGraphController();
-        fs.transmitData("x^3");
-        System.out.println(Thread.currentThread().getName());
-        fs.draw();
+        fs.transmitData("sinx+cosx");
+        fs.testDraw();
+        //实际使用时
+        //fs.draw();
     }
 
 }
