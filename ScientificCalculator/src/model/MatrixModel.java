@@ -209,7 +209,7 @@ public class MatrixModel extends CalculatorModel{
             result.setRowCol(ope1.row, ope1.col);
             for(int i = 0; i < result.row; i++){
                 for(int j = 0; j < result.col; j++){
-                    result.data[i][j] = ope1.data[i][j] + ope2.data[i][j];
+                    result.data[i][j] = ope1.data[i][j] - ope2.data[i][j];
                 }
             }
         }

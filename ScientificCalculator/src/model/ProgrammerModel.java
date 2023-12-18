@@ -91,9 +91,15 @@ public class ProgrammerModel extends CalculatorModel{
             	ans = ope1%ope2;
                 break;
         	case "<<":
+        		if(ope2>64||ope2<0) {
+        			throw new ArithmeticException("结果未定义");
+        		}
     			ans = ope1 << ope2;
     			break;
     		case ">>":
+    			if(ope2>64||ope2<0) {
+        			throw new ArithmeticException("结果未定义");
+        		}
     			ans = ope1 >> ope2;
     			break;
     		case "&":
@@ -116,8 +122,9 @@ public class ProgrammerModel extends CalculatorModel{
         }
         return ans;
     }
-
-
+	public ProgrammerModel(String inputExpression) {
+        this.inputExpression = inputExpression;
+    }
 	public boolean checkIllegal() {
 		return false;
 	}
@@ -128,7 +135,7 @@ public class ProgrammerModel extends CalculatorModel{
 	}
 	 private void transToPostfix() {
     	if(inputExpression.length()>300) {
-    		//输入处理
+    		return;
     	}
    
     	String replaceInput = inputExpression.replaceAll("\\s", "");
@@ -272,12 +279,16 @@ public class ProgrammerModel extends CalculatorModel{
 	 public static boolean isLong(String input) { // 判断字符串是否是整数
 	        return input.matches("-?\\d+");
 	 }
-
-	
 	@Override
 	public Map<String, String> getOutPutMap() {
 		return outputMap;
 	}
-	
+	 public static void main(String[] args) {//测试
+
+	        String A = "3/0";
+	        ProgrammerModel testModel = new ProgrammerModel(A);
+	        testModel.count();
+	        System.out.println(testModel.outputMap);
+	    }
 
 }
