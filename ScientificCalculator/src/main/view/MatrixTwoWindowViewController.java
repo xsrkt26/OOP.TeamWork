@@ -1,4 +1,4 @@
-package main.controller;
+package main.view;
 
 import controller.MatrixController;
 import javafx.fxml.FXML;
@@ -10,7 +10,7 @@ import javafx.scene.input.MouseEvent;
  * @Description:
  * @date:
  */
-public class MatrixTwoWindowController extends Controller{
+public class MatrixTwoWindowViewController extends viewController {
     @FXML
     TextArea inputA;
     @FXML

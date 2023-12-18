@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Map;
+
 /**
  * @author ：kiyotaka
  * @description：TODO
@@ -9,6 +11,11 @@ public class GraphModel extends CalculatorModel{
     @Override
     public void count() {
 
+    }
+
+    @Override
+    public Map<String, String> getOutPutMap() {
+        return null;
     }
 
     public String outputAns() {

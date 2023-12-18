@@ -1,4 +1,4 @@
-package main.controller;
+package main.view;
 /**
  * @Description: The superclass of all controllers
  * @author: QingYu
@@ -6,16 +6,16 @@ package main.controller;
  */
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Controller {
+public class viewController {
     private double x, y;
     @FXML
     protected Pane titlePane;
@@ -46,7 +46,16 @@ public class Controller {
         Scene scene = new Scene(loader.load());
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
-        ((MenuWindowController)loader.getController()).init(stage);
+        ((MenuWindowViewController)loader.getController()).init(stage);
         stage.show();
+    }
+
+    @FXML
+    void onMouseEntered(MouseEvent event) {
+        ((Pane)event.getSource()).setOpacity(0.5);
+    }
+    @FXML
+    void onMouseExited(MouseEvent event) {
+        ((Pane)event.getSource()).setOpacity(1);
     }
 }

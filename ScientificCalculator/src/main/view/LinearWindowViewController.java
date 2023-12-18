@@ -1,13 +1,10 @@
-package main.controller;
+package main.view;
 
 import controller.LinearRegressionController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import model.GeneralModel;
-import model.LinearRegressionModel;
-import javafx.scene.input.KeyEvent;
 
 import java.util.ArrayList;
 
@@ -16,7 +13,7 @@ import java.util.ArrayList;
  * @author: QingYu
  * @date: 2023/12/9
  */
-public class LinearWindowController extends Controller{
+public class LinearWindowViewController extends viewController {
     @FXML
     private Label lblResult;
     @FXML
@@ -57,7 +54,7 @@ public class LinearWindowController extends Controller{
     private String showOperator = "";
     private int lastShowExpressionIndex;
     private ArrayList<String> stack = new ArrayList<>();
-    public LinearWindowController() {
+    public LinearWindowViewController() {
         XClicked = true;
         YClicked = false;
         showExpression = xExpression;

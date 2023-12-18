@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -124,6 +125,11 @@ public class GeneralModel extends CalculatorModel {
 		outputAnswer = String.valueOf(stack.pop());
 		outputAns();
 		return;
+	}
+
+	@Override
+	public Map<String, String> getOutPutMap() {
+		return null;
 	}
 
 	/**
@@ -345,14 +351,18 @@ public class GeneralModel extends CalculatorModel {
 		int insertIndex ; // 减号后插入空格位置的索引
 		char charToInsert = ' '; // 要插入的空格
 		int k = 0;
-		if(replaceInput.charAt(0)=='-') {//首位为负号补0
-			insertIndex = 0;
-			k++;
-			sb.insert(insertIndex, '0');
-			insertIndex = 2;
-			k++;
-			sb.insert(insertIndex, ' ');
+		if (replaceInput.isEmpty()) {
+			replaceInput = "0";
 		}
+			if (replaceInput.charAt(0) == '-') {//首位为负号补0
+				insertIndex = 0;
+				k++;
+				sb.insert(insertIndex, '0');
+				insertIndex = 2;
+				k++;
+				sb.insert(insertIndex, ' ');
+			}
+		//}
 		for(int i=1;i<replaceInput.length();i++) {
 			if(replaceInput.charAt(i)=='-'&&(replaceInput.charAt(i-1)==')'||Character.isDigit(replaceInput.charAt(i-1)))) {// 减号则后面插入空格
 				insertIndex = i+1+k;

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="785.0" prefWidth="1057.0" stylesheets="@../css/MatrixTwoWindowController.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controller.MatrixTwoWindowController">
+<AnchorPane prefHeight="785.0" prefWidth="1057.0" stylesheets="@../css/MatrixTwoWindowController.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.view.MatrixTwoWindowViewController">
     <children>
         <Pane fx:id="mainPane" layoutX="6.0" layoutY="37.0" prefHeight="747.0" prefWidth="773.0" styleClass="mainPane" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="37.0">
          <children>
@@ -72,7 +72,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Pane fx:id="btnEquals" layoutX="55.0" layoutY="629.0" onMouseClicked="#compute" prefHeight="75.0" prefWidth="939.0" styleClass="highlight">
+            <Pane fx:id="btnEquals" layoutX="55.0" layoutY="629.0" onMouseClicked="#compute" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="75.0" prefWidth="939.0" styleClass="highlight">
                <children>
                   <Label layoutX="404.0" layoutY="16.0" text="Compute" textFill="WHITE">
                      <font>
@@ -89,7 +89,7 @@
                         <Image url="@../../images/close.png" />
                     </image>
                 </ImageView>
-                <ImageView fx:id="btnMinimize" fitHeight="16.0" fitWidth="16.0" layoutX="978.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="btnMinimize" fitHeight="16.0" fitWidth="16.0" layoutX="977.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../images/hide.png" />
                     </image>

@@ -1,17 +1,16 @@
-package main.controller;
+package main.view;
 import controller.MatrixController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 
 /**
  * @author:
  * @Description:
  * @date:
  */
-public class MatrixOneWindowController extends Controller{
+public class MatrixOneWindowViewController extends viewController {
     @FXML
     TextArea input;
 
@@ -40,7 +39,7 @@ public class MatrixOneWindowController extends Controller{
         }
         input.insert(0, "0|");
     }
-    public MatrixOneWindowController() {
+    public MatrixOneWindowViewController() {
     }
     @FXML
     void compute(MouseEvent event) {

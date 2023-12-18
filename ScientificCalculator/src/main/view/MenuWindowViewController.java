@@ -1,20 +1,19 @@
-package main.controller;
+package main.view;
 /**
  * @Description: The Controller of menu window
  * @author: QingYu
  * @date: 2023/12/9
  */
-import controller.LinearRegressionController;
+import controller.FunctionGraphController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.event.ActionEvent;
-import javafx.scene.Node;
+
 import java.io.IOException;
 
-public class MenuWindowController extends Controller {
+public class MenuWindowViewController extends viewController {
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -24,7 +23,7 @@ public class MenuWindowController extends Controller {
         Scene scene = new Scene(loader.load());
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
-        ((MainWindowController)loader.getController()).init(stage);
+        ((MainWindowViewController)loader.getController()).init(stage);
         stage.show();
     }
 
@@ -34,7 +33,7 @@ public class MenuWindowController extends Controller {
         Scene scene = new Scene(loader.load());
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
-        ((LinearWindowController)loader.getController()).init(stage);
+        ((LinearWindowViewController)loader.getController()).init(stage);
         stage.show();
     }
     public void switchToMatrixOneWindow() throws IOException {
@@ -43,7 +42,7 @@ public class MenuWindowController extends Controller {
         Scene scene = new Scene(loader.load());
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
-        ((MatrixOneWindowController)loader.getController()).init(stage);
+        ((MatrixOneWindowViewController)loader.getController()).init(stage);
         stage.show();
     }
     public void switchToMatrixTwoWindow() throws IOException {
@@ -52,7 +51,11 @@ public class MenuWindowController extends Controller {
         Scene scene = new Scene(loader.load());
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
-        ((MatrixTwoWindowController)loader.getController()).init(stage);
+        ((MatrixTwoWindowViewController)loader.getController()).init(stage);
         stage.show();
+    }
+    public void switchToFunctionGraph() throws Exception {
+        FunctionGraphController functionGraphController = new FunctionGraphController();
+        functionGraphController.draw();
     }
 }

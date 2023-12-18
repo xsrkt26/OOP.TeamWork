@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import main.controller.MainWindowController;
+import main.view.MainWindowViewController;
 
 public class MainWindow extends Application {
     @Override
@@ -26,7 +26,7 @@ public class MainWindow extends Application {
         stage.show();
         Image image = new Image("/images/icon.png");
         stage.getIcons().add(image);
-        ((MainWindowController)loader.getController()).init(stage);
+        ((MainWindowViewController)loader.getController()).init(stage);
     }
     public void run(){launch();}
 }

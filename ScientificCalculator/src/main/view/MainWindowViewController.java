@@ -1,4 +1,4 @@
-package main.controller;
+package main.view;
 /**
  * @Description: The Controller of main window
  * @author: QingYu
@@ -6,15 +6,15 @@ package main.controller;
  */
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import model.*;
 
 import java.util.ArrayList;
 
-public class MainWindowController extends Controller{
+public class MainWindowViewController extends viewController {
     @FXML private Label lblResult;
+    @FXML private Label lblResultAlways;
     private StringBuffer calculateExpression = new StringBuffer("");
     private StringBuffer showExpression = new StringBuffer("");
     private GeneralModel generalModel = new GeneralModel();
@@ -22,12 +22,23 @@ public class MainWindowController extends Controller{
     private String showOperator = "";
     private int lastShowExpressionIndex;
     private ArrayList<String> stack = new ArrayList<>();
+    private void count(){
+        try {
+            generalModel.count();
+        } catch (Exception e){
+
+        }
+
+    }
     @FXML
     void onNumberClicked(MouseEvent event) {
         int value = Integer.parseInt(((Pane)event.getSource()).getId().replace("btn",""));
         calculateExpression.append(value);
         showExpression.append(value);
         lblResult.setText(showExpression.toString());
+        generalModel.setInputExpression(calculateExpression.toString());
+        count();
+        lblResultAlways.setText(generalModel.outputAns());
         stack.add(String.valueOf(value));
     }
 
@@ -37,7 +48,7 @@ public class MainWindowController extends Controller{
 
         if(symbol.equals("Equals")) {
             generalModel.setInputExpression(calculateExpression.toString());
-            generalModel.count();
+            count();
             lblResult.setText(generalModel.outputAns());
         }
         else if(symbol.equals("Clear")) {
@@ -46,7 +57,8 @@ public class MainWindowController extends Controller{
             showExpression.setLength(0);
             operator = ".";
             stack.clear();
-        }        else if(symbol.equals("BackSpace")) {
+        }
+        else if(symbol.equals("BackSpace")) {
             if (!stack.isEmpty()) {
                 calculateExpression = new StringBuffer(calculateExpression.substring(0, calculateExpression.length() - 1));
                 lastShowExpressionIndex = stack.get(stack.size() - 1).length();
@@ -56,9 +68,17 @@ public class MainWindowController extends Controller{
                     lblResult.setText(String.valueOf(showExpression));
                 } else {
                     lblResult.setText(String.valueOf(0.0));
+                    lblResultAlways.setText(String.valueOf(0.0));
+                    generalModel.setInputExpression("0");
+                    count();
+                    return;
                 }
             } else {
+                lblResultAlways.setText(String.valueOf(0.0));
                 lblResult.setText(String.valueOf(0.0));
+                generalModel.setInputExpression("0");
+                count();
+                return;
             }
         }
         else {
@@ -88,7 +108,7 @@ public class MainWindowController extends Controller{
                     showOperator = "^";
                 }
                 case "Cos" -> {
-                    operator = "c";
+                    operator = "o";
                     showOperator = "cos";
                 }
                 case "Sin" -> {
@@ -176,6 +196,10 @@ public class MainWindowController extends Controller{
             calculateExpression.append(operator);
             showExpression.append(showOperator);
             lblResult.setText(String.valueOf(showExpression));
+
         }
+        generalModel.setInputExpression(calculateExpression.toString());
+        count();
+        lblResultAlways.setText(generalModel.outputAns());
     }
 }

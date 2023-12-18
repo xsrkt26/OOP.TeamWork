@@ -7,20 +7,25 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="851.0" prefWidth="970.0" stylesheets="@../css/MainWindowStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controller.MainWindowController">
+<AnchorPane prefHeight="785.0" prefWidth="1057.0" stylesheets="@../css/MainWindowStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.view.MainWindowViewController">
    <children>
-      <Pane fx:id="mainPane" layoutX="5.333333333333333" layoutY="37.0" prefHeight="801.0" prefWidth="963.0" styleClass="mainPane" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="37.0">
+      <Pane fx:id="mainPane" layoutX="5.333333333333333" layoutY="37.0" prefHeight="747.0" prefWidth="773.0" styleClass="mainPane" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="37.0">
          <children>
-            <Pane layoutX="40.0" layoutY="14.0" prefHeight="116.0" prefWidth="915.0" styleClass="highlight">
+            <Pane layoutX="40.0" layoutY="14.0" prefHeight="137.0" prefWidth="915.0" styleClass="highlight">
                <children>
-                  <Label fx:id="lblResult" alignment="CENTER_RIGHT" layoutX="45.0" layoutY="37.0" prefHeight="42.0" prefWidth="838.0" text="0.0" textFill="WHITE">
+                  <Label fx:id="lblResult" alignment="CENTER_RIGHT" layoutX="39.0" layoutY="14.0" prefHeight="42.0" prefWidth="838.0" text="0.0" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="36.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblResultAlways" alignment="CENTER_RIGHT" layoutX="39.0" layoutY="81.0" prefHeight="42.0" prefWidth="838.0" text="0.0" textFill="WHITE">
                      <font>
                         <Font name="Arial" size="36.0" />
                      </font>
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btn7" layoutX="511.0" layoutY="324.0" onMouseClicked="#onNumberClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btn7" layoutX="511.0" layoutY="324.0" onMouseClicked="#onNumberClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="40.0" layoutY="29.0" text="7" textFill="WHITE">
                      <font>
@@ -29,7 +34,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btn8" layoutX="618.0" layoutY="324.0" onMouseClicked="#onNumberClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btn8" layoutX="618.0" layoutY="324.0" onMouseClicked="#onNumberClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="40.0" layoutY="29.0" text="8" textFill="WHITE">
                      <font>
@@ -38,7 +43,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btn9" layoutX="725.0" layoutY="324.0" onMouseClicked="#onNumberClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btn9" layoutX="725.0" layoutY="324.0" onMouseClicked="#onNumberClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="40.0" layoutY="29.0" text="9" textFill="WHITE">
                      <font>
@@ -47,7 +52,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnPlus" layoutX="832.0" layoutY="430.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnPlus" layoutX="832.0" layoutY="430.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="39.0" layoutY="29.0" text="+" textFill="WHITE">
                      <font>
@@ -56,7 +61,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btn4" layoutX="512.0" layoutY="430.0" onMouseClicked="#onNumberClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btn4" layoutX="512.0" layoutY="430.0" onMouseClicked="#onNumberClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="40.0" layoutY="29.0" text="4" textFill="WHITE">
                      <font>
@@ -65,7 +70,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btn5" layoutX="619.0" layoutY="430.0" onMouseClicked="#onNumberClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btn5" layoutX="619.0" layoutY="430.0" onMouseClicked="#onNumberClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="40.0" layoutY="29.0" text="5" textFill="WHITE">
                      <font>
@@ -74,7 +79,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btn6" layoutX="726.0" layoutY="430.0" onMouseClicked="#onNumberClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btn6" layoutX="726.0" layoutY="430.0" onMouseClicked="#onNumberClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="40.0" layoutY="29.0" text="6" textFill="WHITE">
                      <font>
@@ -83,7 +88,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnMinus" layoutX="832.0" layoutY="536.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnMinus" layoutX="832.0" layoutY="536.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="44.0" layoutY="29.0" text="-" textFill="WHITE">
                      <font>
@@ -92,7 +97,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btn1" layoutX="512.0" layoutY="536.0" onMouseClicked="#onNumberClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btn1" layoutX="512.0" layoutY="536.0" onMouseClicked="#onNumberClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="40.0" layoutY="29.0" text="1" textFill="WHITE">
                      <font>
@@ -101,7 +106,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btn2" layoutX="618.0" layoutY="536.0" onMouseClicked="#onNumberClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btn2" layoutX="618.0" layoutY="536.0" onMouseClicked="#onNumberClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="40.0" layoutY="29.0" text="2" textFill="WHITE">
                      <font>
@@ -110,7 +115,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btn3" layoutX="725.0" layoutY="536.0" onMouseClicked="#onNumberClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btn3" layoutX="725.0" layoutY="536.0" onMouseClicked="#onNumberClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="40.0" layoutY="29.0" text="3" textFill="WHITE">
                      <font>
@@ -119,7 +124,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnMultiply" layoutX="832.0" layoutY="324.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnMultiply" layoutX="832.0" layoutY="324.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="43.0" layoutY="37.0" text="*" textFill="WHITE">
                      <font>
@@ -128,7 +133,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnClear" layoutX="512.0" layoutY="642.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnClear" layoutX="512.0" layoutY="642.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="37.0" layoutY="29.0" text="C" textFill="WHITE">
                      <font>
@@ -137,7 +142,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btn0" layoutX="619.0" layoutY="642.0" onMouseClicked="#onNumberClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btn0" layoutX="619.0" layoutY="642.0" onMouseClicked="#onNumberClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="40.0" layoutY="29.0" text="0" textFill="WHITE">
                      <font>
@@ -146,7 +151,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnPoint" layoutX="726.0" layoutY="642.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnPoint" layoutX="726.0" layoutY="642.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="40.0" layoutY="-12.0" prefHeight="1.0" prefWidth="0.0" text="." textFill="WHITE">
                      <font>
@@ -155,7 +160,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnDivide" layoutX="726.0" layoutY="217.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnDivide" layoutX="726.0" layoutY="217.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="45.0" layoutY="29.0" text="/" textFill="WHITE">
                      <font>
@@ -164,7 +169,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnEquals" layoutX="832.0" layoutY="642.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnEquals" layoutX="832.0" layoutY="642.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="39.0" layoutY="29.0" text="=" textFill="WHITE">
                      <font>
@@ -173,7 +178,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnSin" layoutX="403.0" layoutY="537.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnSin" layoutX="403.0" layoutY="537.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="31.0" layoutY="32.0" text="sin" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -182,7 +187,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnTan" layoutX="403.0" layoutY="324.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnTan" layoutX="403.0" layoutY="324.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="29.0" layoutY="32.0" text="tan" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -191,7 +196,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnCos" layoutX="403.0" layoutY="430.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnCos" layoutX="403.0" layoutY="430.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="27.0" layoutY="32.0" text="cos" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -200,7 +205,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnLn" layoutX="295.0" layoutY="431.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnLn" layoutX="295.0" layoutY="431.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="38.0" layoutY="32.0" text="ln" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -209,7 +214,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnLog" layoutX="295.0" layoutY="537.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnLog" layoutX="295.0" layoutY="537.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="30.0" layoutY="32.0" text="log" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -218,7 +223,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnAbs" layoutX="403.0" layoutY="643.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnAbs" layoutX="403.0" layoutY="643.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="26.0" layoutY="32.0" text="abs" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -227,7 +232,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnMod" layoutX="295.0" layoutY="643.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnMod" layoutX="295.0" layoutY="643.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="21.0" layoutY="32.0" text="mod" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -236,7 +241,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnFact" layoutX="188.0" layoutY="643.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnFact" layoutX="188.0" layoutY="643.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="35.0" layoutY="29.0" text="n!" textFill="WHITE">
                      <font>
@@ -245,7 +250,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnRbracket" layoutX="512.0" layoutY="217.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnRbracket" layoutX="512.0" layoutY="217.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="44.0" layoutY="29.0" text=")" textFill="WHITE">
                      <font>
@@ -254,7 +259,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnLbracket" layoutX="403.0" layoutY="217.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnLbracket" layoutX="403.0" layoutY="217.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label fx:id="btnLbracket" layoutX="44.0" layoutY="29.0" text="(" textFill="WHITE">
                      <font>
@@ -263,7 +268,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnCot" layoutX="295.0" layoutY="218.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnCot" layoutX="295.0" layoutY="218.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label fx:id="btnCot" layoutX="29.0" layoutY="32.0" text="cot" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -272,7 +277,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnPower" layoutX="619.0" layoutY="217.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnPower" layoutX="619.0" layoutY="217.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="42.0" layoutY="29.0" text="^" textFill="WHITE">
                      <font>
@@ -281,7 +286,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnAsin" layoutX="188.0" layoutY="537.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnAsin" layoutX="188.0" layoutY="537.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="10.0" layoutY="32.0" text="arcsin" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -290,7 +295,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnAcos" layoutX="188.0" layoutY="431.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnAcos" layoutX="188.0" layoutY="431.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="6.0" layoutY="32.0" text="arccos" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -299,7 +304,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnAtan" layoutX="188.0" layoutY="325.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnAtan" layoutX="188.0" layoutY="325.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="10.0" layoutY="32.0" text="arctan" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -308,7 +313,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnAcot" layoutX="79.0" layoutY="325.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnAcot" layoutX="79.0" layoutY="325.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="10.0" layoutY="32.0" text="arccot" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -317,7 +322,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnAscs" layoutX="79.0" layoutY="537.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnAscs" layoutX="79.0" layoutY="537.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="6.0" layoutY="32.0" text="arcscs" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -326,7 +331,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnAcsc" layoutX="79.0" layoutY="431.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnAcsc" layoutX="79.0" layoutY="431.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="6.0" layoutY="32.0" text="arccsc" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -335,7 +340,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnPi" layoutX="79.0" layoutY="218.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnPi" layoutX="79.0" layoutY="218.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="40.0" layoutY="32.0" text="π" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -344,7 +349,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnE" layoutX="79.0" layoutY="643.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnE" layoutX="79.0" layoutY="643.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="42.0" layoutY="32.0" text="e" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -353,7 +358,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnSec" layoutX="295.0" layoutY="325.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnSec" layoutX="295.0" layoutY="325.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label fx:id="btnCot1" layoutX="26.0" layoutY="32.0" text="sec" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -362,7 +367,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnCsc" layoutX="188.0" layoutY="218.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnCsc" layoutX="188.0" layoutY="218.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label fx:id="btnCot2" layoutX="28.0" layoutY="32.0" text="csc" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -371,7 +376,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="btnBackSpace" layoutX="832.0" layoutY="217.0" onMouseClicked="#onSymbolClicked" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
+            <Pane fx:id="btnBackSpace" layoutX="832.0" layoutY="217.0" onMouseClicked="#onSymbolClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="100.0" styleClass="highlight">
                <children>
                   <Label layoutX="32.0" layoutY="29.0" text="←" textFill="WHITE">
                      <font>
@@ -382,20 +387,20 @@
             </Pane>
          </children>
       </Pane>
-      <Pane fx:id="titlePane" prefHeight="37.0" prefWidth="940.0">
+      <Pane fx:id="titlePane" prefHeight="37.0" prefWidth="1050.0">
          <children>
-            <ImageView fx:id="btnClose" fitHeight="16.0" fitWidth="16.0" layoutX="910.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="btnClose" fitHeight="16.0" fitWidth="16.0" layoutX="1027.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/close.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="btnMinimize" fitHeight="16.0" fitWidth="16.0" layoutX="864.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="btnMinimize" fitHeight="16.0" fitWidth="16.0" layoutX="977.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/hide.png" />
                </image>
             </ImageView>
             <Label layoutX="30.0" layoutY="12.0" text="Scientific Calculator" textFill="WHITE" />
-            <ImageView fx:id="binMenu" fitHeight="16.0" fitWidth="16.0" layoutX="888.0" layoutY="12.0" onMouseClicked="#switchToMenu" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="binMenu" fitHeight="16.0" fitWidth="16.0" layoutX="1002.0" layoutY="11.0" onMouseClicked="#switchToMenu" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/icon.png" />
                </image>
