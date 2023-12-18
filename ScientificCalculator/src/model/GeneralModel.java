@@ -169,6 +169,8 @@ public class GeneralModel extends CalculatorModel{
 		}
 	}
 
+	public GeneralModel(){}
+
 	    private double calculate(String op, double ope){
 	        /**
 	        * @author: hirmy
