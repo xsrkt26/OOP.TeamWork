@@ -29,19 +29,19 @@ public class MatrixController implements Controller{
         String input2 = "1|1 2 3/4 5 6/7 8 9|9 8 7/6 5 4/3 2 1";
 
         //标志0：一元运算样例
-        testControl.transmitData(input);
-        testControl.count();
-        String DeterminationAns = testControl.getOutputInformation("matrixDeterminantAnswer");
-        String InverseAns = testControl.getOutputInformation("matrixInverseAnswer");
-        System.out.println("行列式值： " + DeterminationAns);
-        System.out.println("逆矩阵为： " + InverseAns);
+//        testControl.transmitData(input);
+//        testControl.count();
+//        String DeterminationAns = testControl.getOutputInformation("matrixDeterminantAnswer");
+//        String InverseAns = testControl.getOutputInformation("matrixInverseAnswer");
+//        System.out.println("行列式值： " + DeterminationAns);
+//        System.out.println("逆矩阵为： " + InverseAns);
 
         //标志1：二元运算样例
         testControl.transmitData(input2);
         testControl.count();
-        String addAns = testControl.getOutputInformation( "matrixAddAnswer");
+        String addAns = testControl.getOutputInformation( "matrixSubAnswer");
         String crossAns = testControl.getOutputInformation("matrixCrossProductAnswer");
-        System.out.println("矩阵加： " +addAns);
+        System.out.println("矩阵减： " +addAns);
         System.out.println("矩阵叉乘：" + crossAns);
 
 
