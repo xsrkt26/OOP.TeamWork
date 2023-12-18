@@ -151,7 +151,6 @@ public class GeneralModel extends CalculatorModel{
 		outputMap.put("answer", String.valueOf(stack.pop()));
 	}
 
-	public GeneralModel() {};
 
 
     /**
@@ -457,9 +456,8 @@ public class GeneralModel extends CalculatorModel{
 	         * @date: 2023/12/9 23:08
 	         * @return void
 	         */
-	    	String[] s1 = new String[300];
 	    	if(inputExpression.length()>300) {
-	    		System.out.println("无效输入");
+	    		return;
 	    	}
 	    	String replaceInput = inputExpression.replaceAll("\\s", "");
 	    	
