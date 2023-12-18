@@ -533,9 +533,7 @@ public class GeneralModel extends CalculatorModel{
 	    public static boolean isInteger(String input) { // 判断字符串是否是整数
 	        return input.matches("-?\\d+");
 	    }
-	    private static double readNumber() {
-	        return 0;
-	    }
+
 	    public boolean isPiDiv2 (double num) {//判断是否为k*180+90
 	    	if(Math.abs((num+90)%180)<EP||Math.abs((num+90)%180)>180-EP) {
 	    		return true;
@@ -551,7 +549,7 @@ public class GeneralModel extends CalculatorModel{
 
     public static void main(String[] args) {//测试
        //String A = "-(-(-1! / 2 + t 45 - l 100.00 - 3! * s (-90) * o(180)/ n 2.732 d 6.54^1.2086 + a(-2)*a(3.04) %)%)*10000.0000^(1.768596)*T6.42/S 0.6024+O(-0.4523)-U7.002*I56.54-J0.23";
-        String A = "3/0+l 2";
+        String A = "3/0+2";
         GeneralModel testModel = new GeneralModel(A);
         testModel.count();
         System.out.println(testModel.outputMap);
