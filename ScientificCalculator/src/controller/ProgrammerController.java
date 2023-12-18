@@ -1,36 +1,28 @@
 package controller;
 
-import model.GeneralModel;
+import model.ProgrammerModel;
 
 /**
  * @author ：kiyotaka
  * @description：TODO
- * @date ：2023/12/12 20:56
+ * @date ：2023/12/18 16:00
  */
-public class GeneralController implements Controller {
-    GeneralModel currentModel;
-    public GeneralController() {
-        currentModel = new GeneralModel();
-    }
-
+public class ProgrammerController implements Controller{
+    ProgrammerModel currentModel;
     @Override
     public void transmitData(String inputInformation) {
-        currentModel.setInputExpression(inputInformation);
+        currentModel = new ProgrammerModel();
     }
 
     @Override
     public String getOutputInformation(String key) {
-        //此模块key值统一为“answer”
         return currentModel.getOutPutMap().get(key);
-
     }
 
     @Override
     public void count() {
         currentModel.count();
     }
-
-
 }
 
 

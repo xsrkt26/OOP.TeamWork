@@ -13,7 +13,8 @@ public class ProgrammerModel extends CalculatorModel{
 	 * @description: 程序员计算器
 	 * @date: 2023/12/12 23:18
 	 */
-	 int numberSystem=10;//目前的进制,默认为10
+	 Map<String, String> outputMap = new HashMap<>();
+	 int numberSystem = 10;//目前的进制,默认为10
 	 private ArrayList<String> postfixExpression = new ArrayList<>();
 	 private static HashMap<String, Integer> operationPriority = new HashMap<>();//运算符优先级
 	 static {
@@ -44,8 +45,7 @@ public class ProgrammerModel extends CalculatorModel{
 	                        long ope = stack.pop();
 	                        stack.push(~ope);
 	                    }catch(ArithmeticException e){
-	                        outputAnswer = "NaN";
-	                        outputAns();
+							outputMap.put("answer", "NaN");
 	                        return;
 	                    }
 	                }
@@ -57,18 +57,14 @@ public class ProgrammerModel extends CalculatorModel{
 	                        ans = calculate(o,ope1,ope2);
 	                        stack.push(ans);
 	                    }catch (ArithmeticException e){//捕获异常，如:除0
-	                        outputAnswer = "NaN";
-	                        outputAns();
+							outputMap.put("answer", "NaN");
 	                        return;
 	                    }
 	                }
                 }
             
         }
-        outputAnswer = String.valueOf(stack.pop());
-        outputAns();
-        return;
-		
+		outputMap.put("answer", String.valueOf(stack.pop()));
 	}
 	private long calculate(String op, long ope1, long ope2){
         long ans = 0;
@@ -121,9 +117,6 @@ public class ProgrammerModel extends CalculatorModel{
         return ans;
     }
 
-	public String outputAns() {
-		return outputAnswer;
-	}
 
 	public boolean checkIllegal() {
 		return false;
@@ -281,8 +274,7 @@ public class ProgrammerModel extends CalculatorModel{
 	 }
 	@Override
 	public Map<String, String> getOutPutMap() {
-		// TODO 自动生成的方法存根
-		return null;
+		return outputMap;
 	}
 	
 
