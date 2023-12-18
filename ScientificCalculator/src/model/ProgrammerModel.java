@@ -57,7 +57,7 @@ public class ProgrammerModel extends CalculatorModel{
 	                        ans = calculate(o,ope1,ope2);
 	                        stack.push(ans);
 	                    }catch (ArithmeticException e){//捕获异常，如:除0
-							outputMap.put("answer", "NaN");
+							outputMap.put("answer", e.getMessage());
 	                        return;
 	                    }
 	                }
@@ -80,6 +80,7 @@ public class ProgrammerModel extends CalculatorModel{
                 break;
             case "/":
             	 if(ope2==0){
+
             		 throw new ArithmeticException("除数不能为0");
      	        }
                 ans = ope1 / ope2;
@@ -207,8 +208,6 @@ public class ProgrammerModel extends CalculatorModel{
     	while (opStack.size() != 0){
         	postfixExpression.add(opStack.pop());
         }
-    	for(String o:postfixExpression)
-    		System.out.print(o+" ");
     	
     }
 	 public String transAtoB(String inputExpression,int a,int b) { //a->b进制转换
@@ -285,7 +284,7 @@ public class ProgrammerModel extends CalculatorModel{
 	}
 	 public static void main(String[] args) {//测试
 
-	        String A = "3/0";
+	        String A = "3/0+1<66";
 	        ProgrammerModel testModel = new ProgrammerModel(A);
 	        testModel.count();
 	        System.out.println(testModel.outputMap);
