@@ -1,5 +1,6 @@
 package model;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +14,7 @@ public class ProgrammerModel extends CalculatorModel{
 	 * @description: 程序员计算器
 	 * @date: 2023/12/12 23:18
 	 */
-	 Map<String, String> outputMap = new HashMap<>();
+
 	 int numberSystem = 10;//目前的进制,默认为10
 	 private ArrayList<String> postfixExpression = new ArrayList<>();
 	 private static HashMap<String, Integer> operationPriority = new HashMap<>();//运算符优先级
@@ -37,7 +38,7 @@ public class ProgrammerModel extends CalculatorModel{
         Stack<Long> stack = new Stack<Long>();
         for(String o : postfixExpression){
             if(isLong(o)){
-            	stack.push(Long.parseLong(o));
+            	stack.push(Long.parseLong(o,numberSystem));
             }
             else{
             	 if(o.equals("~")){
@@ -45,7 +46,7 @@ public class ProgrammerModel extends CalculatorModel{
 	                        long ope = stack.pop();
 	                        stack.push(~ope);
 	                    }catch(ArithmeticException e){
-							outputMap.put("answer", "NaN");
+							outputMap.put("answer", e.getMessage());
 	                        return;
 	                    }
 	                }
@@ -57,14 +58,14 @@ public class ProgrammerModel extends CalculatorModel{
 	                        ans = calculate(o,ope1,ope2);
 	                        stack.push(ans);
 	                    }catch (ArithmeticException e){//捕获异常，如:除0
-							outputMap.put("answer", "NaN");
+							outputMap.put("answer", e.getMessage());
 	                        return;
 	                    }
 	                }
                 }
             
         }
-		outputMap.put("answer", String.valueOf(stack.pop()));
+		outputMap.put("answer", transNum(String.valueOf(stack.pop()),10,numberSystem));
 	}
 	private long calculate(String op, long ope1, long ope2){
         long ans = 0;
@@ -80,6 +81,7 @@ public class ProgrammerModel extends CalculatorModel{
                 break;
             case "/":
             	 if(ope2==0){
+
             		 throw new ArithmeticException("除数不能为0");
      	        }
                 ans = ope1 / ope2;
@@ -131,15 +133,15 @@ public class ProgrammerModel extends CalculatorModel{
 
 	public void setNumberSystem(int numberSystem) {//设置进制 numberSystem=2,8,10,16
 		inputExpression=transAtoB(inputExpression,this.numberSystem,numberSystem);
+		transAnswer(this.numberSystem,numberSystem);
 		this.numberSystem=numberSystem;
 	}
 	 private void transToPostfix() {
     	if(inputExpression.length()>300) {
     		return;
     	}
-   
     	String replaceInput = inputExpression.replaceAll("\\s", "");
- 
+    	
     	StringBuilder sb = new StringBuilder(replaceInput);
     	int insertIndex ; // 减号后插入空格位置的索引
     	char charToInsert = ' '; // 要插入的空格
@@ -153,7 +155,7 @@ public class ProgrammerModel extends CalculatorModel{
     		sb.insert(insertIndex, ' ');
     	}
     	for(int i=1;i<replaceInput.length();i++) {
-    		if(replaceInput.charAt(i)=='-'&&(replaceInput.charAt(i-1)==')'||Character.isDigit(replaceInput.charAt(i-1)))) {// 减号则后面插入空格
+    		if(replaceInput.charAt(i)=='-'&&(replaceInput.charAt(i-1)==')'||Character.isDigit(replaceInput.charAt(i-1)))||isAlpha(replaceInput.charAt(i-1))) {// 减号则后面插入空格
     			insertIndex = i+1+k;
     			k++;
     			sb.insert(insertIndex, charToInsert);
@@ -168,9 +170,8 @@ public class ProgrammerModel extends CalculatorModel{
     		}
     	}
     	String modifiedString = sb.toString();
-    	Pattern pattern = Pattern.compile("-?\\d+|[-+*/%><&|~\\\\.^()N()]");
+    	Pattern pattern = Pattern.compile("[0-9a-f]+|[-+*/%><&|~\\\\.^()N()]");
     	Matcher matcher = pattern.matcher(modifiedString);
-    	
     	ArrayList<String> infixExpression = new ArrayList<>();
 
     	while (matcher.find()) {
@@ -180,7 +181,7 @@ public class ProgrammerModel extends CalculatorModel{
     		else if(tmp.equals("N")) tmp = "NOR";
     		infixExpression.add(tmp);
     	}
-  
+
     	Stack<String> opStack = new Stack<>();
     	
     	for(String o : infixExpression) {
@@ -188,6 +189,7 @@ public class ProgrammerModel extends CalculatorModel{
     		if( isLong(o)){
                  postfixExpression.add(o);
             }
+    		
     		else if(o.equals("(")){
     			opStack.push((String)o);
     		}
@@ -198,22 +200,23 @@ public class ProgrammerModel extends CalculatorModel{
     			opStack.pop();
     		}
     		else {// 运算符
+
     			while(opStack.size()>0 && operationPriority.get(o)<=operationPriority.get(opStack.peek())) {  //符号栈为空，并且运算符小于等于栈顶的运算符优先级
     				postfixExpression.add(opStack.pop());
     			}
     			opStack.push((String)o);
+
     		}
     	}
     	while (opStack.size() != 0){
         	postfixExpression.add(opStack.pop());
         }
-    	for(String o:postfixExpression)
-    		System.out.print(o+" ");
     	
     }
 	 public String transAtoB(String inputExpression,int a,int b) { //a->b进制转换
 		 String res="";
 		 String replaceInput = inputExpression.replaceAll("\\s", "");
+
 	    	StringBuilder sb = new StringBuilder(replaceInput);
 	    	int insertIndex ; 
 	    	char charToInsert = ' '; 
@@ -227,7 +230,7 @@ public class ProgrammerModel extends CalculatorModel{
 	    		sb.insert(insertIndex, ' ');
 	    	}
 	    	for(int i=1;i<replaceInput.length();i++) {
-	    		if(replaceInput.charAt(i)=='-'&&(replaceInput.charAt(i-1)==')'||Character.isDigit(replaceInput.charAt(i-1)))) {// 减号则后面插入空格
+	    		if(replaceInput.charAt(i)=='-'&&(replaceInput.charAt(i-1)==')'||Character.isDigit(replaceInput.charAt(i-1)))||isAlpha(replaceInput.charAt(i-1))) {// 减号则后面插入空格
 	    			insertIndex = i+1+k;
 	    			k++;
 	    			sb.insert(insertIndex, charToInsert);
@@ -242,7 +245,7 @@ public class ProgrammerModel extends CalculatorModel{
 	    		}
 	    	}
 	    	String modifiedString = sb.toString();
-	    	Pattern pattern = Pattern.compile("-?\\d+|[-+*/%><&|~\\\\.^()N()]");
+	    	Pattern pattern = Pattern.compile("[0-9a-f]+|[-+*/%><&|~\\\\.^()N()]");
 	    	Matcher matcher = pattern.matcher(modifiedString);
 	    	
 	    	ArrayList<String> infixExpression = new ArrayList<>();
@@ -253,14 +256,16 @@ public class ProgrammerModel extends CalculatorModel{
 	    	}
 	    	for(String o : infixExpression) {
 	    		if( isLong(o)) {
-	    			transNum(o,a,b);
+	    			res+=transNum(o,a,b);
 	    		}
-	    			res+=o;  
+	    		else res+=o;
 	    	}
+
 		 return res;
 	 }
 	 public String transNum(String num,int a,int b) {
-		long number = Long.parseLong(num, a);//解析a进制到十进制
+		  BigInteger bigInteger = new BigInteger(num, a);
+	      long number = bigInteger.longValue();//解析a进制到十进制
 		String res="";
 		if(b==2) {
 			res=Long.toBinaryString(number);
@@ -274,10 +279,20 @@ public class ProgrammerModel extends CalculatorModel{
 		else if(b==16) {
 			res=Long.toHexString(number);
 		}
+
 		return res;
 	 }
+	 public void transAnswer(int a,int b) {
+		 String tmp = outputMap.get("answer");
+		 outputMap.put("answer", transNum(tmp,a,b));
+		 
+	 }
 	 public static boolean isLong(String input) { // 判断字符串是否是整数
-	        return input.matches("-?\\d+");
+	        return input.matches("[0-9a-f]+");
+	 }
+	 public static boolean isAlpha(char ch) { // 判断字符串是否是a-f
+	        if(ch>='a'&&ch<='f')return true;
+	        return false;
 	 }
 	@Override
 	public Map<String, String> getOutPutMap() {
@@ -285,10 +300,22 @@ public class ProgrammerModel extends CalculatorModel{
 	}
 	 public static void main(String[] args) {//测试
 
-	        String A = "3/0";
+	        String A = "-124<19+274.3-243432";
 	        ProgrammerModel testModel = new ProgrammerModel(A);
 	        testModel.count();
 	        System.out.println(testModel.outputMap);
+	        testModel.setNumberSystem(2);
+	        System.out.println(testModel.outputMap);
+	        testModel.setNumberSystem(8);
+	        System.out.println(testModel.outputMap);
+	        testModel.setNumberSystem(10);
+	        System.out.println(testModel.outputMap);
+	        testModel.setNumberSystem(16);
+	        System.out.println(testModel.outputMap);
+	        testModel.setNumberSystem(8);
+	        System.out.println(testModel.outputMap);
+
+
 	    }
 
 }
