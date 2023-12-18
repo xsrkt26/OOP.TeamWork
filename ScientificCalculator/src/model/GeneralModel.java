@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
  */
 
 public class GeneralModel extends CalculatorModel{
+	boolean isRadians = false;
     final double EP = 1e-16;//用于进行浮点数相等比较
 	private ArrayList<String> postfixExpression = new ArrayList<>();
 	private static HashMap<String, Integer> operationPriority = new HashMap<>();
@@ -94,6 +95,8 @@ public class GeneralModel extends CalculatorModel{
 		operationAry_N.put("%",1);
 	}
 
+
+
 	public void count() {
 		/**
 		* @author: hirmy
@@ -161,6 +164,11 @@ public class GeneralModel extends CalculatorModel{
         this.inputExpression = inputExpression;
     }
 
+	public GeneralModel(boolean isRadians){
+		if(isRadians){
+			this.isRadians = true;
+		}
+	}
 
 	    private double calculate(String op, double ope){
 	        /**
@@ -170,117 +178,202 @@ public class GeneralModel extends CalculatorModel{
 	        * @return double
 	        */
 	    	double ans = 0;
-	        switch(op){
-	            case "log":
-	            	 if(ope < EP){
-	            		 System.out.println("真数必须大于0");
-	            		 ans = Double.POSITIVE_INFINITY;
-		            	 return ans;
-	     	        }
-	                ans = Math.log(ope) / Math.log(10);
-	                break;
-	            case "ln":
-	            	if(ope < EP){
-	            		 System.out.println("真数必须大于0");
-	            		 ans = Double.POSITIVE_INFINITY;
-		            	 return ans;
-	     	        }
-	                ans = Math.log(ope);
-	                break;
-	            case "sin":
-	                ans = Math.sin(Math.toRadians(ope));
-	                break;
-	            case "cos":
-	                ans = Math.cos(Math.toRadians(ope));
-	                break;
-	            case "tan":
-	            	if(isPiDiv2(ope)) {
-	            		System.out.println("tan无效输入");
-	            		ans = Double.POSITIVE_INFINITY;
-	            		return ans;
-	            	}
-	                ans = Math.tan(Math.toRadians(ope));
-	                break;
-	            case "csc":
-	            	if(isKMultPi(ope)) {
-	            		System.out.println("csc无效输入");
-	            		ans = Double.POSITIVE_INFINITY;
-	            		return ans;
-	            	}
-	                ans =1/ Math.sin(Math.toRadians(ope));
-	                break;
-	            case "sec":
-	            	if(isPiDiv2(ope)) {
-	            		System.out.println("sec无效输入");
-	            		ans = Double.POSITIVE_INFINITY;
-	            		return ans;
-	            	}
-	                ans =1/ Math.cos(Math.toRadians(ope));
-	                break;
-	            case "cot":
-	            	if(isKMultPi(ope)) {
-	            		System.out.println("cot无效输入");
-	            		ans = Double.POSITIVE_INFINITY;
-	            		return ans;
-	            	}
-	            	else if(isPiDiv2(ope)) {
-	            		ans = 0;
-	            	}
-	            	else ans =1/ Math.tan(Math.toRadians(ope));
-	                break;
-	            case "asin":
-	            	if(ope>1+EP||ope<-1-EP) {
-	            		System.out.println("asin无效输入");
-	            		ans = Double.POSITIVE_INFINITY;
-	            		return ans;
-	            	}
-	            	ans = Math.toDegrees(Math.asin(ope));
-	                break;
-	            case "acos":
-	            	if(ope>1+EP||ope<-1-EP) {
-	            		System.out.println("acos无效输入");
-	            		ans = Double.POSITIVE_INFINITY;
-	            		return ans;
-	            	}
-	                ans = Math.toDegrees(Math.acos(ope));
-	                break;
-	            case "atan":
-	                ans = Math.toDegrees(Math.atan(ope));
-	                break;
-	            case "acsc":
-	            	if(ope>=-1+EP&&ope<=1-EP) {
-	            		System.out.println("acsc无效输入");
-	            		ans = Double.POSITIVE_INFINITY;
-	            		return ans;
-	            	}	          
-	            	 ans = Math.toDegrees(Math.asin(1/ope));
-	                break;
-	            case "asec":
-	            	if(ope>=-1+EP&&ope<=1-EP) {
-	            		System.out.println("asec无效输入");
-	            		ans = Double.POSITIVE_INFINITY;
-	            		return ans;
-	            	}
-	                ans = Math.toDegrees(Math.acos(1/ope));
-	                break;
-	            case "acot":
-	            	if(Math.abs(ope)<EP) {
-	            		ans = 90;
-	            	}
-	            	else ans = Math.toDegrees(Math.atan(1/ope));
-	                break;
-	            case "!":
-	                ans = factorial(ope);
-	                break;
-	            case "abs":
-	                ans = Math.abs(ope);
-	                break;
-	            case "%":
-	                ans = ope * 0.01;
-	                break;
-	            default:
-	                break;
-	        }
+			if(!isRadians){
+				//角度制算法
+				switch(op){
+					case "log":
+						if(ope < EP){
+							System.out.println("真数必须大于0");
+							ans = Double.POSITIVE_INFINITY;
+							return ans;
+						}
+						ans = Math.log(ope) / Math.log(10);
+						break;
+					case "ln":
+						if(ope < EP){
+							System.out.println("真数必须大于0");
+							ans = Double.POSITIVE_INFINITY;
+							return ans;
+						}
+						ans = Math.log(ope);
+						break;
+					case "sin":
+						ans = Math.sin(Math.toRadians(ope));
+						break;
+					case "cos":
+						ans = Math.cos(Math.toRadians(ope));
+						break;
+					case "tan":
+						if(isPiDiv2(ope)) {
+							System.out.println("tan无效输入");
+							ans = Double.POSITIVE_INFINITY;
+							return ans;
+						}
+						ans = Math.tan(Math.toRadians(ope));
+						break;
+					case "csc":
+						if(isKMultPi(ope)) {
+							System.out.println("csc无效输入");
+							ans = Double.POSITIVE_INFINITY;
+							return ans;
+						}
+						ans =1/ Math.sin(Math.toRadians(ope));
+						break;
+					case "sec":
+						if(isPiDiv2(ope)) {
+							System.out.println("sec无效输入");
+							ans = Double.POSITIVE_INFINITY;
+							return ans;
+						}
+						ans =1/ Math.cos(Math.toRadians(ope));
+						break;
+					case "cot":
+						if(isKMultPi(ope)) {
+							System.out.println("cot无效输入");
+							ans = Double.POSITIVE_INFINITY;
+							return ans;
+						}
+						else if(isPiDiv2(ope)) {
+							ans = 0;
+						}
+						else ans =1/ Math.tan(Math.toRadians(ope));
+						break;
+					case "asin":
+						if(ope>1+EP||ope<-1-EP) {
+							System.out.println("asin无效输入");
+							ans = Double.POSITIVE_INFINITY;
+							return ans;
+						}
+						ans = Math.toDegrees(Math.asin(ope));
+						break;
+					case "acos":
+						if(ope>1+EP||ope<-1-EP) {
+							System.out.println("acos无效输入");
+							ans = Double.POSITIVE_INFINITY;
+							return ans;
+						}
+						ans = Math.toDegrees(Math.acos(ope));
+						break;
+					case "atan":
+						ans = Math.toDegrees(Math.atan(ope));
+						break;
+					case "acsc":
+						if(ope>=-1+EP&&ope<=1-EP) {
+							System.out.println("acsc无效输入");
+							ans = Double.POSITIVE_INFINITY;
+							return ans;
+						}
+						ans = Math.toDegrees(Math.asin(1/ope));
+						break;
+					case "asec":
+						if(ope>=-1+EP&&ope<=1-EP) {
+							System.out.println("asec无效输入");
+							ans = Double.POSITIVE_INFINITY;
+							return ans;
+						}
+						ans = Math.toDegrees(Math.acos(1/ope));
+						break;
+					case "acot":
+						if(Math.abs(ope)<EP) {
+							ans = 90;
+						}
+						else ans = Math.toDegrees(Math.atan(1/ope));
+						break;
+					case "!":
+						ans = factorial(ope);
+						break;
+					case "abs":
+						ans = Math.abs(ope);
+						break;
+					case "%":
+						ans = ope * 0.01;
+						break;
+					default:
+						break;
+				}
+			}
+	        else{
+				//弧度制算法
+				switch(op){
+					case "log":
+						ans = Math.log(ope) / Math.log(10);
+						break;
+					case "ln":
+						ans = Math.log(ope);
+						break;
+					case "sin":
+						ans = Math.sin(ope);
+						break;
+					case "cos":
+						ans = Math.cos(ope);
+						break;
+					case "tan":
+						ans = Math.tan(ope);
+						break;
+					case "csc":
+						ans =1/ Math.sin(ope);
+						break;
+					case "sec":
+						ans =1/ Math.cos(ope);
+						break;
+					case "cot":
+						ans =1/ Math.tan(ope);
+						break;
+					case "asin":
+						if(ope>1+EP||ope<-1-EP) {
+							System.out.println("asin无效输入");
+							ans = Double.POSITIVE_INFINITY;
+							return ans;
+						}
+						ans = Math.toDegrees(Math.asin(ope));
+						break;
+					case "acos":
+						if(ope>1+EP||ope<-1-EP) {
+							System.out.println("acos无效输入");
+							ans = Double.POSITIVE_INFINITY;
+							return ans;
+						}
+						ans = Math.toDegrees(Math.acos(ope));
+						break;
+					case "atan":
+						ans = Math.toDegrees(Math.atan(ope));
+						break;
+					case "acsc":
+						if(ope>=-1+EP&&ope<=1-EP) {
+							System.out.println("acsc无效输入");
+							ans = Double.POSITIVE_INFINITY;
+							return ans;
+						}
+						ans = Math.toDegrees(Math.asin(1/ope));
+						break;
+					case "asec":
+						if(ope>=-1+EP&&ope<=1-EP) {
+							System.out.println("asec无效输入");
+							ans = Double.POSITIVE_INFINITY;
+							return ans;
+						}
+						ans = Math.toDegrees(Math.acos(1/ope));
+						break;
+					case "acot":
+						if(Math.abs(ope)<EP) {
+							ans = 90;
+						}
+						else ans = Math.toDegrees(Math.atan(1/ope));
+						break;
+					case "!":
+						ans = factorial(ope);
+						break;
+					case "abs":
+						ans = Math.abs(ope);
+						break;
+					case "%":
+						ans = ope * 0.01;
+						break;
+					default:
+						break;
+				}
+			}
+
 	        return ans;
 	    }
 
