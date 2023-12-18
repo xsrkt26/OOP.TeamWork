@@ -13,7 +13,7 @@ public class ProgrammerModel extends CalculatorModel{
 	 * @description: 程序员计算器
 	 * @date: 2023/12/12 23:18
 	 */
-	 int numberSystem=10;//目前的进制,默认为10
+	 int numberSystem = 10;//目前的进制,默认为10
 	 private ArrayList<String> postfixExpression = new ArrayList<>();
 	 private static HashMap<String, Integer> operationPriority = new HashMap<>();//运算符优先级
 	 static {
