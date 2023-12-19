@@ -193,7 +193,7 @@ public class FunctionGraphModel extends Application {
         thisPane.getChildren().add(new Text(width * 0.98, centerY + 0.02 * height, xText.getText()));
         thisPane.getChildren().add(new Text(centerX + 0.01 * width, 0.02 * height, yText.getText()));
         thisPane.getChildren().add(new Text(centerX + 0.005 * width, centerY + 0.02 * height, zeroText.getText()));
-        for (int gap = 0; gap < (width / 2)*10; gap += measureGap) {//x坐标线
+        for (int gap = 0; gap < (width / 2)*30; gap += measureGap) {//x坐标线
             Line xMeasure1 = new Line(centerX + gap, centerY, centerX + gap, centerY - 0.01 * height);
             Line xMeasure2 = new Line(centerX - gap, centerY, centerX - gap, centerY - 0.01 * height);
 
@@ -206,7 +206,7 @@ public class FunctionGraphModel extends Application {
             thisPane.getChildren().add(xMeasure1);
             thisPane.getChildren().add(xMeasure2);
         }
-        for (int gap = 0; gap < (height / 2)*10; gap += measureGap) {//y坐标线
+        for (int gap = 0; gap < (height / 2)*30; gap += measureGap) {//y坐标线
             Line yMeasure1 = new Line(centerX, centerY + gap, centerX + 0.007 * width, centerY + gap);
             Line yMeasure2 = new Line(centerX, centerY - gap, centerX + 0.007 * width, centerY - gap);
             int num = gap / measureGap;
