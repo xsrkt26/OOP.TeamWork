@@ -17,7 +17,7 @@
                   <Font size="28.0" />
                </font>
             </TextArea>
-            <Label layoutX="64.0" layoutY="14.0" text="Input A Matrix Here" textFill="WHITE">
+            <Label layoutX="64.0" layoutY="14.0" text="Input A Matrix Here">
                <font>
                   <Font size="24.0" />
                </font>
@@ -27,7 +27,7 @@
                   <Font size="28.0" />
                </font>
             </TextArea>
-            <Label layoutX="411.0" layoutY="14.0" text="Input B Matrix Here" textFill="WHITE">
+            <Label layoutX="411.0" layoutY="14.0" text="Input B Matrix Here">
                <font>
                   <Font size="24.0" />
                </font>
@@ -37,7 +37,7 @@
                   <Font size="28.0" />
                </font>
             </TextArea>
-            <Label layoutX="826.0" layoutY="14.0" text="A + B" textFill="WHITE">
+            <Label layoutX="826.0" layoutY="14.0" text="A + B">
                <font>
                   <Font size="24.0" />
                </font>
@@ -47,7 +47,7 @@
                   <Font size="28.0" />
                </font>
             </TextArea>
-            <Label layoutX="146.0" layoutY="296.0" text="A - B " textFill="WHITE">
+            <Label layoutX="146.0" layoutY="296.0" text="A - B ">
                <font>
                   <Font size="24.0" />
                </font>
@@ -57,7 +57,7 @@
                   <Font size="28.0" />
                </font>
             </TextArea>
-            <Label layoutX="441.0" layoutY="296.0" text="CrossProduct" textFill="WHITE">
+            <Label layoutX="441.0" layoutY="296.0" text="CrossProduct">
                <font>
                   <Font size="24.0" />
                </font>
@@ -67,12 +67,12 @@
                   <Font size="28.0" />
                </font>
             </TextArea>
-            <Label layoutX="791.0" layoutY="296.0" text="DotProduct" textFill="WHITE">
+            <Label layoutX="791.0" layoutY="296.0" text="DotProduct">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Pane fx:id="btnEquals" layoutX="55.0" layoutY="629.0" onMouseClicked="#compute" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="75.0" prefWidth="939.0" styleClass="highlight">
+            <Pane fx:id="btnEquals" layoutX="55.0" layoutY="629.0" onMouseClicked="#compute" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="75.0" prefWidth="939.0" styleClass="equal">
                <children>
                   <Label layoutX="404.0" layoutY="16.0" text="Compute" textFill="WHITE">
                      <font>

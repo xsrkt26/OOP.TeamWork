@@ -17,12 +17,12 @@
                   <Font size="28.0" />
                </font>
             </TextArea>
-            <Label layoutX="52.0" layoutY="23.0" text="Input A Matrix Here" textFill="WHITE">
+            <Label layoutX="52.0" layoutY="23.0" text="Input A Matrix Here">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Pane fx:id="btnEquals" layoutX="68.0" layoutY="658.0" onMouseClicked="#compute" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="75.0" prefWidth="939.0" styleClass="highlight">
+            <Pane fx:id="btnEquals" layoutX="55.0" layoutY="622.0" onMouseClicked="#compute" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="75.0" prefWidth="939.0" styleClass="equal">
                <children>
                   <Label layoutX="404.0" layoutY="16.0" text="Compute" textFill="WHITE">
                      <font>
@@ -46,57 +46,57 @@
                   <Font size="28.0" />
                </font>
             </TextArea>
-            <Label layoutX="398.0" layoutY="23.0" text="Transpose Matrix" textFill="WHITE">
+            <Label layoutX="398.0" layoutY="23.0" text="Transpose Matrix">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="94.0" layoutY="291.0" text="Inverse Matrix" textFill="WHITE">
+            <Label layoutX="94.0" layoutY="291.0" text="Inverse Matrix">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="398.0" layoutY="291.0" text="Adjoint Matrix" textFill="WHITE">
+            <Label layoutX="398.0" layoutY="291.0" text="Adjoint Matrix">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label fx:id="determinant" alignment="CENTER_RIGHT" layoutX="777.0" layoutY="92.0" prefHeight="42.0" prefWidth="191.0" text="0.0" textFill="WHITE">
+            <Label fx:id="determinant" alignment="CENTER_RIGHT" layoutX="777.0" layoutY="92.0" prefHeight="42.0" prefWidth="191.0" text="0.0">
                <font>
                   <Font name="Arial" size="36.0" />
                </font>
             </Label>
-            <Label fx:id="trace" alignment="CENTER_RIGHT" layoutX="777.0" layoutY="186.0" prefHeight="42.0" prefWidth="191.0" text="0.0" textFill="WHITE">
+            <Label fx:id="trace" alignment="CENTER_RIGHT" layoutX="777.0" layoutY="186.0" prefHeight="42.0" prefWidth="191.0" text="0.0">
                <font>
                   <Font name="Arial" size="36.0" />
                </font>
             </Label>
-            <Label fx:id="rank" alignment="CENTER_RIGHT" layoutX="777.0" layoutY="291.0" prefHeight="42.0" prefWidth="191.0" text="0.0" textFill="WHITE">
+            <Label fx:id="rank" alignment="CENTER_RIGHT" layoutX="777.0" layoutY="291.0" prefHeight="42.0" prefWidth="191.0" text="0.0">
                <font>
                   <Font name="Arial" size="36.0" />
                </font>
             </Label>
-            <Label fx:id="eigValue" alignment="CENTER_RIGHT" layoutX="777.0" layoutY="374.0" prefHeight="42.0" prefWidth="191.0" text="0.0" textFill="WHITE">
+            <Label fx:id="eigValue" alignment="CENTER_RIGHT" layoutX="777.0" layoutY="374.0" prefHeight="42.0" prefWidth="191.0" text="0.0">
                <font>
                   <Font name="Arial" size="36.0" />
                </font>
             </Label>
-            <Label layoutX="658.0" layoutY="92.0" text="det(A)" textFill="WHITE">
+            <Label layoutX="658.0" layoutY="92.0" text="det(A)">
                <font>
                   <Font name="Arial" size="36.0" />
                </font>
             </Label>
-            <Label layoutX="672.0" layoutY="186.0" text="tr(A)" textFill="WHITE">
+            <Label layoutX="672.0" layoutY="186.0" text="tr(A)">
                <font>
                   <Font name="Arial" size="36.0" />
                </font>
             </Label>
-            <Label layoutX="677.0" layoutY="291.0" text="r(A)" textFill="WHITE">
+            <Label layoutX="677.0" layoutY="291.0" text="r(A)">
                <font>
                   <Font name="Arial" size="36.0" />
                </font>
             </Label>
-            <Label layoutX="662.0" layoutY="374.0" text="eigen" textFill="WHITE">
+            <Label layoutX="662.0" layoutY="374.0" text="eigen">
                <font>
                   <Font name="Arial" size="36.0" />
                </font>

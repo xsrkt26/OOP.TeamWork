@@ -3,10 +3,25 @@
 -fx-background-radius: 28;
 }
 .mainPane{
--fx-background-color: linear-gradient(to bottom right,#50ffd3,#6A5ACD);
+-fx-background-color: #EFF4F9;
 -fx-background-radius: 15 15 25 25;
 }
 .highlight{
 -fx-background-color: #00000025;
 -fx-background-radius: 15;
+}
+.number{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 15;
+    -fx-text-fill: #232323;
+}
+.symbol{
+    -fx-background-color: #F7F9FC;
+    -fx-background-radius: 15;
+    -fx-text-fill: #A2A3A5;
+}
+.equal{
+    -fx-background-color: #7E7E7E;
+    -fx-background-radius: 15;
+    -fx-text-fill: #FFFFFF;
 }

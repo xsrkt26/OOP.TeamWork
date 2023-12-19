@@ -9,12 +9,13 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import model.*;
+import java.util.HashSet;
+import java.util.Set;
 
 import java.util.ArrayList;
 
 public class MainWindowViewController extends viewController {
     @FXML private Label lblResult;
-    @FXML private Label lblResultAlways;
     private StringBuffer calculateExpression = new StringBuffer("");
     private StringBuffer showExpression = new StringBuffer("");
     private GeneralModel generalModel = new GeneralModel();
@@ -22,13 +23,9 @@ public class MainWindowViewController extends viewController {
     private String showOperator = "";
     private int lastShowExpressionIndex;
     private ArrayList<String> stack = new ArrayList<>();
+    private Set<Character> symbolSet = new HashSet<>(Set.of('t', 's', 'o', 'u', 'i', 'j', 'T', 'S', 'O', 'U', 'I', 'J', 'L', 'n', 'd', 'a', '+', '-', '*', '/', '^', '(', '!', '.'));
     private void count(){
-        try {
-            generalModel.count();
-        } catch (Exception e){
-
-        }
-
+        generalModel.count();
     }
     @FXML
     void onNumberClicked(MouseEvent event) {
@@ -36,9 +33,6 @@ public class MainWindowViewController extends viewController {
         calculateExpression.append(value);
         showExpression.append(value);
         lblResult.setText(showExpression.toString());
-        generalModel.setInputExpression(calculateExpression.toString());
-        count();
-        lblResultAlways.setText(generalModel.outputAns());
         stack.add(String.valueOf(value));
     }
 
@@ -68,17 +62,9 @@ public class MainWindowViewController extends viewController {
                     lblResult.setText(String.valueOf(showExpression));
                 } else {
                     lblResult.setText(String.valueOf(0.0));
-                    lblResultAlways.setText(String.valueOf(0.0));
-                    generalModel.setInputExpression("0");
-                    count();
-                    return;
                 }
             } else {
-                lblResultAlways.setText(String.valueOf(0.0));
                 lblResult.setText(String.valueOf(0.0));
-                generalModel.setInputExpression("0");
-                count();
-                return;
             }
         }
         else {
@@ -198,8 +184,5 @@ public class MainWindowViewController extends viewController {
             lblResult.setText(String.valueOf(showExpression));
 
         }
-        generalModel.setInputExpression(calculateExpression.toString());
-        count();
-        lblResultAlways.setText(generalModel.outputAns());
     }
 }

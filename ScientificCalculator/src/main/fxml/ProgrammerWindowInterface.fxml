@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="1057.0" stylesheets="@../css/ProgrammerWindowStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.view.ProgrammerWindowViewController">
+    <children>
+        <Pane fx:id="mainPane" layoutX="6.0" layoutY="37.0" prefHeight="747.0" prefWidth="773.0" styleClass="mainPane" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="37.0" />
+        <Pane fx:id="titlePane" prefHeight="37.0" prefWidth="1050.0">
+            <children>
+                <ImageView fx:id="btnClose" fitHeight="16.0" fitWidth="16.0" layoutX="1027.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/close.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="btnMinimize" fitHeight="16.0" fitWidth="16.0" layoutX="977.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/hide.png" />
+                    </image>
+                </ImageView>
+                <Label layoutX="30.0" layoutY="12.0" text="Scientific Calculator" textFill="WHITE" />
+                <ImageView fx:id="binMenu" fitHeight="16.0" fitWidth="16.0" layoutX="1002.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/icon.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

@@ -154,6 +154,7 @@ public class MatrixModel extends CalculatorModel{
         }
     }
 
+    @Override
     public Map<String, String> getOutPutMap() {
         return this.outputMap;
     }
@@ -208,7 +209,7 @@ public class MatrixModel extends CalculatorModel{
             result.setRowCol(ope1.row, ope1.col);
             for(int i = 0; i < result.row; i++){
                 for(int j = 0; j < result.col; j++){
-                    result.data[i][j] = ope1.data[i][j] + ope2.data[i][j];
+                    result.data[i][j] = ope1.data[i][j] - ope2.data[i][j];
                 }
             }
         }
@@ -459,13 +460,14 @@ public class MatrixModel extends CalculatorModel{
         }
         return ope;
     }
+
+    /**
+     * @author: hirmy
+     * @description: 求逆矩阵；要求：i == j
+     * @date: 2023/12/9 17:08
+     * @return void
+     */
     private void matrixInverse(Matrix ope){
-        /**
-         * @author: hirmy
-         * @description: 求逆矩阵；要求：i == j
-         * @date: 2023/12/9 17:08
-         * @return void
-         */
         Matrix result = new Matrix();
         if (ope.isPhalanx() && Math.abs(matrixDeterminant(ope) - 0) > EP) {
             double det = matrixDeterminant(ope);

@@ -11,54 +11,54 @@
    <children>
       <Pane fx:id="mainPane" layoutX="6.0" layoutY="37.0" prefHeight="747.0" prefWidth="773.0" styleClass="mainPane" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="37.0">
          <children>
-            <Pane fx:id="switchToMainWindow" layoutX="344.0" layoutY="27.0" onMouseClicked="#switchToMainWindow" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="362.0" styleClass="highlight">
+            <Pane fx:id="switchToMainWindow" layoutX="344.0" layoutY="27.0" onMouseClicked="#switchToMainWindow" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="362.0" styleClass="equal">
                <children>
-                  <Label layoutX="39.0" layoutY="29.0" text="General Mode" textFill="WHITE">
+                  <Label layoutX="39.0" layoutY="29.0" styleClass="equal" text="General Mode" textFill="WHITE">
                      <font>
                         <Font name="Arial" size="36.0" />
                      </font>
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="switchToLinearRegression" layoutX="344.0" layoutY="142.0" onMouseClicked="#switchToLinearWindow" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="362.0" styleClass="highlight">
+            <Pane fx:id="switchToLinearRegression" layoutX="344.0" layoutY="142.0" onMouseClicked="#switchToLinearWindow" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="362.0" styleClass="equal">
                <children>
-                  <Label layoutX="39.0" layoutY="29.0" text="Linear Regression" textFill="WHITE">
+                  <Label layoutX="39.0" layoutY="29.0" styleClass="equal" text="Linear Regression" textFill="WHITE">
                      <font>
                         <Font name="Arial" size="36.0" />
                      </font>
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="switchToMatrixOne" layoutX="344.0" layoutY="256.0" onMouseClicked="#switchToMatrixOneWindow" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="362.0" styleClass="highlight">
+            <Pane fx:id="switchToMatrixOne" layoutX="344.0" layoutY="256.0" onMouseClicked="#switchToMatrixOneWindow" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="362.0" styleClass="equal">
                <children>
-                  <Label layoutX="39.0" layoutY="29.0" text="Unary Matrix" textFill="WHITE">
+                  <Label layoutX="39.0" layoutY="29.0" styleClass="equal" text="Unary Matrix" textFill="WHITE">
                      <font>
                         <Font name="Arial" size="36.0" />
                      </font>
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="switchToMatrixTwo" layoutX="344.0" layoutY="374.0" onMouseClicked="#switchToMatrixTwoWindow" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="362.0" styleClass="highlight">
+            <Pane fx:id="switchToMatrixTwo" layoutX="344.0" layoutY="374.0" onMouseClicked="#switchToMatrixTwoWindow" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="362.0" styleClass="equal">
                <children>
-                  <Label layoutX="39.0" layoutY="29.0" text="Binary Matrix" textFill="WHITE">
+                  <Label layoutX="39.0" layoutY="29.0" styleClass="equal" text="Binary Matrix" textFill="WHITE">
                      <font>
                         <Font name="Arial" size="36.0" />
                      </font>
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="switchToProgrammer" layoutX="344.0" layoutY="492.0" onMouseClicked="#switchToMatrixTwoWindow" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="362.0" styleClass="highlight">
+            <Pane fx:id="switchToProgrammer" layoutX="344.0" layoutY="492.0" onMouseClicked="#switchToProgrammerWindow" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="362.0" styleClass="equal">
                <children>
-                  <Label layoutX="39.0" layoutY="29.0" text="Programmer" textFill="WHITE">
+                  <Label layoutX="39.0" layoutY="29.0" styleClass="equal" text="Programmer" textFill="WHITE">
                      <font>
                         <Font name="Arial" size="36.0" />
                      </font>
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="switchToFunctionGraph" layoutX="344.0" layoutY="611.0" onMouseClicked="#switchToFunctionGraph" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="362.0" styleClass="highlight">
+            <Pane fx:id="switchToFunctionGraph" layoutX="344.0" layoutY="611.0" onMouseClicked="#switchToFunctionGraph" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="100.0" prefWidth="362.0" styleClass="equal">
                <children>
-                  <Label layoutX="39.0" layoutY="29.0" text="Function Graph" textFill="WHITE">
+                  <Label layoutX="39.0" layoutY="29.0" styleClass="equal" text="Function Graph" textFill="WHITE">
                      <font>
                         <Font name="Arial" size="36.0" />
                      </font>

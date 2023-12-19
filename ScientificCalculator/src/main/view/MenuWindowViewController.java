@@ -54,6 +54,15 @@ public class MenuWindowViewController extends viewController {
         ((MatrixTwoWindowViewController)loader.getController()).init(stage);
         stage.show();
     }
+    public void switchToProgrammerWindow() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/ProgrammerWindowInterface.fxml"));
+        Stage stage = (Stage)binMenu.getScene().getWindow();
+        Scene scene = new Scene(loader.load());
+        scene.setFill(Color.TRANSPARENT);
+        stage.setScene(scene);
+        ((ProgrammerWindowViewController)loader.getController()).init(stage);
+        stage.show();
+    }
     public void switchToFunctionGraph() throws Exception {
         FunctionGraphController functionGraphController = new FunctionGraphController();
         functionGraphController.draw();
