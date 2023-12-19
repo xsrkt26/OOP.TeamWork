@@ -169,7 +169,11 @@ public class FunctionGraphModel extends Application {
 
 
         //函数，确定定义域
-        for (int xi = -(width / 2)*5; xi < (width / 2)*5; xi++) {
+//        for (int xi = -(width / 2)*4; xi < (width / 2)*4; xi++) {
+//            pointList.add(centerX + (double) (xi));
+//            pointList.add(centerY - (f(xi * 1.0 / measureGap) * measureGap));
+//        }
+        for (int xi = -(centerX); xi < (width-centerX); xi++) {
             pointList.add(centerX + (double) (xi));
             pointList.add(centerY - (f(xi * 1.0 / measureGap) * measureGap));
         }
@@ -224,14 +228,15 @@ public class FunctionGraphModel extends Application {
 
                 centerX -= (int)((e.getX()-nowX)*0.07);
                 centerY -= (int)((e.getY()-nowY)*0.05);
-//                thisPane.setTranslateX(nowX-e.getX());
-//                thisPane.setTranslateY(nowY-e.getY());
+//                thisPane.setLayoutX(nowX-e.getX());
+//                thisPane.setLayoutY(nowY-e.getY());
 
                 try {
                     scene.setRoot(getPane());
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);
                 }
+
             });
 
         });
