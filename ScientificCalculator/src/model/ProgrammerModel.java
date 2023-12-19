@@ -15,7 +15,7 @@ public class ProgrammerModel extends CalculatorModel{
      * @date: 2023/12/12 23:18
      */
 
-    int numberSystem = 10;//目前的进制,默认为10
+    public int numberSystem = 10;//目前的进制,默认为10
     private ArrayList<String> postfixExpression = new ArrayList<>();
     private static HashMap<String, Integer> operationPriority = new HashMap<>();//运算符优先级
     static {
@@ -300,7 +300,7 @@ public class ProgrammerModel extends CalculatorModel{
     }
     public static void main(String[] args) {//测试
 
-        String A = "-124<19+274.3-243432";
+        String A = "f+1";
         ProgrammerModel testModel = new ProgrammerModel(A);
         testModel.count();
         System.out.println(testModel.outputMap);
@@ -314,8 +314,6 @@ public class ProgrammerModel extends CalculatorModel{
         System.out.println(testModel.outputMap);
         testModel.setNumberSystem(8);
         System.out.println(testModel.outputMap);
-
-
     }
 
 }

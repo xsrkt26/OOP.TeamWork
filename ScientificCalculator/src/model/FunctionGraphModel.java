@@ -7,6 +7,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polyline;
 import javafx.scene.text.Font;
@@ -50,13 +51,12 @@ public class FunctionGraphModel extends Application {
 
         primaryStage.setTitle("Function");
         scene = new Scene(getPane(), width, height);
-
         scene.setOnScroll(event -> {
             double deltaY = event.getDeltaY();
             if (deltaY < 0) {
                 // 向下滚动
-                measureGap *= 1.2;
-                fontSize *= 1.2;
+                measureGap *= 1.1;
+                fontSize *= 1.1;
                 nowFont = new Font(fontSize);
                 try {
                     scene.setRoot(getPane());
@@ -65,8 +65,8 @@ public class FunctionGraphModel extends Application {
                 }
             } else if (deltaY > 0) {
                 // 向上滚动
-                measureGap /= 1.2;
-                fontSize /= 1.2;
+                measureGap /= 1.1;
+                fontSize /= 1.1;
                 nowFont = new Font(fontSize);
                 try {
                     scene.setRoot(getPane());
@@ -83,11 +83,11 @@ public class FunctionGraphModel extends Application {
         });
     }
 
+
     public static void draw() throws Exception{
         Stage primaryStage = new Stage();
         primaryStage.setTitle("Function");
         scene = new Scene(getPane(), width, height);
-
         scene.setOnScroll(event -> {
             double deltaY = event.getDeltaY();
             if (deltaY < 0) {
@@ -123,9 +123,10 @@ public class FunctionGraphModel extends Application {
 
     private static Pane getPane() throws Exception {
         BorderPane thisPane = new BorderPane();
-        HBox hbox = new HBox(0.01*width);
-
+        BorderPane backPane = new BorderPane();
+        backPane.getChildren().add(thisPane);
         //创建文本框
+        HBox hbox = new HBox(0.01*width);
         TextField textField = new TextField();
         textField.setPrefColumnCount(10);
         textField.setPromptText("请输入函数表达式");
@@ -142,7 +143,7 @@ public class FunctionGraphModel extends Application {
         hbox.setAlignment(Pos.TOP_LEFT);
         hbox.setPadding(new Insets(0.02*height));
         hbox.getChildren().addAll(textField, submitButton);
-        thisPane.setTop(hbox);
+        backPane.setTop(hbox);
         //折线绘制
         Polyline polyline = new Polyline();
         ObservableList<Double> pointList = polyline.getPoints();
@@ -153,6 +154,8 @@ public class FunctionGraphModel extends Application {
         Button resetButton = new Button("reset");
         resetButton.setOnAction(e -> {
             try{
+                centerX = width/2;
+                centerY = height/2;
                 setInputExpression("0");
                 measureGap = 100;
                 scene.setRoot(getPane());
@@ -162,11 +165,15 @@ public class FunctionGraphModel extends Application {
         });
         resetBox.setAlignment(Pos.BOTTOM_RIGHT);
         resetBox.getChildren().add(resetButton);
-        thisPane.setBottom(resetBox);
+        backPane.setBottom(resetBox);
 
 
         //函数，确定定义域
-        for (int xi = -(width / 2); xi < width / 2; xi++) {
+//        for (int xi = -(width / 2)*4; xi < (width / 2)*4; xi++) {
+//            pointList.add(centerX + (double) (xi));
+//            pointList.add(centerY - (f(xi * 1.0 / measureGap) * measureGap));
+//        }
+        for (int xi = -(centerX); xi < (width-centerX); xi++) {
             pointList.add(centerX + (double) (xi));
             pointList.add(centerY - (f(xi * 1.0 / measureGap) * measureGap));
         }
@@ -186,7 +193,7 @@ public class FunctionGraphModel extends Application {
         thisPane.getChildren().add(new Text(width * 0.98, centerY + 0.02 * height, xText.getText()));
         thisPane.getChildren().add(new Text(centerX + 0.01 * width, 0.02 * height, yText.getText()));
         thisPane.getChildren().add(new Text(centerX + 0.005 * width, centerY + 0.02 * height, zeroText.getText()));
-        for (int gap = 0; gap < width / 2; gap += measureGap) {//x坐标线
+        for (int gap = 0; gap < (width / 2)*30; gap += measureGap) {//x坐标线
             Line xMeasure1 = new Line(centerX + gap, centerY, centerX + gap, centerY - 0.01 * height);
             Line xMeasure2 = new Line(centerX - gap, centerY, centerX - gap, centerY - 0.01 * height);
 
@@ -199,7 +206,7 @@ public class FunctionGraphModel extends Application {
             thisPane.getChildren().add(xMeasure1);
             thisPane.getChildren().add(xMeasure2);
         }
-        for (int gap = 0; gap < height / 2; gap += measureGap) {//y坐标线
+        for (int gap = 0; gap < (height / 2)*30; gap += measureGap) {//y坐标线
             Line yMeasure1 = new Line(centerX, centerY + gap, centerX + 0.007 * width, centerY + gap);
             Line yMeasure2 = new Line(centerX, centerY - gap, centerX + 0.007 * width, centerY - gap);
             int num = gap / measureGap;
@@ -211,8 +218,32 @@ public class FunctionGraphModel extends Application {
             thisPane.getChildren().add(yMeasure2);
         }
         thisPane.getChildren().add(new Group(xLine, yLine));
-        return thisPane;
+
+
+
+        thisPane.setOnMousePressed(e -> {
+            thisPane.setOnMouseDragged(e1 ->{
+                double nowX = e1.getX();
+                double nowY = e1.getY();
+
+                centerX -= (int)((e.getX()-nowX)*0.07);
+                centerY -= (int)((e.getY()-nowY)*0.05);
+//                thisPane.setLayoutX(nowX-e.getX());
+//                thisPane.setLayoutY(nowY-e.getY());
+
+                try {
+                    scene.setRoot(getPane());
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+
+            });
+
+        });
+
+        return backPane;
     }
+
 
     private static String replaceNameInput(String input) {
         input = input.replaceAll("atan", "T");
