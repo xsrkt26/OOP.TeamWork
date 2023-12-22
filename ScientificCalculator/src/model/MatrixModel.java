@@ -24,6 +24,13 @@ public class MatrixModel extends CalculatorModel{
 
         @Override
         public String toString(){
+            /**
+            * @author: hirmy
+
+            * @description: 矩阵格式化输出
+            * @date: 2023/12/3 13:00
+            * @return String
+            */
             if (this.row == 0 && this.col == 0) {
                 return "0|" + NaN;
             }
@@ -57,6 +64,11 @@ public class MatrixModel extends CalculatorModel{
 
 
         public Matrix(String[] matrixString) {
+           /**
+           * @author: hirmy
+           * @description: 构造矩阵，参数为格式化矩阵
+           * @date: 2023/12/3 13:00
+           */
             row = matrixString.length;
             col = matrixString[0].split("\\s+").length;
             data = new double[row][col];
@@ -125,6 +137,12 @@ public class MatrixModel extends CalculatorModel{
     }
     @Override
     public void count() {
+        /**
+        * @author: hirmy
+        * @description: 进行运算
+        * @date: 2023/12/4
+        * @return void
+        */
         if (checkIllegal()) {
             if (matrixOperation == 0) {
                 countDataForOne();
@@ -137,6 +155,12 @@ public class MatrixModel extends CalculatorModel{
     }
 
     private void saveDataToMap(){
+        /**
+        * @author: hirmy
+        * @description: 答案保存到Map里
+        * @date: 2023/12/4
+        * @return void
+        */
         if (matrixOperation == 1) {
             outputMap.put("matrixAddAnswer", matrixAddAnswer);
             outputMap.put("matrixSubAnswer", matrixSubAnswer);
@@ -160,6 +184,12 @@ public class MatrixModel extends CalculatorModel{
     }
 
     private void countDataForTwo() {
+        /**
+        * @author: hirmy
+        * @description: 二元运算
+        * @date: 2023/12/4
+        * @return void
+        */
         matrixAdd(matrixA, matrixB);
         matrixSub(matrixA, matrixB);
         matrixCrossProduct(matrixA, matrixB);
@@ -167,6 +197,12 @@ public class MatrixModel extends CalculatorModel{
     }
 
     private void countDataForOne() {
+        /**
+        * @author: hirmy
+        * @description: 一元运算
+        * @date: 2023/12/4
+        * @return void
+        */
         matrixTranspose(matrixA);
         matrixDeterminant(matrixA);
         matrixAdjoint(matrixA);
@@ -468,6 +504,12 @@ public class MatrixModel extends CalculatorModel{
      * @return void
      */
     private void matrixInverse(Matrix ope){
+        /**
+        * @author: hirmy
+        * @description: 矩阵求逆
+        * @date: 2023/12/9
+        * @return void
+        */
         Matrix result = new Matrix();
         if (ope.isPhalanx() && Math.abs(matrixDeterminant(ope) - 0) > EP) {
             double det = matrixDeterminant(ope);
@@ -653,6 +695,13 @@ public class MatrixModel extends CalculatorModel{
 
     private int Hessenberg(double[][] Matrix,int n,double[][]ret)
     {
+        /**
+        * @author: hirmy
+        * @description: 工具用，计算矩阵 特征值
+        * @date: 2023/12/5
+        * @return void
+
+        */
 
         int i;
         int j;
@@ -718,6 +767,12 @@ public class MatrixModel extends CalculatorModel{
 
     private boolean EigenValue(Matrix ope,double[][] Ret)
     {
+        /**
+        * @author: hirmy
+        * @description: 工具用，计算矩阵特征值
+        * @date: 2023/12/5
+        * @return boolean
+        */
         double[][] Matrix = ope.data;
         int n = ope.row;
         int Erro = 4;
@@ -748,7 +803,7 @@ public class MatrixModel extends CalculatorModel{
         double z;
         double y;
         int loop1=LoopNu;
-        Hessenberg(Matrix,n,A);//灏嗘柟闃礙1杞寲鎴愪笂Hessenberg鐭╅樀A
+        Hessenberg(Matrix,n,A);
         m=n;
         while(m!=0)
         {
@@ -1179,13 +1234,14 @@ public class MatrixModel extends CalculatorModel{
         return true;
     }
 
-    /**
-     * @author: kiyotaka
-     * @description: 判断组成矩阵的字符串是否合法
-     * @date: 2023/12/9 16:40
-     * @return
-     */
+
     private boolean checkMatrixString(String[] matrixString) {
+        /**
+         * @author: kiyotaka
+         * @description: 判断组成矩阵的字符串是否合法
+         * @date: 2023/12/9 16:40
+         * @return
+         */
         int col = matrixString[0].split("\\s+").length;
         for (String test: matrixString) {
             int temp = test.split("\\s+").length;
@@ -1196,12 +1252,6 @@ public class MatrixModel extends CalculatorModel{
         return true;
     }
 
-    public static void main(String[] args) {
-        String A = "0|1 2 3/4 5 6/7 8 9";
-        MatrixModel testModel = new MatrixModel(A);
-        testModel.count();
-        System.out.println(testModel.checkIllegal());
-    }
 }
 
 

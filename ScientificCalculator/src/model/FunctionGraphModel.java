@@ -48,7 +48,12 @@ public class FunctionGraphModel extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
+        /**
+        * @author: hirmy
+        * @description: 本地运行用绘图
+        * @date: 2023/12/9
+        * @return void
+        */
         primaryStage.setTitle("Function");
         scene = new Scene(getPane(), width, height);
         scene.setOnScroll(event -> {
@@ -85,6 +90,12 @@ public class FunctionGraphModel extends Application {
 
 
     public static void draw() throws Exception{
+        /**
+        * @author: hirmy
+        * @description: 绘图接口，创建新窗口
+        * @date: 2023/12/9
+        * @return void
+        */
         Stage primaryStage = new Stage();
         primaryStage.setTitle("Function");
         scene = new Scene(getPane(), width, height);
@@ -122,6 +133,12 @@ public class FunctionGraphModel extends Application {
 
 
     private static Pane getPane() throws Exception {
+        /**
+        * @author: hirmy
+        * @description: 切换scene的pane
+        * @date: 2023/12/8
+        * @return Pane
+        */
         BorderPane thisPane = new BorderPane();
         BorderPane backPane = new BorderPane();
         backPane.getChildren().add(thisPane);
@@ -168,18 +185,11 @@ public class FunctionGraphModel extends Application {
         backPane.setBottom(resetBox);
 
 
-        //函数，确定定义域
-//        for (int xi = -(width / 2)*4; xi < (width / 2)*4; xi++) {
-//            pointList.add(centerX + (double) (xi));
-//            pointList.add(centerY - (f(xi * 1.0 / measureGap) * measureGap));
-//        }
         for (int xi = -(centerX); xi < (width-centerX); xi++) {
             pointList.add(centerX + (double) (xi));
             pointList.add(centerY - (f(xi * 1.0 / measureGap) * measureGap));
         }
-        //
         thisPane.getChildren().add(polyline);
-
 
         //坐标纸绘制
         Line xLine = new Line(0, centerY, width, centerY);  //x轴
@@ -219,8 +229,6 @@ public class FunctionGraphModel extends Application {
         }
         thisPane.getChildren().add(new Group(xLine, yLine));
 
-
-
         thisPane.setOnMousePressed(e -> {
             thisPane.setOnMouseDragged(e1 ->{
                 double nowX = e1.getX();
@@ -228,8 +236,6 @@ public class FunctionGraphModel extends Application {
 
                 centerX -= (int)((e.getX()-nowX)*0.07);
                 centerY -= (int)((e.getY()-nowY)*0.05);
-//                thisPane.setLayoutX(nowX-e.getX());
-//                thisPane.setLayoutY(nowY-e.getY());
 
                 try {
                     scene.setRoot(getPane());
@@ -240,12 +246,17 @@ public class FunctionGraphModel extends Application {
             });
 
         });
-
         return backPane;
     }
 
 
     private static String replaceNameInput(String input) {
+        /**
+        * @author: hirmy
+        * @description: 表达式替换符
+        * @date: 2023/12/3 13:00
+        * @return String
+        */
         input = input.replaceAll("atan", "T");
         input = input.replaceAll("asin", "S");
         input = input.replaceAll("acos", "O");
@@ -266,6 +277,12 @@ public class FunctionGraphModel extends Application {
     }
 
     private static double f(double x) throws Exception {
+        /**
+        * @author: hirmy
+        * @description: 根据当前表达式计算输入x的值
+        * @date: 2023/12/9
+        * @return double
+        */
         try {
             if (x < 0) {
                 inputExpression = xExpression.replaceAll("x", '(' + String.valueOf(x) + ')');
@@ -280,15 +297,7 @@ public class FunctionGraphModel extends Application {
         } catch (Exception e) {
             return 0;
         }
-      //  return Math.tan(x);
     }
 
-    public static void main(String[] args) {
-        GeneralModel gm = new GeneralModel(true);
-        gm.setInputExpression("tanx");
-        gm.count();
-        String ans = gm.getOutPutMap().get("answer");
-        System.out.println(ans);
-    }
 }
 
