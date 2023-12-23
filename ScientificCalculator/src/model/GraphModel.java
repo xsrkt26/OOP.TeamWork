@@ -9,9 +9,7 @@ import java.util.Map;
  */
 public class GraphModel extends CalculatorModel{
     @Override
-    public void count() {
-
-    }
+    public void count() {}
 
     @Override
     public Map<String, String> getOutPutMap() {
