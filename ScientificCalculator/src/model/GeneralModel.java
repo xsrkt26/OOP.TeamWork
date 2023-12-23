@@ -130,7 +130,7 @@ public class GeneralModel extends CalculatorModel{
 						ans = calculate(op,ope);
 						stack.push(ans);
 					}catch(ArithmeticException e){
-						outputMap.put("answer", "NaN");
+						outputMap.put("answer", e.getMessage());
 						return;
 					}
 				}
@@ -142,7 +142,7 @@ public class GeneralModel extends CalculatorModel{
 						ans = calculate(op,ope1,ope2);
 						stack.push(ans);
 					}catch (ArithmeticException e){//捕获异常，如:除0
-						outputMap.put("answer", "NaN");
+						outputMap.put("answer", e.getMessage());
 						return;
 					}
 				}
@@ -169,6 +169,8 @@ public class GeneralModel extends CalculatorModel{
 		}
 	}
 
+	public GeneralModel(){}
+
 	    private double calculate(String op, double ope){
 	        /**
 	        * @author: hirmy
@@ -182,17 +184,13 @@ public class GeneralModel extends CalculatorModel{
 				switch(op){
 					case "log":
 						if(ope < EP){
-							System.out.println("真数必须大于0");
-							ans = Double.POSITIVE_INFINITY;
-							return ans;
+							 throw new ArithmeticException("真数必须大于0");
 						}
 						ans = Math.log(ope) / Math.log(10);
 						break;
 					case "ln":
 						if(ope < EP){
-							System.out.println("真数必须大于0");
-							ans = Double.POSITIVE_INFINITY;
-							return ans;
+							 throw new ArithmeticException("真数必须大于0");
 						}
 						ans = Math.log(ope);
 						break;
@@ -204,33 +202,29 @@ public class GeneralModel extends CalculatorModel{
 						break;
 					case "tan":
 						if(isPiDiv2(ope)) {
-							System.out.println("tan无效输入");
-							ans = Double.POSITIVE_INFINITY;
-							return ans;
+							throw new ArithmeticException("tan无效输入");
+							
 						}
 						ans = Math.tan(Math.toRadians(ope));
 						break;
 					case "csc":
 						if(isKMultPi(ope)) {
-							System.out.println("csc无效输入");
-							ans = Double.POSITIVE_INFINITY;
-							return ans;
+							throw new ArithmeticException("csc无效输入");
+							
 						}
 						ans =1/ Math.sin(Math.toRadians(ope));
 						break;
 					case "sec":
 						if(isPiDiv2(ope)) {
-							System.out.println("sec无效输入");
-							ans = Double.POSITIVE_INFINITY;
-							return ans;
+							throw new ArithmeticException("sec无效输入");
+							
 						}
 						ans =1/ Math.cos(Math.toRadians(ope));
 						break;
 					case "cot":
 						if(isKMultPi(ope)) {
-							System.out.println("cot无效输入");
-							ans = Double.POSITIVE_INFINITY;
-							return ans;
+							throw new ArithmeticException("cot无效输入");
+							
 						}
 						else if(isPiDiv2(ope)) {
 							ans = 0;
@@ -239,17 +233,15 @@ public class GeneralModel extends CalculatorModel{
 						break;
 					case "asin":
 						if(ope>1+EP||ope<-1-EP) {
-							System.out.println("asin无效输入");
-							ans = Double.POSITIVE_INFINITY;
-							return ans;
+							throw new ArithmeticException("asin无效输入");
+						
 						}
 						ans = Math.toDegrees(Math.asin(ope));
 						break;
 					case "acos":
 						if(ope>1+EP||ope<-1-EP) {
-							System.out.println("acos无效输入");
-							ans = Double.POSITIVE_INFINITY;
-							return ans;
+							throw new ArithmeticException("acos无效输入");
+							
 						}
 						ans = Math.toDegrees(Math.acos(ope));
 						break;
@@ -258,17 +250,15 @@ public class GeneralModel extends CalculatorModel{
 						break;
 					case "acsc":
 						if(ope>=-1+EP&&ope<=1-EP) {
-							System.out.println("acsc无效输入");
-							ans = Double.POSITIVE_INFINITY;
-							return ans;
+							throw new ArithmeticException("acsc无效输入");
+							
 						}
 						ans = Math.toDegrees(Math.asin(1/ope));
 						break;
 					case "asec":
 						if(ope>=-1+EP&&ope<=1-EP) {
-							System.out.println("asec无效输入");
-							ans = Double.POSITIVE_INFINITY;
-							return ans;
+							throw new ArithmeticException("asec无效输入");
+						
 						}
 						ans = Math.toDegrees(Math.acos(1/ope));
 						break;
@@ -320,17 +310,15 @@ public class GeneralModel extends CalculatorModel{
 						break;
 					case "asin":
 						if(ope>1+EP||ope<-1-EP) {
-							System.out.println("asin无效输入");
-							ans = Double.POSITIVE_INFINITY;
-							return ans;
+							throw new ArithmeticException("asin无效输入");
+						
 						}
 						ans = Math.toDegrees(Math.asin(ope));
 						break;
 					case "acos":
 						if(ope>1+EP||ope<-1-EP) {
-							System.out.println("acos无效输入");
-							ans = Double.POSITIVE_INFINITY;
-							return ans;
+							throw new ArithmeticException("acos无效输入");
+							
 						}
 						ans = Math.toDegrees(Math.acos(ope));
 						break;
@@ -339,17 +327,15 @@ public class GeneralModel extends CalculatorModel{
 						break;
 					case "acsc":
 						if(ope>=-1+EP&&ope<=1-EP) {
-							System.out.println("acsc无效输入");
-							ans = Double.POSITIVE_INFINITY;
-							return ans;
+							throw new ArithmeticException("acsc无效输入");
+							
 						}
 						ans = Math.toDegrees(Math.asin(1/ope));
 						break;
 					case "asec":
 						if(ope>=-1+EP&&ope<=1-EP) {
-							System.out.println("asec无效输入");
-							ans = Double.POSITIVE_INFINITY;
-							return ans;
+							throw new ArithmeticException("asec无效输入");
+						
 						}
 						ans = Math.toDegrees(Math.acos(1/ope));
 						break;
@@ -396,9 +382,7 @@ public class GeneralModel extends CalculatorModel{
 	                break;
 	            case "/":
 	            	 if(Math.abs(ope2 - 0) < EP){
-	            		 System.out.println("除数不能为0");
-	            		 ans = Double.POSITIVE_INFINITY;
-		            	 return ans;
+	            		 throw new ArithmeticException("除数不能为0");
 	     	        }
 	                ans = ope1 / ope2;
 	                break;
@@ -427,8 +411,7 @@ public class GeneralModel extends CalculatorModel{
 	         * @return double
 	         */
 	    	if(ope<-EP||ope-(int)ope>=EP) {
-	    		System.out.println("无法计算该阶乘");
-	    		return Double.POSITIVE_INFINITY;
+	    		throw new ArithmeticException("无法计算该阶乘");
 	    	}
 	        if(Math.abs(ope - 0) < EP){
 	            return 1;
@@ -552,9 +535,7 @@ public class GeneralModel extends CalculatorModel{
 	    public static boolean isInteger(String input) { // 判断字符串是否是整数
 	        return input.matches("-?\\d+");
 	    }
-	    private static double readNumber() {
-	        return 0;
-	    }
+
 	    public boolean isPiDiv2 (double num) {//判断是否为k*180+90
 	    	if(Math.abs((num+90)%180)<EP||Math.abs((num+90)%180)>180-EP) {
 	    		return true;
@@ -570,7 +551,7 @@ public class GeneralModel extends CalculatorModel{
 
     public static void main(String[] args) {//测试
        //String A = "-(-(-1! / 2 + t 45 - l 100.00 - 3! * s (-90) * o(180)/ n 2.732 d 6.54^1.2086 + a(-2)*a(3.04) %)%)*10000.0000^(1.768596)*T6.42/S 0.6024+O(-0.4523)-U7.002*I56.54-J0.23";
-        String A = "-4.99+1";
+        String A = "3/0+2";
         GeneralModel testModel = new GeneralModel(A);
         testModel.count();
         System.out.println(testModel.outputMap);

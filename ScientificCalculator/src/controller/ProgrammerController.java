@@ -11,7 +11,7 @@ public class ProgrammerController implements Controller{
     ProgrammerModel currentModel;
     @Override
     public void transmitData(String inputInformation) {
-        currentModel = new ProgrammerModel();
+        currentModel = new ProgrammerModel(inputInformation);
     }
 
     @Override
