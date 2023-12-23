@@ -9,10 +9,41 @@ import java.util.Map;
  * @date ：2023/11/28 17:41
  */
 public abstract class CalculatorModel {
+    /**
+     * @author: kiyotaka
+     * @description: 该参数存储输入表达式
+     * @date: 2023/12/23 11:44
+     */
     String inputExpression;
+
+    /**
+     * @author: kiyotaka
+     * @description: 答案存储的该map中，需要调用时使用Controller中的函数调用
+     * @date: 2023/12/23 11:45
+     */
     Map<String, String> outputMap = new HashMap<>();
 
+    /**
+     * @author: kiyotaka
+     * @description: 核心运算部分
+     * @date: 2023/12/23 11:50
+     * @return Void
+     */
     public abstract void count();
+
+    /**
+     * @author: kiyotaka
+     * @description: Controller调用该函数得到答案
+     * @date: 2023/12/23 11:50
+     * @return Map
+     */
     public abstract Map<String, String> getOutPutMap();
+
+    /**
+     * @author: kiyotaka
+     * @description: 检查输入字符串合法性。
+     * @date: 2023/12/23 11:55
+     * @return boolean
+     */
     public abstract boolean checkIllegal();
 }

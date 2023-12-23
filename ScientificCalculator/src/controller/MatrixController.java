@@ -4,7 +4,7 @@ import model.MatrixModel;
 
 /**
  * @author ：kiyotaka
- * @description：TODO
+ * @description：MatrixModel的控制器及其测试函数
  * @date ：2023/12/12 20:45
  */
 public class MatrixController implements Controller{
@@ -14,13 +14,36 @@ public class MatrixController implements Controller{
     }
 
     @Override
+    /**
+     * @author: kiyotaka
+     * @description: 数据输入函数
+     * @date: 2023/12/23 11:20
+     * @return void
+     */
     public void transmitData(String inputInformation) {
         currentModel.setInputExpression(inputInformation);
     }
 
     @Override
+    /**
+     * @author: kiyotaka
+     * @description: MatrixModel的答案输出比较多，对应的key可以在MatrixModel的参数中找到；
+     * @date: 2023/12/23 11:17
+     * @return java.lang.String
+     */
     public String getOutputInformation(String key) {
         return currentModel.getOutPutMap().get(key);
+    }
+
+    @Override
+    /**
+     * @author: kiyotaka
+     * @description: 计算函数
+     * @date: 2023/12/23 11:19
+     * @return void
+     */
+    public void count() {
+        currentModel.count();
     }
 
     public static void main(String[] args) {
@@ -48,10 +71,6 @@ public class MatrixController implements Controller{
 
     }
 
-    @Override
-    public void count() {
-        currentModel.count();
-    }
 
 }
 

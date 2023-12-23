@@ -61,8 +61,6 @@ public class LinearRegressionModel extends CalculatorModel {
         this.inputExpression = inputExpression;
     }
 
-
-
     public LinearRegressionModel() {};
 
     /**
@@ -92,6 +90,12 @@ public class LinearRegressionModel extends CalculatorModel {
         saveDataIntoMap();
     }
 
+    /**
+     * @author: kiyotaka
+     * @description: 辅助函数。把list型数据转化成字符串
+     * @date: 2023/12/23 11:47
+     * @return
+     */
     private String listToString(ArrayList<Double> list) {
         StringBuilder stringBuilder = new StringBuilder();
         for (double temp : list) {
@@ -100,6 +104,12 @@ public class LinearRegressionModel extends CalculatorModel {
         return stringBuilder.toString();
     }
 
+    /**
+     * @author: Kiyotaka
+     * @description: 把答案转化成字符串形式，并存储答案于map中
+     * @date: 2023/12/23 11:49
+     * @return
+     */
     private void saveDataIntoMap() {
         outputMap = new HashMap<>();
         outputMap.put("xyList", listToString(xyList));
