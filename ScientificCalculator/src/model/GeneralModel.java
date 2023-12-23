@@ -13,14 +13,19 @@ import java.util.regex.Pattern;
  */
 
 public class GeneralModel extends CalculatorModel{
+	 /**
+     * @author: huihui-ux
+     * @description: 科学计算器
+     * @date: 2023/12/8
+     */
 	boolean isRadians = false;
     final double EP = 1e-16;//用于进行浮点数相等比较
 	private ArrayList<String> postfixExpression = new ArrayList<>();
 	private static HashMap<String, Integer> operationPriority = new HashMap<>();
 	private static HashMap<String, Integer> operationAry_N = new HashMap<>();
 	//op为 1或2 元运算符
-	/*	键盘快捷键输入
-	 * 
+	/**
+	 * 键盘快捷键输入
 	 *  t->tan
 	 *  s->sin
 	 *  o->cos
@@ -527,22 +532,46 @@ public class GeneralModel extends CalculatorModel{
 	        }
 	    }
 	   
-	    public static boolean isDouble(String input) {  // 判断字符串是否是浮点数
+	    public static boolean isDouble(String input) {   
+	    	/**
+		     * @author: huihui-ux
+		     * @description: 判断字符串是否是浮点数
+		     * @date: 2023/12/8
+		     * @return boolean
+		     */
 	        return input.matches("-?\\d+(\\.\\d+)?");
 	    }
 
 	    
-	    public static boolean isInteger(String input) { // 判断字符串是否是整数
+	    public static boolean isInteger(String input) { 
+	    	 /**
+		     * @author: huihui-ux
+		     * @description: 判断字符串是否是整数
+		     * @date: 2023/12/8
+		     * @return boolean
+		     */
 	        return input.matches("-?\\d+");
 	    }
 
-	    public boolean isPiDiv2 (double num) {//判断是否为k*180+90
+	    public boolean isPiDiv2 (double num) {
+	    	 /**
+		     * @author: huihui-ux
+		     * @description: 判断是否为k*180+90
+		     * @date: 2023/12/8
+		     * @return boolean
+		     */
 	    	if(Math.abs((num+90)%180)<EP||Math.abs((num+90)%180)>180-EP) {
 	    		return true;
 	    	}
 	    	return false;
 	    }
-	    public boolean isKMultPi (double num) {//判断是否为k*180
+	    public boolean isKMultPi (double num) {
+	    	 /**
+		     * @author: huihui-ux
+		     * @description: 判断是否为k*180
+		     * @date: 2023/12/8
+		     * @return boolean
+		     */
 	    	if(Math.abs(num%180)<EP||Math.abs(num%180)>180-EP) {
 	    		return true;
 	    	}
@@ -550,8 +579,7 @@ public class GeneralModel extends CalculatorModel{
 	    }
 
     public static void main(String[] args) {//测试
-       //String A = "-(-(-1! / 2 + t 45 - l 100.00 - 3! * s (-90) * o(180)/ n 2.732 d 6.54^1.2086 + a(-2)*a(3.04) %)%)*10000.0000^(1.768596)*T6.42/S 0.6024+O(-0.4523)-U7.002*I56.54-J0.23";
-        String A = "3/0+2";
+       String A = "-(-(-1! / 2 + t 45 - l 100.00 - 3! * s (-90) * o(180)/ n 2.732 d 6.54^1.2086 + a(-2)*a(3.04) %)%)*10000.0000^(1.768596)*T6.42/S 0.6024+O(-0.4523)-U7.002*I56.54-J0.23";
         GeneralModel testModel = new GeneralModel(A);
         testModel.count();
         System.out.println(testModel.outputMap);

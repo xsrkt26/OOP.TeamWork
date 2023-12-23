@@ -12,7 +12,7 @@ public class ProgrammerModel extends CalculatorModel{
 	/**
 	 * @author: huihui-ux
 	 * @description: 程序员计算器
-	 * @date: 2023/12/12 23:18
+	 * @date: 2023/12/12 
 	 */
 
 	 int numberSystem = 10;//目前的进制,默认为10
@@ -34,6 +34,12 @@ public class ProgrammerModel extends CalculatorModel{
 	        operationPriority.put("(", 0);
 	    }
 	public void count() {
+		 /**
+	     * @author: huihui-ux
+	     * @description: 进行后缀表达式的计算
+	     * @date: 2023/12/12
+	     * @return void
+	     */
 		transToPostfix();
         Stack<Long> stack = new Stack<Long>();
         for(String o : postfixExpression){
@@ -69,6 +75,12 @@ public class ProgrammerModel extends CalculatorModel{
 	}
 	private long calculate(String op, long ope1, long ope2){
         long ans = 0;
+        /**
+	     * @author: huihui-ux
+	     * @description:进行二元运算
+	     * @date: 2023/12/12
+	     * @return long
+	     */
         switch(op){
             case "+":
                 ans = ope1 + ope2;
@@ -131,12 +143,24 @@ public class ProgrammerModel extends CalculatorModel{
 		return false;
 	}
 
-	public void setNumberSystem(int numberSystem) {//设置进制 numberSystem=2,8,10,16
+	public void setNumberSystem(int numberSystem) {
+		 /**
+	     * @author: huihui-ux
+	     * @description:设置进制 numberSystem=2,8,10,16
+	     * @date: 2023/12/12
+	     * @return void
+	     */
 		inputExpression=transAtoB(inputExpression,this.numberSystem,numberSystem);
 		transAnswer(this.numberSystem,numberSystem);
 		this.numberSystem=numberSystem;
 	}
 	 private void transToPostfix() {
+		 /**
+		     * @author: huihui-ux
+		     * @description:输入转后缀表达式
+		     * @date: 2023/12/12
+		     * @return void
+		     */
     	if(inputExpression.length()>300) {
     		return;
     	}
@@ -146,7 +170,7 @@ public class ProgrammerModel extends CalculatorModel{
     	int insertIndex ; // 减号后插入空格位置的索引
     	char charToInsert = ' '; // 要插入的空格
     	int k = 0;
-    	if(replaceInput.charAt(0)=='-') {//首位为负号补0
+    	if(replaceInput.charAt(0)=='-') { // 首位为负号补0
     		insertIndex = 0;
     		k++;
     		sb.insert(insertIndex, '0');
@@ -160,7 +184,7 @@ public class ProgrammerModel extends CalculatorModel{
     			k++;
     			sb.insert(insertIndex, charToInsert);
     		}
-    		else if(replaceInput.charAt(i)=='-'&&(replaceInput.charAt(i-1)=='(')){//前补0后补空格
+    		else if(replaceInput.charAt(i)=='-'&&(replaceInput.charAt(i-1)=='(')){ // 前补0后补空格
     			insertIndex = i+k;
 	    		k++;
 	    		sb.insert(insertIndex, '0');
@@ -213,7 +237,13 @@ public class ProgrammerModel extends CalculatorModel{
         }
     	
     }
-	 public String transAtoB(String inputExpression,int a,int b) { //a->b进制转换
+	 public String transAtoB(String inputExpression,int a,int b) { 
+		   /**
+		     * @author: huihui-ux
+		     * @description:a->b进制转换
+		     * @date: 2023/12/12
+		     * @return String
+		     */
 		 String res="";
 		 String replaceInput = inputExpression.replaceAll("\\s", "");
 
@@ -264,6 +294,12 @@ public class ProgrammerModel extends CalculatorModel{
 		 return res;
 	 }
 	 public String transNum(String num,int a,int b) {
+		  /**
+		     * @author: huihui-ux
+		     * @description:某个数字实现a->b进制转换
+		     * @date: 2023/12/12
+		     * @return String
+		     */
 		  BigInteger bigInteger = new BigInteger(num, a);
 	      long number = bigInteger.longValue();//解析a进制到十进制
 		String res="";
@@ -283,24 +319,48 @@ public class ProgrammerModel extends CalculatorModel{
 		return res;
 	 }
 	 public void transAnswer(int a,int b) {
+		  /**
+		     * @author: huihui-ux
+		     * @description:结果的a->b进制转换
+		     * @date: 2023/12/12
+		     * @return void
+		     */
 		 String tmp = outputMap.get("answer");
 		 outputMap.put("answer", transNum(tmp,a,b));
 		 
 	 }
-	 public static boolean isLong(String input) { // 判断字符串是否是整数
+	 public static boolean isLong(String input) { 
+		  /**
+		     * @author: huihui-ux
+		     * @description:判断字符串是否是整数
+		     * @date: 2023/12/12
+		     * @return boolean
+		     */
 	        return input.matches("[0-9a-f]+");
 	 }
-	 public static boolean isAlpha(char ch) { // 判断字符串是否是a-f
+	 public static boolean isAlpha(char ch) { 
+		 /**
+		     * @author: huihui-ux
+		     * @description: 判断字符串是否是a-f
+		     * @date: 2023/12/12
+		     * @return boolean
+		     */
 	        if(ch>='a'&&ch<='f')return true;
 	        return false;
 	 }
 	@Override
 	public Map<String, String> getOutPutMap() {
+		 /**
+	     * @author: huihui-ux
+	     * @description: 判断字符串是否是a-f
+	     * @date: 2023/12/12
+	     * @return void
+	     */
 		return outputMap;
 	}
 	 public static void main(String[] args) {//测试
 
-	        String A = "-124<19+274.3-243432";
+	        String A = "-124<19+274.3";
 	        ProgrammerModel testModel = new ProgrammerModel(A);
 	        testModel.count();
 	        System.out.println(testModel.outputMap);
