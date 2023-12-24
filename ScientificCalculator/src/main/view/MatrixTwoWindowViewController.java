@@ -6,9 +6,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 
 /**
- * @author:
- * @Description:
- * @date:
+ * 二元矩阵运算窗口
+ * @author: QingYu
+ * @date: 2023/12/17
  */
 public class MatrixTwoWindowViewController extends viewController {
     @FXML
@@ -40,6 +40,11 @@ public class MatrixTwoWindowViewController extends viewController {
         inputA.insert(0, "1|");
         return inputA.append("|").append(inputB);
     }
+    /**
+     * 计算
+     * @author: QingYu
+     * @date: 2023/12/17
+     */
     @FXML
     void compute(MouseEvent event) {
         inputMatrixA = new StringBuffer(inputA.getText());

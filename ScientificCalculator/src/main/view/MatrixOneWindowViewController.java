@@ -6,9 +6,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 
 /**
- * @author:
- * @Description:
- * @date:
+ * 一元矩阵运算窗口
+ * @author: QingYu
+ * @date: 2023/12/17
  */
 public class MatrixOneWindowViewController extends viewController {
     @FXML
@@ -31,6 +31,11 @@ public class MatrixOneWindowViewController extends viewController {
     Label eigValue;
     private StringBuffer inputMatrix;
     private MatrixController matrixController = new MatrixController();
+    /**
+     * 字符串输入处理
+     * @author: QingYu
+     * @date: 2023/12/17
+     */
     private void processInput(StringBuffer input) {
         int index = 0;
         while ((index = input.indexOf("\n", index)) != -1) {
@@ -39,8 +44,11 @@ public class MatrixOneWindowViewController extends viewController {
         }
         input.insert(0, "0|");
     }
-    public MatrixOneWindowViewController() {
-    }
+    /**
+     * 计算
+     * @author: QingYu
+     * @date: 2023/12/17
+     */
     @FXML
     void compute(MouseEvent event) {
         inputMatrix = new StringBuffer(input.getText());

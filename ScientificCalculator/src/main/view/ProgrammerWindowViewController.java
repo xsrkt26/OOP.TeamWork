@@ -5,13 +5,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-
 import java.util.*;
 
 /**
- * @author:
- * @Description:
- * @date:
+ * 程序员计算器窗口
+ * @author: QingYu
+ * @date: 2023/12/9
  */
 public class ProgrammerWindowViewController extends viewController{
     @FXML
@@ -27,6 +26,11 @@ public class ProgrammerWindowViewController extends viewController{
     private List<Integer> binList = new ArrayList<>(List.of(0, 1));
     private List<Integer> octList = new ArrayList<>(List.of(0, 1, 2, 3, 4, 5, 6, 7));
     @FXML
+    /**
+     * 鼠标点击事件，选择数字输入
+     * @author: QingYu
+     * @date: 2023/12/10
+     */
     void onNumberClicked(MouseEvent event) {
         int value = Integer.parseInt(((Pane)event.getSource()).getId().replace("btn",""));
         if (baseMode == 2 && !binList.contains(value)) {
@@ -41,6 +45,11 @@ public class ProgrammerWindowViewController extends viewController{
         stack.add(String.valueOf(value));
     }
     @FXML
+    /**
+     * 鼠标点击事件，选择十六进制A~F的输入
+     * @author: QingYu
+     * @date: 2023/12/10
+     */
     void onHexAlphaClicked(MouseEvent event) {
         if (baseMode != 16) {
             return;
@@ -52,6 +61,11 @@ public class ProgrammerWindowViewController extends viewController{
         stack.add(res);
     }
     @FXML
+    /**
+     * 鼠标点击事件，选择模式
+     * @author: QingYu
+     * @date: 2023/12/10
+     */
     void onModeClicked(MouseEvent event) {
         baseMode = Integer.parseInt(((Pane)event.getSource()).getId().replace("base",""));
         controller.transmitData("0");
@@ -64,7 +78,11 @@ public class ProgrammerWindowViewController extends viewController{
         operator = "";
         stack.clear();
     }
-
+    /**
+     * 鼠标点击事件，选择运算符
+     * @author: QingYu
+     * @date: 2023/12/10
+     */
     @FXML
     void onSymbolClicked(MouseEvent event) {
         String symbol = ((Pane)event.getSource()).getId().replace("btn","");

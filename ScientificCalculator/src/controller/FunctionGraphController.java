@@ -1,7 +1,11 @@
 package controller;
 
 import model.FunctionGraphModel;
-
+/**
+ * 函数绘图方法接口
+ * @author ：kiyotaka
+ * @date ：2023/12/12 18:14
+ */
 public class FunctionGraphController {
 
     public void transmitData(String s){

@@ -112,7 +112,7 @@ public class LinearRegressionModel extends CalculatorModel {
 
     /**
      * @author: kiyotaka
-     * @description: get inputExpression;
+     *  get inputExpression;
      * @date: 2023/12/3 11:06
      */
     public LinearRegressionModel(String inputExpression) {
@@ -124,9 +124,8 @@ public class LinearRegressionModel extends CalculatorModel {
     public LinearRegressionModel() {};
 
     /**
-     * @return
      * @author: kiyotake
-     * @description: 输入发生变化时，更新输入数据
+     *  输入发生变化时，更新输入数据
      * @date: 2023/12/9 14:47
      */
     public void upDateInputExpression(String inputExpression) {
@@ -140,7 +139,7 @@ public class LinearRegressionModel extends CalculatorModel {
     @Override
     /**
      * @author: kiyotaka
-     * @description: 综合逻辑：1.
+     *  综合逻辑：1.
      * @date: 2023/12/3 13:00
      * @return void
      */
@@ -178,7 +177,7 @@ public class LinearRegressionModel extends CalculatorModel {
     /**
      * @return
      * @author: kiyotaka
-     * @description: 计算数据
+     *  计算数据
      * @date: 2023/12/9 14:57
      */
     private void countData() {
@@ -219,7 +218,7 @@ public class LinearRegressionModel extends CalculatorModel {
     /**
      * @return
      * @author: kiyotaka
-     * @description: 当自变量的数量与因变量的数量不一致时，输入不合法
+     *  当自变量的数量与因变量的数量不一致时，输入不合法
      * @date: 2023/12/9 13:10
      */
     @Override
@@ -231,7 +230,7 @@ public class LinearRegressionModel extends CalculatorModel {
     /**
      * @return
      * @author: kiyotaka
-     * @description: 把输入字符串转化为 XY两个字符串，然后分割转化为数字存储在xList ， yList 中
+     *  把输入字符串转化为 XY两个字符串，然后分割转化为数字存储在xList ， yList 中
      * @date: 2023/12/9 13:03
      */
     private void splitInputExpression() {

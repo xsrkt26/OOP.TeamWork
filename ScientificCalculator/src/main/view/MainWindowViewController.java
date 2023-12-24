@@ -1,9 +1,6 @@
 package main.view;
-/**
- * @Description: The Controller of main window
- * @author: QingYu
- * @date: 2023/12/9
- */
+
+import controller.GeneralController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -13,9 +10,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 import java.util.ArrayList;
-
+/**
+ * 常规科学计算器窗口
+ * @author: QingYu
+ * @date: 2023/12/10
+ */
 public class MainWindowViewController extends viewController {
     @FXML private Label lblResult;
+    private GeneralController generalController = new GeneralController();
     private StringBuffer calculateExpression = new StringBuffer("");
     private StringBuffer showExpression = new StringBuffer("");
     private GeneralModel generalModel = new GeneralModel();
@@ -27,6 +29,11 @@ public class MainWindowViewController extends viewController {
     private void count(){
         generalModel.count();
     }
+    /**
+     * 鼠标点击事件，输入数字
+     * @author: QingYu
+     * @date: 2023/12/10
+     */
     @FXML
     void onNumberClicked(MouseEvent event) {
         int value = Integer.parseInt(((Pane)event.getSource()).getId().replace("btn",""));
@@ -35,12 +42,17 @@ public class MainWindowViewController extends viewController {
         lblResult.setText(showExpression.toString());
         stack.add(String.valueOf(value));
     }
-
+    /**
+     * 鼠标点击事件，输入运算符
+     * @author: QingYu
+     * @date: 2023/12/10
+     */
     @FXML
     void onSymbolClicked(MouseEvent event) {
         String symbol = ((Pane)event.getSource()).getId().replace("btn","");
 
         if(symbol.equals("Equals")) {
+            generalController.transmitData(calculateExpression.toString());
             generalModel.setInputExpression(calculateExpression.toString());
             count();
             lblResult.setText(generalModel.outputAns());

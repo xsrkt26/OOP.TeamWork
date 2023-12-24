@@ -51,7 +51,7 @@ public class GeneralModel extends CalculatorModel {
 	static {
 		/**
 		 * @author: hirmy
-		 * @description: 某计算符为 1或2 元计算符
+		 *  某计算符为 1或2 元计算符
 		 * @date: 2023/12/9 14:49
 		 */
 		operationAry_N.put("-",2);
@@ -82,7 +82,7 @@ public class GeneralModel extends CalculatorModel {
 	public void count() {
 		/**
 		 * @author: hirmy
-		 * @description: 根据transToPostfix()修改后的list，进行后缀表达式的计算
+		 *  根据transToPostfix()修改后的list，进行后缀表达式的计算
 		 * @date: 2023/12/9 14:50
 		 * @return void
 		 */
@@ -134,7 +134,7 @@ public class GeneralModel extends CalculatorModel {
 
 	/**
 	 * @author: kiyotaka
-	 * @description: 构造函数
+	 *  构造函数
 	 * @date: 2023/12/9 22:13
 	 * @return
 	 */
@@ -142,7 +142,7 @@ public class GeneralModel extends CalculatorModel {
 	private double calculate(String op, double ope){
 		/**
 		 * @author: hirmy
-		 * @description: 进行一元运算
+		 *  进行一元运算
 		 * @date: 2023/12/9 14:50
 		 * @return double
 		 */
@@ -264,7 +264,7 @@ public class GeneralModel extends CalculatorModel {
 	private double calculate(String op, double ope1, double ope2){
 		/**
 		 * @author: hirmy
-		 * @description: 进行二元运算
+		 *  进行二元运算
 		 * @date: 2023/12/9 14:50
 		 * @return double
 		 */
@@ -307,7 +307,7 @@ public class GeneralModel extends CalculatorModel {
 	private double factorial(double ope){
 		/**
 		 * @author: hirmy
-		 * @description: 进行ope的阶乘运算
+		 *  进行ope的阶乘运算
 		 * @date: 2023/12/9 14:50
 		 * @return double
 		 */
@@ -337,7 +337,7 @@ public class GeneralModel extends CalculatorModel {
 	private void transToPostfix() {
 		/**
 		 * @author: huihui-ux
-		 * @description: 输入转后缀表达式
+		 *  输入转后缀表达式
 		 * @date: 2023/12/9 23:08
 		 * @return void
 		 */

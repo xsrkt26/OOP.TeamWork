@@ -9,9 +9,9 @@ import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 
 /**
- * @Description: The Controller of linear regression window
+ * 一元线性回归计算窗口
  * @author: QingYu
- * @date: 2023/12/9
+ * @date: 2023/12/10
  */
 public class LinearWindowViewController extends viewController {
     @FXML
@@ -59,6 +59,11 @@ public class LinearWindowViewController extends viewController {
         YClicked = false;
         showExpression = xExpression;
     }
+    /**
+     * 设置输出框输出
+     * @author: QingYu
+     * @date: 2023/12/10
+     */
     private void setText(String expression) {
         if (XClicked && !YClicked) {
             lblResult.setText(expression);
@@ -66,6 +71,11 @@ public class LinearWindowViewController extends viewController {
             lblResultY.setText(expression);
         }
     }
+    /**
+     * 鼠标点击事件，选择输入框X
+     * @author: QingYu
+     * @date: 2023/12/10
+     */
     @FXML
     void onTextClickedX(MouseEvent event) {
         showExpression = xExpression;
@@ -74,6 +84,11 @@ public class LinearWindowViewController extends viewController {
         XClicked = true;
         YClicked = false;
     }
+    /**
+     * 鼠标点击事件，选择输入框Y
+     * @author: QingYu
+     * @date: 2023/12/10
+     */
     @FXML
     void onTextClickedY(MouseEvent event) {
         showExpression = yExpression;
@@ -82,7 +97,11 @@ public class LinearWindowViewController extends viewController {
         XClicked = false;
         YClicked = true;
     }
-
+    /**
+     * 鼠标点击事件，输入数字
+     * @author: QingYu
+     * @date: 2023/12/10
+     */
     @FXML
     void onNumberClicked(MouseEvent event) {
         int value = Integer.parseInt(((Pane)event.getSource()).getId().replace("btn",""));
@@ -90,7 +109,11 @@ public class LinearWindowViewController extends viewController {
         setText(showExpression.toString());
         stack.add(String.valueOf(value));
     }
-
+    /**
+     * 鼠标点击事件，输入运算符
+     * @author: QingYu
+     * @date: 2023/12/10
+     */
     @FXML
     void onSymbolClicked(MouseEvent event) {
         String symbol = ((Pane)event.getSource()).getId().replace("btn","");

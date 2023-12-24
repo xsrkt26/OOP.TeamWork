@@ -48,7 +48,12 @@ public class FunctionGraphModel extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
+        /**
+         * @author: hirmy
+         *  本地运行用绘图
+         * @date: 2023/12/9
+         * @return void
+         */
         primaryStage.setTitle("Function");
         scene = new Scene(getPane(), width, height);
         scene.setOnScroll(event -> {
@@ -85,6 +90,12 @@ public class FunctionGraphModel extends Application {
 
 
     public static void draw() throws Exception{
+        /**
+         * @author: hirmy
+         *  绘图接口，创建新窗口
+         * @date: 2023/12/9
+         * @return void
+         */
         Stage primaryStage = new Stage();
         primaryStage.setTitle("Function");
         scene = new Scene(getPane(), width, height);
@@ -122,6 +133,12 @@ public class FunctionGraphModel extends Application {
 
 
     private static Pane getPane() throws Exception {
+        /**
+         * @author: hirmy
+         *  切换scene的pane
+         * @date: 2023/12/8
+         * @return Pane
+         */
         BorderPane thisPane = new BorderPane();
         BorderPane backPane = new BorderPane();
         backPane.getChildren().add(thisPane);
@@ -246,6 +263,12 @@ public class FunctionGraphModel extends Application {
 
 
     private static String replaceNameInput(String input) {
+        /**
+         * @author: hirmy
+         *  表达式替换符
+         * @date: 2023/12/3 13:00
+         * @return String
+         */
         input = input.replaceAll("atan", "T");
         input = input.replaceAll("asin", "S");
         input = input.replaceAll("acos", "O");
@@ -266,6 +289,12 @@ public class FunctionGraphModel extends Application {
     }
 
     private static double f(double x) throws Exception {
+        /**
+         * @author: hirmy
+         *  根据当前表达式计算输入x的值
+         * @date: 2023/12/9
+         * @return double
+         */
         try {
             if (x < 0) {
                 inputExpression = xExpression.replaceAll("x", '(' + String.valueOf(x) + ')');

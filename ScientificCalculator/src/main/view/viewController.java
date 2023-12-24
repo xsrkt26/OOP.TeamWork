@@ -1,9 +1,5 @@
 package main.view;
-/**
- * @Description: The superclass of all controllers
- * @author: QingYu
- * @date: 2023/12/9
- */
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,12 +10,21 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
+/**
+ * The superclass of all controllers
+ * @author: QingYu
+ * @date: 2023/12/9
+ */
 public class viewController {
     private double x, y;
     @FXML
     protected Pane titlePane;
     @FXML protected ImageView btnMinimize, btnClose, binMenu;
+    /**
+     * 程序入口
+     * @author: QingYu
+     * @date: 2023/12/9
+     */
     public void init(Stage stage) {
         titlePane.setOnMousePressed(mouseEvent -> {
             x = mouseEvent.getSceneX();
@@ -40,6 +45,11 @@ public class viewController {
             }
         });
     }
+    /**
+     * 切换至主菜单
+     * @author: QingYu
+     * @date: 2023/12/9
+     */
     public void switchToMenu() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/MenuInterface.fxml"));
         Stage stage = (Stage)binMenu.getScene().getWindow();
@@ -49,11 +59,20 @@ public class viewController {
         ((MenuWindowViewController)loader.getController()).init(stage);
         stage.show();
     }
-
+    /**
+     * 鼠标拖动事件
+     * @author: QingYu
+     * @date: 2023/12/9
+     */
     @FXML
     void onMouseEntered(MouseEvent event) {
         ((Pane)event.getSource()).setOpacity(0.5);
     }
+    /**
+     * 鼠标悬停提示
+     * @author: QingYu
+     * @date: 2023/12/9
+     */
     @FXML
     void onMouseExited(MouseEvent event) {
         ((Pane)event.getSource()).setOpacity(1);
